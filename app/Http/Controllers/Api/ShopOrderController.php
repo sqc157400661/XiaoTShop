@@ -1,0 +1,83 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Logic\CartLogic;
+use App\Models\ShopCart;
+use App\Logic\AddressLogic;
+use App\Logic\Buy;
+
+class ShopOrderController extends ApiController
+{
+
+
+    // 校验购物车商品
+    public function checkout(Request $request)
+    {
+        if (empty(\Auth::user()->id)) {
+            $this->user_id = 0;
+        } else {
+            $this->user_id = \Auth::user()->id;
+        }
+        // 参数校验
+        $validator = Validator::make($request->all(),
+            [
+                'addressId' => 'required',
+            ],
+            [
+                'addressId.required' => '参数缺失',
+            ]
+        );
+        if ($validator->fails()) {
+            return $this->failed($validator->errors(), 403);
+        }
+        $outData = CartLogic::getCheckedGoodsList($this->user_id);
+        $outData['checkedAddress'] = AddressLogic::getOneAddr($request->addressId, $this->user_id); // 选择地址
+        $outData['checkedCoupon'] = []; // 选择的优惠券
+        $outData['couponList'] = []; //  优惠券列表
+        $outData['couponPrice'] = 0.00; // 选中的优惠金额
+        $outData['actualPrice'] = PriceCalculate($outData['orderTotalPrice'], '-', $outData['couponPrice']); // 真实付款金额
+        return $this->success($outData);
+    }
+
+    // 提交订单用来生成订单
+    public function orderSubmit(Request $request)
+    {
+        if (empty(\Auth::user()->id)) {
+            $this->user_id = 0;
+        } else {
+            $this->user_id = \Auth::user()->id;
+        }
+        // 参数校验
+        $validator = Validator::make($request->all(),
+            [
+                'addressId' => 'required',
+            ],
+            [
+                'addressId.required' => '参数缺失',
+            ]
+        );
+        if ($validator->fails()) {
+            return $this->failed($validator->errors(), 403);
+        }
+        $orderData = CartLogic::getCheckedGoodsList($this->user_id);
+        $checkedAddress = AddressLogic::getOneAddr($request->addressId, $this->user_id); // 选择地址
+        if (empty($checkedAddress)) {
+            return $this->failed('未查到用户收货地址，请检查您的收货地址', 401);
+        }
+        $orderData['checkedCouponId'] = $request->couponId??0; // 选择的优惠券
+        $orderData['checkedCoupon'] = []; // 选择的优惠券
+        $orderData['couponList'] = []; //  优惠券列表
+        $orderData['couponPrice'] = 0.00; // 选中的优惠金额
+        $orderData['actualPrice'] = PriceCalculate($orderData['orderTotalPrice'], '-', $orderData['couponPrice']); // 真实付款金额
+        $buyModel = new Buy();
+        $buyRe = $buyModel->buyStep($request, $orderData, $checkedAddress, $this->user_id);
+        if (empty($buyRe['error'])) {
+            return $this->success($buyRe);
+        }
+        return $this->failed($buyRe['error'], 403);
+    }
+
+}
