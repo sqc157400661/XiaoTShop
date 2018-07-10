@@ -314,6 +314,17 @@ class AdminMenuTableSeeder extends Seeder
                 'created_at' => '2018-06-03 02:54:48',
                 'updated_at' => '2018-06-03 02:54:48',
             ),
+            27 => 
+            array (
+                'id' => 28,
+                'parent_id' => 19,
+                'order' => 0,
+                'title' => '商城订单管理',
+                'icon' => 'fa-rmb',
+                'uri' => 'shop-order',
+                'created_at' => '2018-07-10 07:22:58',
+                'updated_at' => '2018-07-10 07:22:58',
+            ),
         ));
         
         

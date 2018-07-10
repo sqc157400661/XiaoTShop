@@ -64,9 +64,9 @@ Route::group([
         $router->resource('shop-goods', ShopGoodsController::class);
         // 主题&专题管理
         $router->resource('shop-topics', ShopTopicController::class);
+
+        // 商城订单管理
+        $router->resource('shop-order', ShopOrderController::class);
     });
 
-    $router->get('test', function(){
-        return 12121;
-    });
 });
