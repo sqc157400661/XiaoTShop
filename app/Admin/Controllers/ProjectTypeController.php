@@ -3,7 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\ProjectType;
-
+use App\Models\ShopBrand;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
@@ -78,6 +78,8 @@ class ProjectTypeController extends Controller
             $grid->type_name('项目类型名');
             $grid->type_desc('项目类型描述')->limit(100);
             $grid->type_img('类型的图片')->image('', 50, 50);
+            $grid->brand_id('品牌id')
+                ->select(ShopBrand::getAllClasses(true));
             $grid->basal_price('该类项目的基础价格');
             $grid->carousel_imgs('轮播图片')->image('', 50, 50);
             $grid->created_at('创建时间');
@@ -105,7 +107,9 @@ class ProjectTypeController extends Controller
             $form->image('type_img', '类型的图片')
                 ->rules('required')
                 ->uniqueName();
-
+            $form->select('brand_id', '品牌id')
+                ->rules('required')
+                ->options(ShopBrand::getAllClasses(true));
             $form->multipleImage('carousel_imgs', '轮播图片')
                 ->uniqueName();
 

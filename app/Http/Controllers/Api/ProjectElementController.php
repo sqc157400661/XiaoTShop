@@ -35,4 +35,25 @@ class ProjectElementController extends ApiController
         $outData['sku'] = ProjectControl::getJsonProjectGoodsByTypeId($request->type_id);
         return $this->success($outData);
     }
+
+    // 技术商品转换成商城商品
+    public function transform(Request $request)
+    {
+        // 参数校验
+        $validator = Validator::make($request->all(),
+            [
+                'type_id' => 'required',
+                'specificationList' => 'required',
+            ],
+            [
+                'type_id.required' => '项目类型参数缺失',
+                'specificationList.required' => '未选择商品',
+            ]
+        );
+        if ($validator->fails()) {
+            return $this->failed($validator->errors(), 403);
+        }
+        $outData = ProjectControl::transform($request->type_id,$request->specificationList);
+        return $this->success($outData);
+    }
 }

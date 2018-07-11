@@ -38,10 +38,10 @@
       <image class="i" src="../../static/images/address_right.png" background-size="cover"></image>
     </view>
 
-  <view class="goods-attr">
+  <view class="goods-attr" wx:if="{{_checkedProductDots.length>0}}">
     <view class="t">商品参数</view>
     <view class="l">
-      <view class="item" wx:for="{{_checkedProductDots}}" wx:key="{{item.id}}">
+      <view class="item" wx:for="{{_checkedProductDots}}" wx:key="{{item.id}}" wx:if="{{item}}">
         <text class="left">{{item.funcdot_name}}</text>
         <text class="right">{{item.funcdot_desc}}</text>
       </view>

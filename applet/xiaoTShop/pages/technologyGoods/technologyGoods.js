@@ -11,6 +11,7 @@ Page({
     attribute: [],
 
     brand: {},// 品牌数据
+    type_id:1,
     specificationList: [],// 功能分类、功能模块和功能点
     models:[],// 某功能分类下的 功能模块和功能点
     _checkedProductList:[],// 已经选中的产品
@@ -29,7 +30,7 @@ Page({
   },
   getGoodsInfo: function () {
     let that = this;
-    util.request(api.ProjectGood, { type_id: 1 }).then(function (res) { //that.data.id
+    util.request(api.ProjectGood, { type_id: that.data.type_id }).then(function (res) { //that.data.id
       console.log(res);
       if (res.code === 200) {
         var tmpPrice = res.data.info.goods_price * 100
@@ -178,23 +179,23 @@ Page({
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     this.setData({
-      id: parseInt(options.id)
+      type_id: parseInt(options.id)
       // id: 1181000
     });
+    
+  },
+  onReady: function () {
+    // 页面渲染完成
     var that = this;
     this.getGoodsInfo();
     util.request(api.CartGoodsCount).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code == 200) {
         that.setData({
-          cartGoodsCount: res.data.cartTotal.goodsCount
+          cartGoodsCount: res.data.goodsCount
         });
 
       }
     });
-  },
-  onReady: function () {
-    // 页面渲染完成
-
   },
   onShow: function () {
     // 页面显示
@@ -233,6 +234,52 @@ Page({
     });
   },
   addToCart: function () {
-    
+    let that = this;
+    var checkedProductNum  = that.data._checkedProductNum
+    var checkedProductPrice = that.data._checkedProductPrice
+    //验证商品选择
+    if (!checkedProductNum) {
+      wx.showToast({
+        image: '/static/images/icon_error.png',
+        title: '未选择商品',
+        mask: true
+      });
+      return false;
+    }
+
+    // 技术商品转换成商城的正式商品
+    util.request(api.GoodsTransform, {
+      specificationList: that.data.specificationList,
+      models: that.data.models,
+      checkedProductDots:that.data._checkedProductDots,
+      checkedProductNum:checkedProductNum,
+      checkedProductPrice:checkedProductPrice,
+      type_id:that.data.type_id
+    }, "POST").then(function (res) {
+        if(res.code == 200){
+          if(res.data.id){
+            //添加到购物车
+            util.request(api.CartAdd, { goodsId: res.data.id, number: 1}, "POST")
+              .then(function (res) {
+                let _res = res;
+                if (_res.code == 200) {
+                  wx.showToast({
+                    title: '添加成功'
+                  });
+                  that.setData({
+                    openAttr: !that.data.openAttr,
+                    cartGoodsCount: _res.data.goodsCount
+                  });
+                } else {
+                  wx.showToast({
+                    image: '/static/images/icon_error.png',
+                    title: _res.message,
+                    mask: true
+                  });
+                }
+            });
+          }
+        }
+      });
   }
 })

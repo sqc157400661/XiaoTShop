@@ -2,15 +2,15 @@
     <scroll-view scroll-y="true" scroll-top="{{scrollTop}}" style="height:{{scrollHeight}};">
     <view class="cate-item">
         <view class="h">
-            <text class="name">项目自主下单</text>
+            <text class="name">项目定制，梦想从这里开始</text>
             <text class="desc">轻松完成您的项目模块，获得小T承诺报价，不仅低于同等服务市场平均价格，而且小T提供项目开发过程的管控，保障交付。</text>
         </view>
         <view class="b">
-            <navigator class="item {{(iindex + 1) % 2 == 0 ? 'item-b' : ''}}"   url="/pages/technologyGoods/technologyGoods?id={{iitem.id}}" wx:for="{{projectTypeList}}" wx:for-item="iitem" wx:for-index="iindex" >
+            <view class="item {{(iindex + 1) % 2 == 0 ? 'item-b' : ''}}"   data-url="/pages/technologyGoods/technologyGoods?id={{iitem.id}}"  wx:for="{{projectTypeList}}" wx:for-item="iitem" wx:for-index="iindex" bindtap="jump">
                 <image class="img" src="{{iitem.type_img}}" background-size="cover"></image>
                 <text class="name">{{iitem.type_name}}</text>
                 <text class="price">￥{{iitem.goods_price}}起</text>
-            </navigator>
+            </view>
         </view>
     </view>
     </scroll-view>

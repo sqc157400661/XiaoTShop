@@ -9,10 +9,10 @@
     </swiper-item>
   </swiper>
   <view class="m-menu">
-    <navigator  class="item"  wx:for="{{specialList}}" url="{{item.link_url}}" wx:key="{{item.id}}" data-url="{{item.link_url}}" bindtap="jump">
+    <view  class="item"  wx:for="{{specialList}}" url="{{item.link_url}}" wx:key="{{item.id}}" data-url="{{item.link_url}}" bindtap="jump">
       <image src="{{item.icon}}" background-size="cover"></image>
       <text>{{item.title}}</text>
-    </navigator>
+    </view>
   </view>
 
   <!-- <view class="a-section a-brand">

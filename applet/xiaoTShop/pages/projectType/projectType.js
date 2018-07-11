@@ -24,7 +24,7 @@ Page({
   },
   onShow: function () {
     // 页面显示
-    console.log(1);
+  
   },
   onHide: function () {
     // 页面隐藏
@@ -41,5 +41,11 @@ Page({
   },
   onUnload: function () {
     // 页面关闭
+  },
+  jump:function(event){
+    var jurl = event.currentTarget.dataset.url
+    wx.navigateTo({
+      url: jurl,
+    })
   },
 })
