@@ -58,10 +58,16 @@ class ProjectControl
     }
 
     // 获取项目类型
-    static public function getProjectTypes()
+    static public function getProjectTypes($form = 1)
     {
+        $default = [];
+        if($form){
+            $default = ['-1'=>'请选择','0' => '全部'];
+        }else{
+            $default = ['0' => '全部'];
+        }
         $dbProjectTypes = ProjectType::pluck('type_name', 'id')->all();
-        $projectTypes = array_merge(['0' => '全部'], $dbProjectTypes);
+        $projectTypes =   $default + $dbProjectTypes;
         return $projectTypes;
     }
 
@@ -177,5 +183,16 @@ class ProjectControl
         $newGoods->is_limited = ShopGoods::STATE_SALE_NOT_LIMIT;// 是否限购
         $newGoods->save();
         return $newGoods;
+    }
+
+
+    // 获取项目类型
+    static public function getJsonForProjectTypes()
+    {
+        $dbProjectTypes = ProjectType::select('type_name as text', 'id')->where(
+            ['status'=> ProjectType::STATUS_ON]
+        )->get()->toArray();
+        $projectTypes = array_merge([['id'=>'-1','text'=> '请选择'],['id'=>'0','text' => '全部']], $dbProjectTypes);
+        return $projectTypes;
     }
 }

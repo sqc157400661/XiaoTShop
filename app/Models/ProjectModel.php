@@ -15,4 +15,5 @@ class ProjectModel extends Model
 	{
 		return $this->hasOne('App\models\ProjectFunctype', 'id', 'fid');
 	}
+
 }

@@ -77,7 +77,8 @@ class ProjectFuncDotController extends Controller
 
             $grid->type_id('所属项目类型id');
             $grid->functype_id('所属功能分类id');
-            $grid->model_id('所属功能模块id');
+            $grid->column('FunctypeFid.functype_name','所属功能分类');
+            $grid->column('getModels.model_name','所属功能模块');
             $grid->funcdot_name('功能点名');
             $grid->funcdot_desc('功能点描述');
             $grid->bottom_time('最低周期(h)');
@@ -112,9 +113,9 @@ class ProjectFuncDotController extends Controller
 
             $form->display('id', '序号');
             $form->select('type_id', '所属项目类型')
-                ->rules("required")
+                ->rules("required|min:0")
                 ->options(ProjectControl::getProjectTypes())
-                ->default(0)->load('functype_id', '/api/project_json/func-types', 'id', 'functype_name');
+                ->default(-1)->load('functype_id', '/api/project_json/func-types', 'id', 'functype_name');
             $form->select('functype_id', '所属功能分类id')->options(function ($id) {})
                 ->load('model_id', '/api/project_json/models', 'id', 'model_name');
             $form->select('model_id', '所属功能模块id')->options(function ($id) {});

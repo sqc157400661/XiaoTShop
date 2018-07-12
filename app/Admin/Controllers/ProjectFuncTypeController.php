@@ -88,7 +88,7 @@ class ProjectFuncTypeController extends Controller
 
             $grid->filter(function ($filter) {
                 $filter->equal('type_id', '所属项目类型id')
-                    ->select(ProjectControl::getProjectTypes());
+                    ->select(ProjectControl::getProjectTypes(0));
                 $filter->like('functype_name', '功能分类名');
             });
         });
@@ -105,9 +105,8 @@ class ProjectFuncTypeController extends Controller
 
             $form->display('id', '序号');
             $form->select('type_id', '所属项目类型')
-                ->rules("required")
-                ->options(ProjectControl::getProjectTypes())
-                ->default(0);
+                ->rules("required|numeric|min:0")
+                ->options(ProjectControl::getProjectTypes())->default(-1);
             $form->text('functype_name', '功能分类名')
                 ->rules('required');
             $form->text('functype_desc', '功能分类描述')

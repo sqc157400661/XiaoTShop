@@ -99,11 +99,11 @@ class AdminMenuTableSeeder extends Seeder
                 'id' => 8,
                 'parent_id' => 0,
                 'order' => 8,
-                'title' => '项目价格控制系统',
+                'title' => '定制科技项目商品板块',
                 'icon' => 'fa-diamond',
                 'uri' => NULL,
                 'created_at' => '2018-05-07 08:18:24',
-                'updated_at' => '2018-05-07 08:20:42',
+                'updated_at' => '2018-07-11 09:31:51',
             ),
             8 => 
             array (
@@ -206,17 +206,6 @@ class AdminMenuTableSeeder extends Seeder
             ),
             17 => 
             array (
-                'id' => 18,
-                'parent_id' => 9,
-                'order' => 0,
-                'title' => '商品管理',
-                'icon' => 'fa-product-hunt',
-                'uri' => 'goods',
-                'created_at' => '2018-05-09 08:19:47',
-                'updated_at' => '2018-05-09 08:19:47',
-            ),
-            18 => 
-            array (
                 'id' => 19,
                 'parent_id' => 0,
                 'order' => 0,
@@ -226,7 +215,7 @@ class AdminMenuTableSeeder extends Seeder
                 'created_at' => '2018-05-29 09:24:10',
                 'updated_at' => '2018-05-29 09:24:10',
             ),
-            19 => 
+            18 => 
             array (
                 'id' => 20,
                 'parent_id' => 19,
@@ -237,7 +226,7 @@ class AdminMenuTableSeeder extends Seeder
                 'created_at' => '2018-05-29 09:24:26',
                 'updated_at' => '2018-05-29 09:24:26',
             ),
-            20 => 
+            19 => 
             array (
                 'id' => 21,
                 'parent_id' => 19,
@@ -248,7 +237,7 @@ class AdminMenuTableSeeder extends Seeder
                 'created_at' => '2018-05-29 09:26:28',
                 'updated_at' => '2018-05-29 09:26:28',
             ),
-            21 => 
+            20 => 
             array (
                 'id' => 22,
                 'parent_id' => 19,
@@ -259,7 +248,7 @@ class AdminMenuTableSeeder extends Seeder
                 'created_at' => '2018-05-31 01:53:31',
                 'updated_at' => '2018-05-31 01:53:31',
             ),
-            22 => 
+            21 => 
             array (
                 'id' => 23,
                 'parent_id' => 19,
@@ -270,7 +259,7 @@ class AdminMenuTableSeeder extends Seeder
                 'created_at' => '2018-05-31 05:48:40',
                 'updated_at' => '2018-05-31 05:48:40',
             ),
-            23 => 
+            22 => 
             array (
                 'id' => 24,
                 'parent_id' => 19,
@@ -281,7 +270,7 @@ class AdminMenuTableSeeder extends Seeder
                 'created_at' => '2018-06-01 08:28:40',
                 'updated_at' => '2018-06-01 08:28:40',
             ),
-            24 => 
+            23 => 
             array (
                 'id' => 25,
                 'parent_id' => 19,
@@ -292,7 +281,7 @@ class AdminMenuTableSeeder extends Seeder
                 'created_at' => '2018-06-03 02:53:35',
                 'updated_at' => '2018-06-03 02:53:35',
             ),
-            25 => 
+            24 => 
             array (
                 'id' => 26,
                 'parent_id' => 25,
@@ -303,7 +292,7 @@ class AdminMenuTableSeeder extends Seeder
                 'created_at' => '2018-06-03 02:54:11',
                 'updated_at' => '2018-06-03 02:54:11',
             ),
-            26 => 
+            25 => 
             array (
                 'id' => 27,
                 'parent_id' => 25,
@@ -314,7 +303,7 @@ class AdminMenuTableSeeder extends Seeder
                 'created_at' => '2018-06-03 02:54:48',
                 'updated_at' => '2018-06-03 02:54:48',
             ),
-            27 => 
+            26 => 
             array (
                 'id' => 28,
                 'parent_id' => 19,

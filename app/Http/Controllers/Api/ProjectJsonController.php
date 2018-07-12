@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ProjectJsonController extends ApiController
 {
+	public function getProjectTypes(Request $request)
+	{
+		return ProjectControl::getJsonForProjectTypes();
+	}
+
 	public function getProjectFuncTypesByTypeId(Request $request)
 	{
 		$pid = 0;

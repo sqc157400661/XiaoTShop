@@ -149,8 +149,9 @@ page {
 }
 
 .catalog .bd .item .icon {
-  height: 144rpx;
-  width: 144rpx;
+  height: 86rpx;
+  width: 86rpx;
+  margin-left:29rpx;
 }
 
 .catalog .bd .item .txt {

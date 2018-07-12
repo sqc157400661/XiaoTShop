@@ -20,6 +20,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')->group(function () {
     // 在 "App\Http\Controllers\Api" 命名空间下的控制器
     Route::any('/order-notify','PaymentController@notify');
+    // 项目估价json
+    Route::any('/project_json/types', 'ProjectJsonController@getProjectTypes');
+    Route::any('/project_json/func-types', 'ProjectJsonController@getProjectFuncTypesByTypeId');
+    Route::any('/project_json/models', 'ProjectJsonController@getProjectModelsByFunctypeId');
+
     // 需要用户信息的
     Route::middleware('auth:api')->group(function () {
         Route::get('/index','IndexController@index');
@@ -27,9 +32,7 @@ Route::namespace('Api')->group(function () {
         Route::get('/project-goods','ProjectElementController@getProjectGoods');
         Route::post('/project-goods-transform', 'ProjectElementController@transform');
 
-        // 项目估价json
-        Route::any('/project_json/func-types', 'ProjectJsonController@getProjectFuncTypesByTypeId');
-        Route::any('/project_json/models', 'ProjectJsonController@getProjectModelsByFunctypeId');
+
 
 
         // 主题&专题

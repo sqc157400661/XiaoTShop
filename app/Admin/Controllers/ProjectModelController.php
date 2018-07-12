@@ -101,9 +101,9 @@ class ProjectModelController extends Controller
 
             $form->display('id', '序号');
             $form->select('type_id', '所属项目类型')
-                ->rules("required")
+                ->rules("required|min:0")
                 ->options(ProjectControl::getProjectTypes())
-                ->default(0)->load('functype_id', '/api/project_json/func-types', 'id', 'functype_name');
+                ->default(-1)->load('functype_id', '/api/project_json/func-types', 'id', 'functype_name');
             $form->select('functype_id', '所属功能分类id')->options(function ($id) {});
             $form->text('model_name', '模块名')
                 ->rules('required');
