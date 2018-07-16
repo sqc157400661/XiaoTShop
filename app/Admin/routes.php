@@ -30,7 +30,6 @@ Route::group([
     //前端用户管理
 //    $router->resource('front-users', FrontEndUserController::class);
 
-
     // 项目类型管理
     $router->resource('project-type', ProjectTypeController::class);
 
@@ -45,6 +44,7 @@ Route::group([
 
     // 品牌管理
     $router->resource('shop-brand', BrandController::class);
+
 
     Route::post('uploadFile', 'UploadController@uploadImg')->name('admin-up');
 
@@ -64,9 +64,10 @@ Route::group([
         $router->resource('shop-goods', ShopGoodsController::class);
         // 主题&专题管理
         $router->resource('shop-topics', ShopTopicController::class);
-
         // 商城订单管理
         $router->resource('shop-order', ShopOrderController::class);
+        // 用户反馈
+        $router->resource('shop-feedback', FeedbackController::class);
     });
 
 });

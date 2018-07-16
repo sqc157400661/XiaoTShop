@@ -54,6 +54,9 @@ module.exports = {
   OrderCancel: ApiRootUrl + 'order-cancel',  //取消订单
   OrderExpress: ApiRootUrl + 'order-express', //物流详情
 
+  FeedBackData: ApiRootUrl + 'feedback-datalist', // 反馈选项
+  FeedBackHandle: ApiRootUrl + 'feedback-handle', // 反馈
+
  /*--------------------------------------------------------------------------------------*/
 
 

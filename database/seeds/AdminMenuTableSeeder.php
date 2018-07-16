@@ -314,6 +314,17 @@ class AdminMenuTableSeeder extends Seeder
                 'created_at' => '2018-07-10 07:22:58',
                 'updated_at' => '2018-07-10 07:22:58',
             ),
+            27 => 
+            array (
+                'id' => 29,
+                'parent_id' => 19,
+                'order' => 0,
+                'title' => '用户反馈管理',
+                'icon' => 'fa-gittip',
+                'uri' => 'shop-feedback',
+                'created_at' => '2018-07-16 08:56:20',
+                'updated_at' => '2018-07-16 08:56:20',
+            ),
         ));
         
         

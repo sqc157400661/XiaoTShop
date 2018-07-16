@@ -25,15 +25,13 @@ Route::namespace('Api')->group(function () {
     Route::any('/project_json/func-types', 'ProjectJsonController@getProjectFuncTypesByTypeId');
     Route::any('/project_json/models', 'ProjectJsonController@getProjectModelsByFunctypeId');
 
+
     // 需要用户信息的
     Route::middleware('auth:api')->group(function () {
         Route::get('/index','IndexController@index');
         Route::get('/project-type-json','ProjectElementController@getProjectType');
         Route::get('/project-goods','ProjectElementController@getProjectGoods');
         Route::post('/project-goods-transform', 'ProjectElementController@transform');
-
-
-
 
         // 主题&专题
         Route::get('/topic-list','ShopTopicController@getTopicList');
@@ -87,6 +85,10 @@ Route::namespace('Api')->group(function () {
         Route::get('/comment-list','ShopCommentController@getCommentList');// 评论列表
         Route::get('/comment-count','ShopCommentController@getCommentCount');//评论总数
         Route::post('/comment-post','ShopCommentController@commentAdd');// 发表评论
+
+        // 用户反馈相关的
+        Route::get('/feedback-datalist','ShopFeedbackController@getDataList');// 获取反馈选项信息
+        Route::post('/feedback-handle','ShopFeedbackController@feedbackHandle');// 反馈
     });
 
     Route::any('/login','AuthenticateController@auto_login')->name('login');
