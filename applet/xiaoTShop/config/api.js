@@ -23,6 +23,7 @@ module.exports = {
   GoodsHot: ApiRootUrl + 'goods-hot',  //热门
 
   CollectAddOrDelete: ApiRootUrl + 'collect-addordelete',  //添加或取消收藏
+   CollectList: ApiRootUrl + 'collect-list',  //收藏列表
 
   CartList: ApiRootUrl + 'cart-index', //获取购物车的数据
   CartAdd: ApiRootUrl + 'cart-add', // 添加商品到购物车
@@ -63,7 +64,7 @@ module.exports = {
   BrandList: ApiRootUrl + 'brand/list',  //品牌列表
   BrandDetail: ApiRootUrl + 'brand/detail',  //品牌详情
 
-  CollectList: ApiRootUrl + 'collect/list',  //收藏列表
+ 
 
   SearchIndex: ApiRootUrl + 'search/index',  //搜索页面数据
   SearchResult: ApiRootUrl + 'search/result',  //搜索数据

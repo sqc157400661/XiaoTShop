@@ -1,4 +1,8 @@
 <view class="container">
+    <view class="no-order" hidden="{{orderList.length > 0 ? true : false}}">
+            <image src="/static/images/no-order.png" class="no-order-img"></image>
+            <view class="text">暂无订单</view>
+        </view>
     <view class="orders">
         <navigator url="../orderDetail/orderDetail?id={{item.id}}" class="order" wx:for="{{orderList}}" wx:key="{{item.id}}">
             <view class="h">

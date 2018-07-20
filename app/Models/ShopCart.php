@@ -33,7 +33,14 @@ class ShopCart extends Model
     }
 
     public static function getGoodsAmountCount($where){
-        return static::where($where)->sum('retail_price');
+        $cartData =  static::where($where)->get();
+        $goodsTotalPrice = 0.00;
+        if($cartData){
+            foreach($cartData as $item){
+                $goodsTotalPrice = PriceCalculate($goodsTotalPrice,'+',PriceCalculate($item['retail_price'],'*',$item['number']));
+            }
+        }
+        return $goodsTotalPrice;
     }
 
     // 获取选中的商品

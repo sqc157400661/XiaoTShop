@@ -137,10 +137,9 @@ class ShopCartController extends ApiController
             return $this->failed($validator->errors(), 403);
         }
         $where = [
-            'uid' =>$user_id,
-            'goods_id' => explode(',',$request->goodsIds)
+            'uid'=>$user_id,
         ];
-        ShopCart::where($where)->update(['checked' => $request->isChecked]);
+        ShopCart::where($where)->whereIn('goods_id',explode(',',$request->goodsIds))->update(['checked' => $request->isChecked]);
         $cartData = CartLogic::getCartList(['uid' =>$user_id]);
         return $this->success($cartData);
     }

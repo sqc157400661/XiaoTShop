@@ -6,6 +6,7 @@ page{
 .container{
     background: #f4f4f4;
     height: auto;
+    padding-bottom:10rpx;
     overflow: hidden;
     width: 100%;
 }
@@ -55,6 +56,7 @@ page{
     height: auto;
     overflow: hidden;
     background: #fff;
+    margin-bottom:100rpx;
 }
 
 .user-menu .item{

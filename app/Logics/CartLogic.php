@@ -62,7 +62,10 @@ class CartLogic
     {
         $cartList = ShopCart::getCheckedGoodsList($uid);
         $checkedGoodsList = ShopCartResource::collection($cartList);
-        $goodsTotalPrice = array_sum(array_pluck($checkedGoodsList, 'retail_price'));
+        $goodsTotalPrice = 0.00;
+        foreach($checkedGoodsList as $goodsVal){
+            $goodsTotalPrice = PriceCalculate($goodsTotalPrice,'+',PriceCalculate($goodsVal['retail_price'],'*',$goodsVal['number']));
+        }
         $freightPrice = array_sum(array_pluck($checkedGoodsList, 'freight_price'));
         return [
             'checkedGoodsList' => $checkedGoodsList,// 商品列表
