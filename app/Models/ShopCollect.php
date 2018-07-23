@@ -17,7 +17,7 @@ class ShopCollect extends Model
 
     public function shop_goods()
     {
-        return $this->hasOne(ShopGoods::class,'value_id');
+        return $this->hasOne(ShopGoods::class,'id','value_id');
     }
 
     public static function getStateDisplayMap()
@@ -30,5 +30,9 @@ class ShopCollect extends Model
 
     public static function getCollectDetail($where){
         return static::where($where)->first();
+    }
+
+    public static function getList($where){
+        return static::where(array_merge(['is_attention'=>static::STATE_ATTENTION],$where))->get();
     }
 }

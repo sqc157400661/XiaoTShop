@@ -52,6 +52,7 @@ Route::namespace('Api')->group(function () {
 
         // 收藏相关
         Route::post('/collect-addordelete','ShopCollectController@addordelete');// 添加或取消收藏
+        Route::get('/collect-list','ShopCollectController@getList');// 获取收藏列表
 
         // 购物车相关处理
         Route::get('/cart-index','ShopCartController@index');//获取购物车的数据
@@ -63,8 +64,9 @@ Route::namespace('Api')->group(function () {
 
         // 下单相关
         Route::get('/cart-checkout','ShopOrderController@checkout');//下单前信息确认
-        Route::post('/order-submit','ShopOrderController@orderSubmit');//下单前信息确认
-        Route::get('/pay-prepay','PaymentController@toPay');//下单前信息确认
+        Route::post('/pay-now','ShopOrderController@payNow');//立即购买
+        Route::post('/order-submit','ShopOrderController@orderSubmit');//下单
+        Route::get('/pay-prepay','PaymentController@toPay');// 支付
 
 
         // 下单收货地址管理

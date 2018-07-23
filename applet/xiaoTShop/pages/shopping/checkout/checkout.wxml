@@ -70,7 +70,7 @@
             <view class="info">
                 <view class="t">
                     <text class="name">{{item.goods_name}}</text>
-                    <text class="number">x{{item.number}}</text>
+                    <text class="number">x{{item.number?item.number:buynumber}}</text>
                 </view>
                 <view class="m">{{item.goods_specifition_name_value}}</view>
                 <view class="b">￥{{item.retail_price}}</view>

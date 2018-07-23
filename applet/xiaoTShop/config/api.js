@@ -23,7 +23,7 @@ module.exports = {
   GoodsHot: ApiRootUrl + 'goods-hot',  //热门
 
   CollectAddOrDelete: ApiRootUrl + 'collect-addordelete',  //添加或取消收藏
-   CollectList: ApiRootUrl + 'collect-list',  //收藏列表
+  CollectList: ApiRootUrl + 'collect-list',  //收藏列表
 
   CartList: ApiRootUrl + 'cart-index', //获取购物车的数据
   CartAdd: ApiRootUrl + 'cart-add', // 添加商品到购物车
@@ -37,6 +37,7 @@ module.exports = {
   CommentPost: ApiRootUrl + 'comment-post',   //发表评论
 
   CartCheckout: ApiRootUrl + 'cart-checkout', // 下单前信息确认
+  PayNow: ApiRootUrl + 'pay-now', // 立即购买
 
   RegionList: ApiRootUrl + 'region-list',  //获取区域列表
   AddressList: ApiRootUrl + 'address-list',  //收货地址列表

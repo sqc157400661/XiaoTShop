@@ -137,7 +137,7 @@ class Buy
         $order_goods_model = DB::table('shop_order_goods')->insert($order_goods_insert);
         // 清除购物车商品
         $cartRe = CartLogic::clearCart($this->_user_id);
-        if ($order_goods_model && $cartRe) {
+        if ($order_goods_model) {
             DB::commit();
             return $order_model->toArray();
         } else {

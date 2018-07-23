@@ -9,8 +9,9 @@ namespace App\Logic;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Resources\ShopCart as ShopCartResource;
+use App\Http\Resources\ShopGoods as ShopGoodsResource;
 use App\Models\ShopCart;
-
+use App\Models\ShopGoods;
 
 class CartLogic
 {
@@ -65,6 +66,34 @@ class CartLogic
         $goodsTotalPrice = 0.00;
         foreach($checkedGoodsList as $goodsVal){
             $goodsTotalPrice = PriceCalculate($goodsTotalPrice,'+',PriceCalculate($goodsVal['retail_price'],'*',$goodsVal['number']));
+        }
+        $freightPrice = array_sum(array_pluck($checkedGoodsList, 'freight_price'));
+        return [
+            'checkedGoodsList' => $checkedGoodsList,// 商品列表
+            'goodsTotalPrice' => $goodsTotalPrice,// 商品总价格
+            'freightPrice' => $freightPrice,// 商品运费总和
+            'orderTotalPrice' => PriceCalculate($goodsTotalPrice,'+',$freightPrice)
+        ];
+    }
+
+    public static function getBuyGoodsById($goodsId,$number = 1)
+    {
+        $goodsInfos = ShopGoods::getGoodsList(['id'=>$goodsId]);
+        foreach ($goodsInfos as $item_info){
+            $checkedGoodsList[] = [
+                "goods_id"=> $item_info->id,
+                "goods_name"=> $item_info->goods_name,
+                "market_price"=> $item_info->counter_price,
+                "retail_price"=> $item_info->retail_price,
+                "number"=> $number,
+                'freight_price' => $item_info->freight_price,
+                "primary_pic_url"=>  config('filesystems.disks.oss.url').'/'.$item_info->primary_pic_url,
+                "list_pic_url"=>  config('filesystems.disks.oss.url').'/'.$item_info->primary_pic_url,
+            ];
+        }
+        $goodsTotalPrice = 0.00;
+        foreach($checkedGoodsList as $goodsVal){
+            $goodsTotalPrice = PriceCalculate($goodsTotalPrice,'+',PriceCalculate($goodsVal['retail_price'],'*',$number));
         }
         $freightPrice = array_sum(array_pluck($checkedGoodsList, 'freight_price'));
         return [

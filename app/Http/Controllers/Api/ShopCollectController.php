@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Models\ShopCollect;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\ShopCollect as ShopCollectResource;
 
 class ShopCollectController extends ApiController
 {
@@ -58,6 +59,33 @@ class ShopCollectController extends ApiController
         }
         return  $this->success(['type'=>$type]);
 
+    }
+
+    /**
+     * 获取收藏列表
+     */
+    public function getList(Request $request){
+        // 参数校验
+        $validator = Validator::make($request->all(),
+            [
+                'typeId' => 'required',
+            ],
+            [
+                'typeId.required' => '参数缺失',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return $this->failed($validator->errors(), 403);
+        }
+        if(empty(\Auth::user()->id)){
+            $user_id = 0;
+        }else{
+            $user_id = \Auth::user()->id;
+        }
+
+        $list = ShopCollect::getList(['user_id'=>$user_id,'type_id'=>$request->typeId]);
+        return $this->success(ShopCollectResource::collection($list));
     }
 
 

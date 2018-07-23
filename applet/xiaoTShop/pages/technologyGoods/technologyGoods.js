@@ -225,6 +225,45 @@ Page({
   },
   // 取消收藏
   addCannelCollect: function () {
+    let that = this;
+    var checkedProductNum = that.data._checkedProductNum
+    var checkedProductPrice = that.data._checkedProductPrice
+    // 技术商品转换成商城的正式商品
+    util.request(api.GoodsTransform, {
+      specificationList: that.data.specificationList,
+      models: that.data.models,
+      checkedProductDots: that.data._checkedProductDots,
+      checkedProductNum: checkedProductNum,
+      checkedProductPrice: checkedProductPrice,
+      type_id: that.data.type_id
+    }, "POST").then(function (res) {
+      if (res.code == 200) {
+        if (res.data.id) {
+          //添加或是取消收藏
+          util.request(api.CollectAddOrDelete, { typeId: 0, valueId: res.data.id }, "POST")
+            .then(function (_res) {
+              if (_res.code == 200) {
+                if (_res.data.type == 'add') {
+                  that.setData({
+                    'collectBackImage': that.data.hasCollectImage
+                  });
+                } else {
+                  that.setData({
+                    'collectBackImage': that.data.noCollectImage
+                  });
+                }
+
+              } else {
+                wx.showToast({
+                  image: '/static/images/icon_error.png',
+                  title: _res.message,
+                  mask: true
+                });
+              }
+            });
+        }
+      }
+    });
     
   },
 
@@ -281,5 +320,38 @@ Page({
           }
         }
       });
-  }
+  },
+
+  payNow: function () {
+    var that = this;
+    var checkedProductNum = that.data._checkedProductNum
+    var checkedProductPrice = that.data._checkedProductPrice
+    if (this.data.openAttr === false) {
+      //打开规格选择窗口
+      this.setData({
+        openAttr: !this.data.openAttr
+      });
+    } else {
+
+      // 技术商品转换成商城的正式商品
+      util.request(api.GoodsTransform, {
+        specificationList: that.data.specificationList,
+        models: that.data.models,
+        checkedProductDots: that.data._checkedProductDots,
+        checkedProductNum: checkedProductNum,
+        checkedProductPrice: checkedProductPrice,
+        type_id: that.data.type_id
+      }, "POST").then(function (res) {
+        if (res.code == 200) {
+          if (res.data.id) {
+            wx.navigateTo({
+              url: '../shopping/checkout/checkout?goodsId=' + res.data.id + '&number=1'
+            })
+          }
+        }
+      });
+      
+    }
+
+  },
 })

@@ -42,6 +42,34 @@ class ShopOrderController extends ApiController
         return $this->success($outData);
     }
 
+    // 立即购买
+    public function payNow(Request $request){
+        if (empty(\Auth::user()->id)) {
+            $this->user_id = 0;
+        } else {
+            $this->user_id = \Auth::user()->id;
+        }
+        // 参数校验
+        $validator = Validator::make($request->all(),
+            [
+                'addressId' => 'required',
+                'goodsId' => 'required',
+                'buynumber' => 'required',
+            ]
+        );
+        if ($validator->fails()) {
+            return $this->failed($validator->errors(), 403);
+        }
+        $outData = CartLogic::getBuyGoodsById($request->goodsId,$request->buynumber);
+        $outData['checkedAddress'] = AddressLogic::getOneAddr($request->addressId, $this->user_id); // 选择地址
+        $outData['checkedCoupon'] = []; // 选择的优惠券
+        $outData['couponList'] = []; //  优惠券列表
+        $outData['couponPrice'] = 0.00; // 选中的优惠金额
+        $outData['actualPrice'] = PriceCalculate($outData['orderTotalPrice'], '-', $outData['couponPrice']); // 真实付款金额
+        return $this->success($outData);
+    }
+
+
     // 提交订单用来生成订单
     public function orderSubmit(Request $request)
     {
@@ -62,7 +90,11 @@ class ShopOrderController extends ApiController
         if ($validator->fails()) {
             return $this->failed($validator->errors(), 403);
         }
-        $orderData = CartLogic::getCheckedGoodsList($this->user_id);
+        if($request->goodsId){
+            $orderData = CartLogic::getBuyGoodsById($request->goodsId,$request->buynumber);
+        }else{
+            $orderData = CartLogic::getCheckedGoodsList($this->user_id);
+        }
         $checkedAddress = AddressLogic::getOneAddr($request->addressId, $this->user_id); // 选择地址
         if (empty($checkedAddress)) {
             return $this->failed('未查到用户收货地址，请检查您的收货地址', 401);

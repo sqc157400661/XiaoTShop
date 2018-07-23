@@ -184,6 +184,31 @@ Page({
     }
 
   },
+  payNow: function () {
+    var that = this;
+    if (this.data.openAttr === false) {
+      //打开规格选择窗口
+      this.setData({
+        openAttr: !this.data.openAttr
+      });
+    } else {
+
+      //验证库存
+      if (this.data.goods.goods_number < this.data.number) {
+        //找不到对应的product信息，提示没有库存
+        wx.showToast({
+          image: '/static/images/icon_error.png',
+          title: '库存不足',
+          mask: true
+        });
+        return false;
+      }
+      wx.navigateTo({
+        url: '../shopping/checkout/checkout?goodsId=' + this.data.goods.id + '&number=' + this.data.number
+      })
+    }
+
+  },
   cutNumber: function () {
     this.setData({
       number: (this.data.number - 1 > 1) ? this.data.number - 1 : 1

@@ -15,13 +15,22 @@ Page({
     couponPrice: 0.00,     //优惠券的价格
     orderTotalPrice: 0.00,  //订单总价
     actualPrice: 0.00,     //实际需要支付的总价
+    is_buyNow:0,
+    goodsId:0,
+    buynumber: 0,
     addressId: 0,
     couponId: 0
   },
   onLoad: function (options) {
 
     // 页面初始化 options为页面跳转所带来的参数
-
+    if (options.goodsId){
+      this.setData({
+        'is_buyNow': 1,
+        'goodsId': options.goodsId,
+        'buynumber': options.number,
+      });
+    }
     try {
       var addressId = wx.getStorageSync('addressId');
       if (addressId) {
@@ -62,6 +71,25 @@ Page({
       wx.hideLoading();
     });
   },
+  buyNow: function () {
+    let that = this;
+    util.request(api.PayNow, { addressId: that.data.addressId, couponId: that.data.couponId, goodsId: that.data.goodsId, buynumber: that.data.buynumber }, 'POST').then(function (res)     {
+      if (res.code === 200) {
+        that.setData({
+          checkedGoodsList: res.data.checkedGoodsList,
+          checkedAddress: res.data.checkedAddress,
+          actualPrice: res.data.actualPrice,
+          checkedCoupon: res.data.checkedCoupon,
+          couponList: res.data.couponList,
+          couponPrice: res.data.couponPrice,
+          freightPrice: res.data.freightPrice,
+          goodsTotalPrice: res.data.goodsTotalPrice,
+          orderTotalPrice: res.data.orderTotalPrice
+        });
+      }
+      wx.hideLoading();
+    });
+  },
   selectAddress() {
     wx.navigateTo({
       url: '/pages/shopping/address/address',
@@ -77,11 +105,17 @@ Page({
 
   },
   onShow: function () {
+    let that = this;
     // 页面显示
     wx.showLoading({
       title: '加载中...',
     })
-    this.getCheckoutInfo();
+    if (that.data.is_buyNow){
+      that.buyNow();
+    }else{
+      that.getCheckoutInfo();
+    }
+    
 
   },
   onHide: function () {
@@ -93,11 +127,12 @@ Page({
 
   },
   submitOrder: function () {
+    let that = this;
     if (this.data.addressId <= 0) {
       util.showErrorToast('请选择收货地址');
       return false;
     }
-    util.request(api.OrderSubmit, { addressId: this.data.addressId, couponId: this.data.couponId }, 'POST').then(res => {
+    util.request(api.OrderSubmit, { addressId: this.data.addressId, couponId: this.data.couponId, goodsId: that.data.goodsId, buynumber: that.data.buynumber }, 'POST').then(res => {
       if (res.code === 200) {
         const orderId = res.data.id;
         pay.payOrder(parseInt(orderId)).then(res => {
