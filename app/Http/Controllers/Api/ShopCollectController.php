@@ -49,7 +49,7 @@ class ShopCollectController extends ApiController
             $newCollect->save();
             return  $this->success(['type'=>$type]);
         }
-        if($info->is_attention ==ShopCollect::STATE_ATTENTION){
+        if($info->is_attention == ShopCollect::STATE_ATTENTION){
             $info->is_attention = ShopCollect::STATE_NOT_ATTENTION;
             $info->save();
             $type = 'del';

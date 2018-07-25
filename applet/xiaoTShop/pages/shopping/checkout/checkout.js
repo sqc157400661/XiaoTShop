@@ -132,6 +132,11 @@ Page({
       util.showErrorToast('请选择收货地址');
       return false;
     }
+    
+    wx.showLoading({
+      title: '支付中...',
+    });
+
     util.request(api.OrderSubmit, { addressId: this.data.addressId, couponId: this.data.couponId, goodsId: that.data.goodsId, buynumber: that.data.buynumber }, 'POST').then(res => {
       if (res.code === 200) {
         const orderId = res.data.id;
@@ -140,9 +145,21 @@ Page({
             url: '/pages/payResult/payResult?status=1&orderId=' + orderId
           });
         }).catch(res => {
-          wx.redirectTo({
-            url: '/pages/payResult/payResult?status=0&orderId=' + orderId
+          wx.showModal({
+            title:'功能暂时关闭',
+            showCancel:false,
+            content:'该功能暂时关闭中，待商城完善后开放',
+            confirmText:'确定',
+            success:function(res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+                  wx.redirectTo({
+                    url: '/pages/payResult/payResult?status=0&orderId=' + orderId
+                  });
+              }
+            }
           });
+          
         });
       } else {
         util.showErrorToast('下单失败');

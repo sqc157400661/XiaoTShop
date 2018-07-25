@@ -76,7 +76,7 @@ class CartLogic
         ];
     }
 
-    public static function getBuyGoodsById($goodsId,$number = 1)
+    public static function getBuyGoodsById($goodsId,$number = 1,$format = 1)
     {
         $goodsInfos = ShopGoods::getGoodsList(['id'=>$goodsId]);
         foreach ($goodsInfos as $item_info){
@@ -87,8 +87,8 @@ class CartLogic
                 "retail_price"=> $item_info->retail_price,
                 "number"=> $number,
                 'freight_price' => $item_info->freight_price,
-                "primary_pic_url"=>  config('filesystems.disks.oss.url').'/'.$item_info->primary_pic_url,
-                "list_pic_url"=>  config('filesystems.disks.oss.url').'/'.$item_info->primary_pic_url,
+                "primary_pic_url"=>  $format ? config('filesystems.disks.oss.url').'/'.$item_info->primary_pic_url:$item_info->primary_pic_url,
+                "list_pic_url"=>  $format ? config('filesystems.disks.oss.url').'/'.$item_info->primary_pic_url:$item_info->primary_pic_url,
             ];
         }
         $goodsTotalPrice = 0.00;

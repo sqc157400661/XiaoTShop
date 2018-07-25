@@ -76,7 +76,7 @@ class PaymentController extends ApiController
                     // 判断支付金额
                     $order->pay_date = Carbon::now(); // 更新支付时间为当前时间
                     $order->trade_no = $message['transaction_id'];// 微信交易号存放到数据库【退款等会用到】
-                    if ($message['total_fee'] == ($order->pay_price * 100)) {
+                    if ($message['total_fee'] == ($order->actual_price * 100)) {
                         // 不是已经支付状态则修改为已经支付状态
                         $order->status = '22';
                         $order->lock_state = 0;
@@ -87,7 +87,7 @@ class PaymentController extends ApiController
                         //生产的
                         $order->status = '10';
                         $order->lock_state = 4;
-                        //add_my_log('order', '支付金额与订单金额不符：' . $order->pay_price . '（元）=>' . $notify->total_fee . '(分)', 3, json_encode($order->toArray()), '微信支付回调');
+                        //add_my_log('order', '支付金额与订单金额不符：' . $order->actual_price . '（元）=>' . $notify->total_fee . '(分)', 3, json_encode($order->toArray()), '微信支付回调');
                     }
 
                 }elseif($message['result_code'] === 'FAIL'){

@@ -91,7 +91,7 @@ class ShopOrderController extends ApiController
             return $this->failed($validator->errors(), 403);
         }
         if($request->goodsId){
-            $orderData = CartLogic::getBuyGoodsById($request->goodsId,$request->buynumber);
+            $orderData = CartLogic::getBuyGoodsById($request->goodsId,$request->buynumber,0);
         }else{
             $orderData = CartLogic::getCheckedGoodsList($this->user_id);
         }

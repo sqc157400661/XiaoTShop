@@ -200,7 +200,7 @@ class Buy
             'body' => '小T商城',
             'detail' => '小T商城的订单',
             'out_trade_no' => $attributes['order_sn'],
-            'total_fee' => $attributes['pay_price'] * 100,
+            'total_fee' => $attributes['actual_price'] * 100,
             'trade_type' => 'JSAPI',
             'openid' => $openid,
         ]);
