@@ -34,6 +34,10 @@ class ShopGoodsController extends ApiController
         if ($validator->fails()) {
             return $this->failed($validator->errors(), 403);
         }
+        $where = [];
+        if( $request->keyword){
+            $where[] = ['goods_name', 'like' , '%'.$request->keyword.'%'];
+        }
         if( $request->categoryId){
             $where['category_id'] = $request->categoryId;
         }

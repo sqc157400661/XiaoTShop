@@ -50,8 +50,8 @@
   <view class="cate-item">
     <view class="b">
       <navigator class="item {{(iindex + 1) % 2 == 0 ? 'item-b' : ''}}" url="/pages/goods/goods?id={{iitem.id}}" wx:for="{{goodsList}}" wx:for-item="iitem" wx:for-index="iindex">
-        <image class="img" src="{{iitem.list_pic_url}}" background-size="cover"></image>
-        <text class="name">{{iitem.name}}</text>
+        <image class="img" src="{{iitem.primary_pic_url}}" background-size="cover"></image>
+        <text class="name">{{iitem.goods_name}}</text>
         <text class="price">￥{{iitem.retail_price}}</text>
       </navigator>
     </view>

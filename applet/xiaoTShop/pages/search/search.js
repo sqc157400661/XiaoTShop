@@ -90,14 +90,14 @@ Page({
   getGoodsList: function () {
     let that = this;
     util.request(api.GoodsList, { keyword: that.data.keyword, page: that.data.page, size: that.data.size, sort: that.data.currentSortType, order: that.data.currentSortOrder, categoryId: that.data.categoryId }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code == 200) {
         that.setData({
           searchStatus: true,
           categoryFilter: false,
-          goodsList: res.data.data,
+          goodsList: res.data,
           filterCategory: res.data.filterCategory,
-          page: res.data.currentPage,
-          size: res.data.numsPerPage
+          page: res.meta.currentPage,
+          size: res.meta.per_page
         });
       }
 
