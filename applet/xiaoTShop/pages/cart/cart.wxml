@@ -6,7 +6,7 @@
   </view>
   <view class="no-cart" wx:if="{{cartGoods.length <= 0}}">
     <view class="c">
-      <image src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/noCart-a8fe3f12e5.png" />
+      <image src="http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/noCart-a8fe3f12e5.png" />
       <text>去添加点什么吧</text>
     </view>
   </view>
@@ -43,7 +43,7 @@
                     <view class="promotion">
                         <text class="tag">满赠</text>
                         <text class="txt">再加26元, 3件赠1件蔓越莓干</text>
-                        <image class="icon" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/go-b67cb9718d.png"></image>
+                        <image class="icon" src="http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/go-b67cb9718d.png"></image>
                     </view>
                     <view class="get">领赠品</view>                
                 </view>

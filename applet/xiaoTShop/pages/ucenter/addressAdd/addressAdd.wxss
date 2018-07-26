@@ -40,13 +40,13 @@ page{
     height: 40rpx;
     padding-left: 50rpx;
     line-height: 40rpx;
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/checkbox-sed825af9d3-a6b8540d42.png) 1rpx -448rpx no-repeat;
+    background: url(http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/checkbox-sed825af9d3-a6b8540d42.png) 1rpx -448rpx no-repeat;
     background-size: 38rpx 486rpx;
     font-size: 28rpx;
 }
 
 .default-input.selected{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/checkbox-sed825af9d3-a6b8540d42.png) 0 -192rpx no-repeat;
+    background: url(http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/checkbox-sed825af9d3-a6b8540d42.png) 0 -192rpx no-repeat;
     background-size: 38rpx 486rpx;
 }
 

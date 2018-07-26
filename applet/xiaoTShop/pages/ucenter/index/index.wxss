@@ -94,42 +94,42 @@ page{
 }
 
 .user-menu .icon.order{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -437.5rpx no-repeat;
+    background: url(http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -437.5rpx no-repeat;
     background-size: 52.803rpx;
 }
 
 .user-menu .icon.coupon{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -62.4997rpx no-repeat;
+    background: url(http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -62.4997rpx no-repeat;
     background-size: 52.803rpx;
 }
 
 .user-menu .icon.gift{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -187.5rpx no-repeat;
+    background: url(http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -187.5rpx no-repeat;
     background-size: 52.803rpx;
 }
 
 .user-menu .icon.address{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 0 no-repeat;
+    background: url(http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 0 no-repeat;
     background-size: 52.803rpx;
 }
 
 .user-menu .icon.security{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -500rpx no-repeat;
+    background: url(http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -500rpx no-repeat;
     background-size: 52.803rpx;
 }
 
 .user-menu .icon.kefu{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -312.5rpx no-repeat;
+    background: url(http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -312.5rpx no-repeat;
     background-size: 52.803rpx;
 }
 
 .user-menu .icon.help{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -250rpx no-repeat;
+    background: url(http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -250rpx no-repeat;
     background-size: 52.803rpx;
 }
 
 .user-menu .icon.feedback{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -125rpx no-repeat;
+    background: url(http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -125rpx no-repeat;
     background-size: 52.803rpx;
 }
 

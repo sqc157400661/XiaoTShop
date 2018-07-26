@@ -10,12 +10,12 @@
                 <view class="address">{{item.full_region + item.address}}</view>
             </view>
             <view class="r">
-                <image catchtap="addressAddOrUpdate" data-address-id="{{item.id}}" class="del" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/address-edit-7fee7b0d63.png"></image>
+                <image catchtap="addressAddOrUpdate" data-address-id="{{item.id}}" class="del" src="http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/address-edit-7fee7b0d63.png"></image>
             </view>
         </view>
     </view>
     <view class="empty-view" wx:if="{{ addressList.length <= 0 }}">
-      <image class="icon" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/noAddress-26d570cefa.png"></image>
+      <image class="icon" src="http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/noAddress-26d570cefa.png"></image>
       <text class="text">收货地址在哪里</text>
     </view>
     <view class="add-address" bindtap="addressAddOrUpdate" data-address-id="0">新建</view>

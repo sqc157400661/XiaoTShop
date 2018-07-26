@@ -11,7 +11,7 @@ page{
 
 .address-list{
     padding-left: 31.25rpx;
-    background: #fff url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/address-bg-bd30f2bfeb.png) 0 0 repeat-x;
+    background: #fff url(http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/address-bg-bd30f2bfeb.png) 0 0 repeat-x;
     background-size: auto 10.5rpx;
     margin-bottom: 90rpx;
 }
