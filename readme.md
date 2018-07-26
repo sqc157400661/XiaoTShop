@@ -8,29 +8,7 @@
 
 ### 项目截图
 
-![首页](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20001.jpg)
-
-![专题](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20005.jpg)
-
-![分类](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20003.jpg)
-
-![商品列表](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20011.jpg)
-
-![商品列表1](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20012.jpg)
-
-![商品详情](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20002.jpg)
-
-![购物车](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20004.jpg)
-
-![订单中心](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20004.jpg)
-
-![订单中心1](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20009.jpg)
-
-![订单中心2](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20007.jpg)
-
-![我的](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20006.jpg)
-
-![优惠券](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20010.jpg)
+![首页](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20111.jpg)
 
 ### 功能列表
 + 首页
@@ -105,12 +83,12 @@
 
 ### 作者希望
 + 喜欢别忘了 Star
-+ 微信号 sqc157400661
 + 交流 QQ 群：563359136
 + 打赏作者
 
 <center>
-<img src="https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/minepay.jpg" width="16%" height="16%" />
+<img src="https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/minepay.jpg" width="16%" height="16%" style="float:left;margin:-left:20px;" />
+<img src="https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/alipay.jpg" width="16%" height="16%" style="float:left;margin:-left:20px;" />
 </center>
 
 
