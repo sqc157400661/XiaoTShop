@@ -88,7 +88,7 @@
 
 <center>
 <img src="https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/minepay.jpg" width="16%" height="16%" style="float:left;margin:-left:20px;" />
-<img src="https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/alipay.jpg" width="16%" height="16%" style="float:left;margin:-left:20px;" />
+<img src="https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/alipay.png" width="16%" height="16%" style="float:left;margin:-left:20px;" />
 </center>
 
 
