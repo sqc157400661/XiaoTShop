@@ -54,6 +54,9 @@ Route::namespace('Api')->group(function () {
         Route::post('/collect-addordelete','ShopCollectController@addordelete');// 添加或取消收藏
         Route::get('/collect-list','ShopCollectController@getList');// 获取收藏列表
 
+        // 品牌相关
+        Route::get('/brand-detail','ShopBrandController@getDetail');// 获取品牌详情
+
         // 购物车相关处理
         Route::get('/cart-index','ShopCartController@index');//获取购物车的数据
         Route::post('/cart-add','ShopCartController@add');//添加商品到购物车
@@ -91,6 +94,9 @@ Route::namespace('Api')->group(function () {
         // 用户反馈相关的
         Route::get('/feedback-datalist','ShopFeedbackController@getDataList');// 获取反馈选项信息
         Route::post('/feedback-handle','ShopFeedbackController@feedbackHandle');// 反馈
+
+        // 用户足迹相关
+        Route::get('/footprint-list','ShopFootprintController@getList');// 获取足迹列表
     });
 
     Route::any('/login','AuthenticateController@auto_login')->name('login');

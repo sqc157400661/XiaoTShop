@@ -59,19 +59,20 @@ module.exports = {
   FeedBackData: ApiRootUrl + 'feedback-datalist', // 反馈选项
   FeedBackHandle: ApiRootUrl + 'feedback-handle', // 反馈
 
+  BrandDetail: ApiRootUrl + 'brand-detail',  //品牌详情
+
+  FootprintList: ApiRootUrl + 'footprint-list',  //足迹列表
+  
  /*--------------------------------------------------------------------------------------*/
 
 
   BrandList: ApiRootUrl + 'brand/list',  //品牌列表
-  BrandDetail: ApiRootUrl + 'brand/detail',  //品牌详情
-
- 
 
   SearchIndex: ApiRootUrl + 'search/index',  //搜索页面数据
   SearchResult: ApiRootUrl + 'search/result',  //搜索数据
   SearchHelper: ApiRootUrl + 'search/helper',  //搜索帮助
   SearchClearHistory: ApiRootUrl + 'search/clearhistory',  //搜索帮助
 
-  FootprintList: ApiRootUrl + 'footprint/list',  //足迹列表
+
   FootprintDelete: ApiRootUrl + 'footprint/delete',  //删除足迹
 };

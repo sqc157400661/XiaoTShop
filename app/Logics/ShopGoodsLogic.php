@@ -11,11 +11,13 @@ use App\Http\Requests;
 use App\Http\Resources\ShopGoods as ShopGoodsResource;
 use App\Models\ShopGoods;
 use App\Models\ShopCategory;
+use App\Models\ShopFootprint;
 use App\Http\Resources\ShopCategory as ShopCategoryResource;
 use App\Models\ShopGoodsAttribute;
 use App\Http\Resources\ShopGoodsAttribute as ShopGoodsAttributeResource;
 use App\Models\ShopGoodsIssue;
 use App\Models\ShopCollect;
+use Illuminate\Support\Carbon;
 
 class ShopGoodsLogic
 {
@@ -89,9 +91,32 @@ class ShopGoodsLogic
         return 1;
     }
 
+    // 获取关联商品
     static public function getRelatedGoods($where){
         $goodsList = ShopGoods::where($where)->inRandomOrder()->take(20)->get();
         return ShopGoodsResource::collection($goodsList);
     }
+
+    // 添加商品足迹
+    static public function addFootprint($goods_id){
+        try{
+            if (empty(\Auth::user()->id)) {
+                $uid = 0;
+            } else {
+                $uid = \Auth::user()->id;
+            }
+            if(empty($goods_id) || empty($uid)){
+                return;
+            }
+            $newModel = new ShopFootprint();
+            $newModel->goods_id = $goods_id;
+            $newModel->uid = $uid;
+            $newModel->add_time = Carbon::now();
+            $newModel->save();
+        }catch (\Exception $e){
+            // 足迹报错失败
+        }
+    }
+
 
 }

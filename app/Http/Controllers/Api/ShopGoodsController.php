@@ -49,6 +49,10 @@ class ShopGoodsController extends ApiController
         if($request->isHot){
             $where['is_hot'] = $request->isHot;
         }
+        // 品牌
+        if($request->brandId){
+            $where['brand_id'] = $request->brandId;
+        }
         $order = '';
         $inputSort = $request->input('sort','default');
         switch($inputSort){
@@ -107,6 +111,7 @@ class ShopGoodsController extends ApiController
         $comment = ShopCommentLogic::getCommentList(['value_id' =>$goodsInfo->id],0,10);
         $brand = ShopBrand::getDetail(['id'=>$goodsInfo->brand_id]);
         $userHasCollect = ShopGoodsLogic::userCollectStatus($goodsInfo->id);
+        ShopGoodsLogic::addFootprint($goodsInfo->id);
         $outData = [
             'info' => $goodsInfo,                    // 商品信息
             'attribute' => $attribute,              // 商品属性参数

@@ -10,7 +10,7 @@ Page({
     brand: {},
     goodsList: [],
     page: 1,
-    size: 1000
+    size: 100
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
@@ -23,9 +23,9 @@ Page({
   getBrand: function () {
     let that = this;
     util.request(api.BrandDetail, { id: that.data.id }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 200) {
         that.setData({
-          brand: res.data.brand
+          brand: res.data
         });
 
         that.getGoodsList();
@@ -35,11 +35,11 @@ Page({
   getGoodsList() {
     var that = this;
 
-    util.request(api.GoodsList, { brandId: that.data.id, page: that.data.page, size: that.data.size})
+    util.request(api.GoodsList, { brandId: that.data.id, page: that.data.page, size: that.data.size,categoryId:0})
       .then(function (res) {
-        if (res.errno === 0) {
+        if (res.code === 200) {
           that.setData({
-            goodsList: res.data.goodsList
+            goodsList: res.data
           });
         }
       });

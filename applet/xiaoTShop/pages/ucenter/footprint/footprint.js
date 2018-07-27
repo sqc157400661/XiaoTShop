@@ -12,10 +12,10 @@ Page({
   getFootprintList() {
     let that = this;
     util.request(api.FootprintList).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 200) {
         console.log(res.data);
         that.setData({
-          footprintList: res.data.data
+          footprintList: res.data
         });
       }
     });

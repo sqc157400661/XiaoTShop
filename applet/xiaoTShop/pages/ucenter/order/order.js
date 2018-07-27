@@ -20,9 +20,13 @@ Page({
       }
     });
   },
-  payOrder(){
+  payOrder(e){
+    var orderId = e.currentTarget.dataset.order_id;
+    var actualPrice = e.currentTarget.dataset.actual_price;
+    console.log(orderId)
+    console.log(actualPrice)
     wx.redirectTo({
-      url: '/pages/pay/pay',
+      url: '/pages/pay/pay?orderId='+orderId+'&actualPrice='+actualPrice,
     })
   },
   onReady:function(){
