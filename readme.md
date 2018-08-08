@@ -5,10 +5,14 @@
 + 功能和数据库参考ecshop
 
 **注意：当前版本功能还在完善中，暂时请勿商用。**
-
+**说明：2018.8.8-2018.8.21封闭开发，会可能暂停更新1-2周***
 ### 项目截图
 
 ![首页](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20111.jpg)
+
+### 发行测试版0.1v  发行时间2018.7.20  计划每月升级一个版本
+
+![首页](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/gh_667b391a9af7_344.jpg)
 
 ### 功能列表
 + 首页
@@ -83,8 +87,8 @@
 
 ### 作者希望
 + 喜欢别忘了 Star
-+ 交流 QQ 群：563359136
-+ 打赏作者
++ 有建议和想法可以联系我157400661@qq.com
++ 都不要赞助我 ╥﹏╥.
 
 <center>
 <img src="https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/minepay.jpg" width="16%" height="16%" style="float:left;margin:-left:20px;" />
