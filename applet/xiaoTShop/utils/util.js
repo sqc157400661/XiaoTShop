@@ -13,6 +13,14 @@ function formatTime(date) {
   return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
+function goLoginPageTimeOut() {
+    setTimeout(function(){
+        wx.reLaunch({
+            url: "/pages/authorize/index"
+        })
+    }, 1000)
+}
+
 function formatNumber(n) {
   n = n.toString()
   return n[1] ? n : '0' + n
@@ -138,7 +146,7 @@ function getUserInfo() {
         resolve(res);
       },
       fail: function (err) {
-        console.log(1111111);
+        goLoginPageTimeOut();
         console.log(err);
         reject(err);
       }
