@@ -81,6 +81,7 @@
 2、执行composer update 安装相关依赖
 
 3、配置.env 为自己的环境参数
+
 ```
  # .env 数据库和redis配置略 可参考官方文档配置
 
@@ -89,8 +90,10 @@ WECHAT_MINI_PROGRAM_APPID= 你的appid
 WECHAT_MINI_PROGRAM_SECRET= 你的appsecret
 
 # 小程序代码./applet/xiaoTShop/config/api.js
-const ApiRootUrl ='你的域名';
+const ApiRootUrl ='你的域名/api/';
+
 ```
+
 4、执行`php artisan XiaoT:install`
 
 

@@ -1,4 +1,4 @@
-const ApiRootUrl ='你的域名';
+const ApiRootUrl ='你的域名/api/';
 
 module.exports = {
   IndexUrl: ApiRootUrl + 'index', //首页数据接口 --
