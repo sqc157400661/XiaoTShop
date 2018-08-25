@@ -1,3 +1,6 @@
+### 协作开发者
+1、![@2lovecode](https://github.com/2lovecode)
+
 ### 基于Laravel5.5 小T商城（微信小程序端）
 
 + 后台基于Laravel5.5开发
