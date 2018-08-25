@@ -49,6 +49,7 @@ class ShopGoodsLogic
     // 获取商品列表
     static public function getGoodsList($where,$pagesize='',$order='sort_order asc')
     {
+        visits('App\Models\ShopGoods','list')->Increment();// 访问统计 see:https://github.com/awssat/laravel-visits
         $goodsList = ShopGoods::getGoodsList($where,$pagesize,$order);
         if(! $goodsList){
             return false;
@@ -58,6 +59,7 @@ class ShopGoodsLogic
 
     // 获取商品详情
     static public function getGoodsDetail($where){
+        visits('App\Models\ShopGoods','detail')->Increment();// 访问统计 see:https://github.com/awssat/laravel-visits
         $goodsDetail = ShopGoods::getGoodsDetail($where);
         return new ShopGoodsResource($goodsDetail);
     }

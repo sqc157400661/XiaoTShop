@@ -18,7 +18,7 @@ App({
     userInfo: {
       nickname: 'Hi,游客',
       username: '点击去登录',
-      avatar: 'http://test2.xiaot.com/images/default_head.png'
+      avatar: '/static/images/default.header.png'
     },
     token: '',
   }

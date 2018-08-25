@@ -18,7 +18,7 @@ class CreateShopCommentTable extends Migration {
 			$table->boolean('type_id')->default(0)->comment('评论类型 0代表商品');
 			$table->integer('value_id')->unsigned()->default(0)->index('id_value')->comment('评论对象id');
 			$table->string('content', 6550)->comment('储存为base64编码');
-			$table->timestamp('add_time')->default('1970-01-01 08:00:01')->comment('添加时间');
+			$table->timestamp('add_time')->default('1971-01-01 08:00:01')->comment('添加时间');
 			$table->tinyInteger('status')->default(1)->comment('评论状态');
 			$table->integer('user_id')->unsigned()->default(0)->comment('用户uid');
 			$table->string('new_content', 6550)->default('')->comment('备用');

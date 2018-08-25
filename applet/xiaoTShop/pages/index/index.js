@@ -30,8 +30,8 @@ Page({
           newGoods: res.data.newGoodsList,
           hotGoods: res.data.hotGoodsList,
           topics: res.data.topicList,
-          brand: res.data.brandList,
-          floorGoods: res.data.categoryList,
+          // brand: res.data.brandList,
+          // floorGoods: res.data.categoryList,
           carouselInfo: res.data.carouselInfo,
           specialList: res.data.specialList
         });

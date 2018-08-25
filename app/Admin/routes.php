@@ -45,6 +45,8 @@ Route::group([
     // 品牌管理
     $router->resource('shop-brand', BrandController::class);
 
+    // 统计管理
+    $router->resource('stat', StatController::class);
 
     Route::post('uploadFile', 'UploadController@uploadImg')->name('admin-up');
 

@@ -23,7 +23,12 @@ use Encore\Admin\Grid\Column;
 use Encore\Admin\Form;
 use App\Admin\Extensions\Form\WangEditor;
 use App\Admin\Extensions\Form\AddSpecification;
+use Encore\Admin\Facades\Admin;
+
 Column::extend('expand', ExpandRow::class);
 Form::forget(['map', 'editor']);
 Form::extend('editor', WangEditor::class);
 Form::extend('addSpecification', AddSpecification::class);
+
+Admin::js('/vendor/echarts/echarts.js');
+Admin::js('/vendor/echarts/macarons.js');

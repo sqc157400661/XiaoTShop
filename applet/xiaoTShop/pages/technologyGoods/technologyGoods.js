@@ -37,12 +37,12 @@ Page({
         that.setData({
           goods: res.data.info,
           gallery: res.data.info.carousel_imgs,
-          attribute: res.data.attribute,
+          // attribute: res.data.attribute,
           brand: {name:'XiaoT科技',id:'1'},
           specificationList: res.data.sku,
           _checkedProductPrice:tmpPrice,
           // 收藏
-          userHasCollect: res.data.userHasCollect
+          // userHasCollect: res.data.userHasCollect
         });
 
         // 收藏相关代码
