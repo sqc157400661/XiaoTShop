@@ -25,8 +25,8 @@ class SpecialController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('专题列表');
-            $content->description('专题管理');
+            $content->header('专栏列表');
+            $content->description('专栏管理');
 
             $content->body($this->grid());
         });
@@ -42,8 +42,8 @@ class SpecialController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('专题修改');
-            $content->description('专题管理');
+            $content->header('专栏修改');
+            $content->description('专栏管理');
 
             $content->body($this->form()->edit($id));
         });
@@ -58,8 +58,8 @@ class SpecialController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('专题创建');
-            $content->description('专题管理');
+            $content->header('专栏创建');
+            $content->description('专栏管理');
 
             $content->body($this->form());
         });
@@ -79,7 +79,7 @@ class SpecialController extends Controller
                 ->image('', 50, 50);
             $grid->class_id('分类')
                 ->select(Classes::getAllClasses(true));
-            $grid->link_url('链接');
+           // $grid->link_url('链接');
             $grid->special_title('标题');
             $grid->special_desc('描述');
             $grid->remark('备注');
@@ -88,7 +88,11 @@ class SpecialController extends Controller
                 ->switch(Special::getIfShowDisplayConfig());
             $grid->created_at('创建时间');
             $grid->updated_at('更新时间');
-
+            $grid->actions(function ($actions) {
+                // append一个操作
+                $url =admin_base_path('module').'?id='.$actions->getKey();
+                $actions->append("<a href='{$url}'><i class='fa fa-cog'></i></a>");
+            });
             $grid->filter(function ($filter) {
                 $filter->equal('class_id', '分类')
                     ->select(Classes::getAllClasses(true));
@@ -116,9 +120,7 @@ class SpecialController extends Controller
                 ->rules("required")
                 ->options(Classes::getAllClasses(true))
                 ->default(0);
-            $form->text('link_url', '链接')
-                ->rules('required')
-                ->rules('nullable|max:60');
+            //$form->text('link_url', '链接')->rules('required')->rules('nullable|max:60');
             $form->text('special_title', '标题')
                 ->rules('required');
             $form->text('special_desc', '描述')

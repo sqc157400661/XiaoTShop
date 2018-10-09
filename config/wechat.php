@@ -59,8 +59,8 @@ return [
      */
     'official_account' => [
         'default' => [
-            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', '111'),         // AppID
-            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', '111'),    // AppSecret
+            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wx2bd067e97c4e9a1f'),         // AppID
+            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', '58480b7e4ad041ea3382e6b373242d4e'),    // AppSecret
             'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'your-token'),           // Token
             'aes_key' => env('WECHAT_OFFICIAL_ACCOUNT_AES_KEY', ''),                 // EncodingAESKey
 
@@ -94,8 +94,8 @@ return [
      */
     'mini_program' => [
         'default' => [
-            'app_id' => env('WECHAT_MINI_PROGRAM_APPID', '111'),
-            'secret' => env('WECHAT_MINI_PROGRAM_SECRET', '1111'),
+            'app_id' => env('WECHAT_MINI_PROGRAM_APPID', 'wx2bd067e97c4e9a1f'),
+            'secret' => env('WECHAT_MINI_PROGRAM_SECRET', '58480b7e4ad041ea3382e6b373242d4e'),
             'token' => env('WECHAT_MINI_PROGRAM_TOKEN', ''),
             'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', ''),
             'response_type' => 'array',
@@ -112,9 +112,9 @@ return [
      'payment' => [
          'default' => [
 //             'sandbox'            => env('WECHAT_PAYMENT_SANDBOX', false),
-             'app_id'             => env('WECHAT_PAYMENT_APPID', 'wx211111'),
-             'mch_id'             => env('WECHAT_PAYMENT_MCH_ID', '14998311113252'),
-             'key'                => env('WECHAT_PAYMENT_KEY', '11111111111111'),
+             'app_id'             => env('WECHAT_PAYMENT_APPID', 'wx2bd067e97c4e9a1f'),
+             'mch_id'             => env('WECHAT_PAYMENT_MCH_ID', '1499833252'),
+             'key'                => env('WECHAT_PAYMENT_KEY', '4g3xjTp4gLH6YbH8h7ZyyGpcpNF7dCiP'),
 //             'cert_path'          => env('WECHAT_PAYMENT_CERT_PATH', 'path/to/cert/apiclient_cert.pem'),    // XXX: 绝对路径！！！！
 //             'key_path'           => env('WECHAT_PAYMENT_KEY_PATH', 'path/to/cert/apiclient_key.pem'),      // XXX: 绝对路径！！！！
              'notify_url'         => 'https://xiaocheng.xuezhangbang.me/api/order-notify',                           // 默认支付结果通知地址

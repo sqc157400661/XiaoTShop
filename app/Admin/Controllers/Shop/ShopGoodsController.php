@@ -6,6 +6,7 @@ use App\Models\ShopCategory;
 use App\Models\ShopGoods;
 use App\Models\ShopBrand;
 use App\Models\ShopAttribute;
+use App\Models\ShopSpecification;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -190,6 +191,9 @@ class ShopGoodsController extends Controller
             $form->textarea('keywords', '商品关键词');
             $form->textarea('goods_brief', '商品摘要');
             $form->editor('goods_desc', '商品描述');
+            $form->addSpecification('products', '添加规格',function(){
+                return ShopSpecification::all();
+            });
             $form->textarea('promotion_desc', '促销描述');
             $form->text('promotion_tag', '促销标签')
                 ->value(' ');
@@ -237,6 +241,12 @@ class ShopGoodsController extends Controller
 //                $form->currency('retail_price', '单价')
 //                    ->symbol('￥');
 //            });
+
+            //保存前回调
+//            $form->saving(function (Form $form) {
+//                dd($form->products);
+//            });
+
 
             $form->display('created_at', '创建时间');
             $form->display('updated_at', '更新时间');

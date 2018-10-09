@@ -1,3 +1,59 @@
+.container {
+    height: 100%;
+}
+
+.wxParse-img {
+    display: block!important;
+}
+
+.header-container {
+    width: 100%;
+    height: 130rpx;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+.header-container .header-name {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 170rpx;
+    font-size: 30rpx;
+    color: #333;
+}
+
+.iphone .header-container {
+    height: 180rpx;
+}
+
+.iphone .header-container .header-name {
+    line-height: 270rpx;
+}
+
+.header-container .goback {
+    width: 56rpx;
+    height: 56rpx;
+    margin-top: 50rpx;
+    position: absolute;
+    margin-left: 20rpx;
+    border: 1rpx solid #fff;
+    border-radius: 50%;
+    padding: 6rpx;
+}
+
+.iphone .header-container .goback {
+    margin-top: 90rpx;
+}
+
+
+
+
+
+
+
+
 page{
     height: 100%;
     min-height: 100%;
@@ -11,14 +67,12 @@ page{
     overflow: hidden;
 }
 .service-policy{
-    width: 750rpx;
+    margin-top:50rpx;
+    width: 740rpx;
     height: 73rpx;
     background: #f4f4f4;
-    padding: 0 31.25rpx;
+    padding: 0 1.25rpx;
     display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-between;
 }
 
 .service-policy .item{
@@ -29,6 +83,7 @@ page{
     align-items: center;
     font-size: 25rpx;
     color: #666;
+    margin-left:62rpx;
 }
 
 .no-cart{

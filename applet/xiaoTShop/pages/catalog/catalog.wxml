@@ -1,30 +1,53 @@
 <view class="container">
-  <view class="search">
-    <navigator url="/pages/search/search" class="input">
-      <image class="icon"></image>
-      <text class="txt">商品搜索, 共{{goodsCount}}款好物</text>
-    </navigator>
+  <view class="type-header-menu">
+    <view class="type-search">
+      <image src="http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/search2-2fb94833aa.png"></image>
+      <input bindconfirm="searchConfirm" bindfocus="searchFocus" class="input {{ searchInput == true ? 'active' : '' }}" confirmType="search" placeholder="搜索商品共,{{goodsCount}}款好物" type="text"></input>
+      <view bindtap="searchClose" class="header-search-btn" hidden="{{ noCancel }}">取消</view>
+    </view>
   </view>
-  <view class="catalog">
-    <scroll-view class="nav" scroll-y="true">
-        <view class="item {{ currentCategory.id == item.id ? 'active' : ''}}" wx:for="{{navList}}"  data-id="{{item.id}}" data-index="{{index}}" bindtap="switchCate">{{item.name}}</view>
-    </scroll-view>
-    <scroll-view class="cate" scroll-y="true">
-        <navigator url="url" class="banner">
+
+  <view class="type-container-boxx">
+    <view class="catalog">
+      <scroll-view class="nav" scroll-y="true">
+        <view class="item {{ currentCategory.id == item.id ? 'active' : ''}}" wx:for="{{navList}}" wx:key="{{ index }}" data-id="{{item.id}}" data-index="{{index}}" bindtap="switchCate">{{item.name}}</view>
+      </scroll-view>
+      <scroll-view class="cate" scroll-y="true">
+          <navigator url="url" class="banner">
             <image class="image" src="{{currentCategory.wap_banner_url}}"></image>
             <view class="txt">{{currentCategory.front_name}}</view>
-        </navigator>
-        <view class="hd">
+          </navigator>
+          <view class="hd">
             <text class="line"></text>
             <text class="txt">{{currentCategory.name}}分类</text>
             <text class="line"></text>
-        </view>
-        <view class="bd">
-            <navigator url="/pages/category/category?id={{item.id}}" class="item {{(index+1) % 3 == 0 ? 'last' : ''}}" wx:for="{{currentCategory.subCategoryList}}">
+          </view>
+          <view class="bd">
+              <navigator url="/pages/category/category?id={{item.id}}" class="item {{(index+1) % 3 == 0 ? 'last' : ''}}" wx:for="{{currentCategory.subCategoryList}}" wx:key="{{ index }}">
                 <image class="icon" src="{{item.wap_banner_url}}"></image>
                 <text class="txt">{{item.name}}</text>
-            </navigator>
-        </view>
-    </scroll-view>
+              </navigator>
+          </view>
+      </scroll-view>
+    </view>
   </view>
+  <scroll-view class="search-box" hidden="{{ noCancel }}" style="height: 100%;" scroll-y="true">
+    <view bindtap="toDetailsTap" class="goods-box" data-id="{{ item.id }}" hidden="{{ noGoods }}" wx:for="{{ searchData }}" wx:key="{{ index }}">
+      <view class="img-box">
+        <image class="image" lazyLoad="true" mode="widthFix" src="{{item.primary_pic_url}}"></image>
+        <view class="goods-characteristic">
+          <text>{{item.characteristic}}</text>
+        </view>
+      </view>
+      <view class="goods-title">{{item.goods_name}}</view>
+      <view style="display:flex;">
+        <view class="goods-price">￥{{item.unit_price}}</view>
+        <view class="goods-price-naver">已售{{item.sell_volume}}</view>
+      </view>
+    </view>
+    <view class="goods-none" hidden="{{ !noGoods }}">
+      <image src="../../static/images/search_empty.png"></image>
+      <text>您寻找的商品还未上架</text>
+    </view>
+  </scroll-view>
 </view>

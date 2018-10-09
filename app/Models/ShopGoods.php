@@ -134,8 +134,8 @@ class ShopGoods extends Model
     // 获取商品列表
     public static function getGoodsList($where= [],$pagesize='' ,$order='sort_order asc'){
         $model =  static::where(array_merge([
-            ['is_delete', '=', static::STATE_NOT_DELETE],
-            ['is_on_sale', '=', static::STATE_ON_SALE],
+//            ['is_delete', '=', static::STATE_NOT_DELETE],
+//            ['is_on_sale', '=', static::STATE_ON_SALE],
         ], $where))->orderByRaw($order);
         if($pagesize){
             return $model->paginate($pagesize);

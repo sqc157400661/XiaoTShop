@@ -26,8 +26,16 @@ Route::namespace('Api')->group(function () {
     Route::any('/project_json/models', 'ProjectJsonController@getProjectModelsByFunctypeId');
 
 
+
     // 需要用户信息的
     Route::middleware('auth:api')->group(function () {
+        // 新版本的接口
+        Route::namespace('v2')->group(function () {
+            //Route::get('/index','IndexController@index');//Router $router
+            //$router->get('/index','IndexController@index');
+            Route::get('/index/v2','IndexController@index');
+        });
+
         Route::get('/index','IndexController@index');
         Route::get('/project-type-json','ProjectElementController@getProjectType');
         Route::get('/project-goods','ProjectElementController@getProjectGoods');
@@ -97,6 +105,9 @@ Route::namespace('Api')->group(function () {
 
         // 用户足迹相关
         Route::get('/footprint-list','ShopFootprintController@getList');// 获取足迹列表
+
+
+
     });
 
     Route::any('/login','AuthenticateController@auto_login')->name('login');

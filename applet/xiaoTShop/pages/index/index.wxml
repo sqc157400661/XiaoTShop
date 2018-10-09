@@ -1,132 +1,136 @@
 
-<!--index.wxml-->
-<view class="container">
-  <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
-    <swiper-item wx:for="{{carouselInfo}}" wx:key="{{item.id}}">
-      <navigator url="{{item.businessId}}">
-        <image src="{{item.picUrl}}" background-size="cover"></image>
-      </navigator>
-    </swiper-item>
-  </swiper>
-  <view class="m-menu">
-    <view  class="item"  wx:for="{{specialList}}" url="{{item.link_url}}" wx:key="{{item.id}}" data-url="{{item.link_url}}" bindtap="jump">
-      <image src="{{item.icon}}" background-size="cover"></image>
-      <text>{{item.title}}</text>
-    </view>
-  </view>
-
-  <!-- <view class="a-section a-brand">
-    <view class="h">
-      <navigator url="../brand/brand">
-        <text class="txt">品牌制造商直供</text>
-      </navigator>
-    </view>
-    <view class="b">
-      <view class="item item-1" wx:for="{{brand}}" wx:key="item.id">
-        <navigator url="/pages/brandDetail/brandDetail?id={{item.id}}">
-          <view class="wrap">
-            <image class="img" src="{{item.new_pic_url}}" mode="aspectFill"></image>
-            <view class="mt">
-              <text class="brand">{{item.name}}</text>
-              <text class="price">{{item.floor_price}}</text>
-              <text class="unit">元起</text>
-            </view>
-          </view>
-        </navigator>
-      </view>
-    </view>
-  </view> -->
- 
-  <view class="a-section a-new" wx:if="{{newGoods.length > 0}}">
-    <view class="h">
-      <view>
-        <navigator url="../newGoods/newGoods">
-          <text class="txt">周一周四 · 新品首发</text>
-        </navigator>
-      </view>
-    </view>
-    <view class="b">
-      <view class="item" wx:for="{{newGoods}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.id}}">
-        <navigator url="../goods/goods?id={{item.id}}">
-          <image class="img" src="{{item.primary_pic_url}}" background-size="cover"></image>
-          <text class="name">{{item.goods_name}}</text>
-          <text class="price">￥{{item.retail_price}}</text>
-        </navigator>
-      </view>
-    </view>
-  </view>
-
-  <view class="a-section a-popular" wx:if="{{hotGoods.length > 0}}">
-    <view class="h">
-      <view>
-        <navigator url="../hotGoods/hotGoods">
-          <text class="txt">人气推荐</text>
-        </navigator>
-      </view>
-    </view>
-    <view class="b">
-      <view class="item" wx:for="{{hotGoods}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.id}}">
-        <navigator url="/pages/goods/goods?id={{item.id}}">
-          <image class="img" src="{{item.primary_pic_url}}" background-size="cover"></image>
-          <view class="right">
-            <view class="text">
-              <text class="name">{{item.goods_name}}</text>
-              <text class="desc">{{item.goods_brief}}</text>
-              <text class="price">￥{{item.retail_price}}</text>
-            </view>
-          </view>
-        </navigator>
-      </view>
-    </view>
-  </view>
-  
-  
-  <view class="a-section a-topic" wx:if="topics.length > 0">
-    <view class="h">
-      <view>
-      <navigator url="../topic/topic" open-type="switchTab">
-        <text class="txt">专题精选</text>
-        </navigator>
-      </view>
-    </view>
-    <view class="b">
-      <scroll-view scroll-x="true" class="list">
-        <view class="item" wx:for="{{topics}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.id}}">
-          <navigator url="../topicDetail/topicDetail?id={{item.id}}">
-            <image class="img" src="{{item.scene_pic_url}}" background-size="cover"></image>
-            <view class="np">
-              <text class="name">{{item.title}}</text>
-              <text class="price">￥{{item.price_info}}元起</text>
-            </view>
-            <text class="desc">{{item.subtitle}}</text>
-          </navigator>
-        </view>
-      </scroll-view>
-    </view>
-  </view>
- <!--
-  <view class="good-grid" wx:for="{{floorGoods}}" wx:key="{{item.id}}">
-    <view class="h">
-      <view>
-        <text>{{item.name}}</text>
-      </view>
-    </view>
-    <view class="b">
-      <block wx:for="{{item.goodsList}}" wx:for-index="iindex" wx:for-item="iitem" wx:key="{{iitem.id}}">
-        <view class="item {{iindex % 2 == 0 ? '' : 'item-b'}}">
-          <navigator url="../goods/goods?id={{iitem.id}}" class="a">
-            <image class="img" src="{{iitem.list_pic_url}}" background-size="cover"></image>
-            <text class="name">{{iitem.name}}</text>
-            <text class="price">￥{{iitem.retail_price}}</text>
-          </navigator>
-        </view>
-      </block>
-      <view class="item item-b item-more">
-          <navigator url="/pages/category/category?id={{item.id}}" class="more-a">
-            <view class="txt">{{'更多'+item.name+'好物'}}</view>
-            <image class="icon" src="../../static/images/icon_go_more.png" background-size="cover"></image>
-          </navigator>
-      </view>
-    </view>
-  </view>-->
+<view class="hidden {{navigationbar}} {{naviphone}}">
+    <image src="{{toplogo}}"></image>
 </view>
+<view class="container">
+    <view class="swiper-container">
+        <swiper autoplay="{{autoplay}}" bindchange="swiperchange" circular="circular" class="swiper_box" duration="{{duration}}" interval="{{interval}}">
+            <swiper-item wx:for="{{carouselInfo}}" wx:key="{{item.id}}" bindtap="specialTo" data-carousel_type="{{item.carousel_type}}" data-carousel_type_data="{{item.carousel_type_data}}">
+                <image bindtap="tapBanner" class="slide-image" data-id="{{item.businessId}}" src="{{item.picUrl}}"></image>
+            </swiper-item>
+        </swiper>
+        <view class="dots">
+            <view class="dot{{index==swiperCurrent?' active':''}}" wx:for="{{carouselInfo}}" wx:key="id"></view>
+        </view>
+    </view>
+    <view class="menu-container">
+        <view bindtap="navTo" class="menu-list" data-url="{{item.link_data}}" wx:for="{{navList}}" wx:key="id">
+            <image src="{{item.icon}}"></image>
+            <text>{{item.nav_title}}</text>
+        </view>
+    </view>
+    <view class="home-hover" wx:if="{{carouselInfo}}"></view>
+
+
+
+    <view wx:for="{{itemList}}">  
+        <view class="pingtuna-container" wx:if="{{item.item_type == 'moduleF'}}">
+            <view bindtap="tapSales" class="pingtuna-title" data-url=''>
+                <text>{{item.item_title}}</text>
+                <image src="/static/images/new/home_more.png" wx:if="{{item.item_link_special_id}}" ></image>
+            </view>
+            <view bindtap="toDetailsTap" class="pingtuna-list" data-id="{{iitem.id}}" wx:for="{{item.goodsList}}" wx:key="id" wx:for-item="iitem">
+                <view class="pingtuna-list-title">{{iitem.goods_name}}</view>
+                <view class="pingtuna-list-text" wx:if="{{iitem.promotion_desc}}">{{iitem.promotion_desc}}</view>
+                <view class="pingtuna-list-info" wx:if="{{iitem.promotion_tag}}">{{iitem.promotion_tag}}</view>
+                <image src="{{iitem.primary_pic_url}}"></image>
+            </view>
+        </view>
+
+        <view class="kanjia-container" wx:if="{{item.item_type == 'moduleE'}}"  wx:key="id">
+            <view bindtap="tapSales" class="kanjia-title" data-url=''>
+                <text>{{item.item_title}}</text>
+                <image src="/static/images/new/home_more.png" wx:if="{{item.item_link_special_id}}"></image>
+            </view>
+            <view bindtap="toDetailsTap" class="kanjia-list" data-id="{{iitem.id}}" wx:for="{{item.goodsList}}" wx:key="id" wx:for-item="iitem" >
+                <view class="kanjia-list-image">
+                    <image src="{{iitem.primary_pic_url}}"></image>
+                </view>
+                <view class="kanjia-list-info" bindtap="toDetailsTap" data-id="{{iitem.id}}">
+                    <view class="kanjia-list-info-title">{{iitem.goods_name}}</view>
+                    <view class="kanjia-list-info-info">{{iitem.goods_brief}}</view>
+                    <view class="kanjia-list-info-money">
+                        <view class="kanjia-list-info-money-a">
+                            <text class="a">Ұ{{iitem.counter_price}}</text>
+                            <text class="b">底价</text>
+                        </view>
+                        <view class="kanjia-list-info-money-a">
+                            <text>Ұ{{iitem.retail_price}}</text>
+                            <text>原价</text>
+                        </view>
+                        <view class="kanjia-list-info-money-a">
+                            <text>{{iitem.sell_volume}}件</text>
+                            <text>销量</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+
+        <view class="topic-container" wx:if="{{item.item_type == 'moduleC'}}"  wx:key="id">
+            <view  class="topic-title" bindtap="tapSales" data-url='../topic/topic'>
+                <text>{{item.item_title}}</text>
+                <image src="/static/images/new/home_more.png" wx:if="{{item.item_link_special_id}}" ></image>
+            </view>
+            <scroll-view class="topic-list-box" scrollX="true">
+                <view bindtap="specialTo" class="topic-list" data-id="{{item.id}}" wx:for="{{item.carousels}}" wx:key="id" wx:for-item="iitem"  data-carousel_type="{{iitem.carousel_type}}" data-carousel_type_data="{{iitem.carousel_type_data}}" >
+                    <image src="{{iitem.picUrl}}"></image>
+                    <view class="topic-list-info">
+                        <view class="topic-list-info-title">{{iitem.title}}</view>
+                        <view class="topic-list-info-text">{{iitem.info}}</view>
+                        <view class="topic-list-info-money" wx:if="{{iitem.price_info}}">{{iitem.price_info}}</view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+
+        <view class="goods-container"  wx:if="{{item.item_type == 'moduleB'}}"  wx:key="id">
+            <view bindtap="tapSales" class="goods-title" data-id="{{topgoods.remark}}" data-url=''>
+                <text>{{item.item_title}}</text>
+                <image src="/static/images/new/home_more.png" wx:if="{{item.item_link_special_id}}" ></image>
+            </view>
+            <view bindtap="toDetailsTap" class="goods-list" data-id="{{iitem.id}}" wx:for="{{item.goodsList}}" wx:key="id" wx:for-item="iitem" >
+                <image src="{{iitem.primary_pic_url}}"></image>
+                <view class="goods-list-title">{{iitem.goods_name}}</view>
+                <view class="goods-list-text">{{iitem.goods_brief}}</view>
+                <view class="goods-list-money">Ұ{{iitem.retail_price}}</view>
+            </view>
+        </view>
+       
+    </view>
+</view>
+
+
+<image bindtap="hoverNewcoupons" class="newcoupons-hover" hidden="{{flag}}" src="{{newcoupons.linkUrl}}"></image>
+<view bindtap="hide" class="modal-box" hidden="{{hovercoupons}}">
+    <view class="modal-body">
+        <view class="modal-content">
+            <image bindtap="newCoupon" class="fenxiang" data-id="{{newcoupons.businessId}}" mode="widthFix" src="{{newcoupons.picUrl}}"></image>
+            <image bindtap="hide" class="knowBtnImg" src="../../static/images/close.png"></image>
+        </view>
+    </view>
+</view>
+
+
+<view class="show-container" hidden="{{wxlogin}}">
+    <view class="show-box">
+        <view class="show-logo-box">
+            <image src="{{toplogo}}"></image>
+            <view class="show-mall-name">{{topname}}</view>
+        </view>
+        <view class="show-text-box">
+            <view class="show-text-name">需要您的授权才能正常使用哦！</view>
+            <view class="show-text-info">
+                <text>·</text>请允许我们获得您的公开资讯</view>
+            <view class="show-text-info">
+                <text>·</text>我们不会公布您的这些信息</view>
+            <view class="show-text-info">
+                <text>·</text>只是为了给您提供更好的服务</view>
+        </view>
+        <button bindgetuserinfo="userlogin" openType="getUserInfo">允许</button>
+    </view>
+</view>
+
+
+

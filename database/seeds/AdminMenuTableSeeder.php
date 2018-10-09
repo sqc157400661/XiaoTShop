@@ -173,157 +173,190 @@ class AdminMenuTableSeeder extends Seeder
             ),
             14 => 
             array (
-                'id' => 15,
-                'parent_id' => 9,
-                'order' => 15,
-                'title' => '首页轮播图管理',
-                'icon' => 'fa-image',
-                'uri' => 'carousel',
-                'created_at' => '2018-05-09 07:50:55',
-                'updated_at' => '2018-05-09 07:52:01',
-            ),
-            15 => 
-            array (
                 'id' => 16,
-                'parent_id' => 9,
-                'order' => 16,
+                'parent_id' => 31,
+                'order' => 19,
                 'title' => '专题管理',
                 'icon' => 'fa-th-list',
                 'uri' => 'special',
                 'created_at' => '2018-05-09 07:51:31',
-                'updated_at' => '2018-05-09 07:52:01',
+                'updated_at' => '2018-10-07 05:56:34',
             ),
-            16 => 
+            15 => 
             array (
                 'id' => 17,
                 'parent_id' => 9,
-                'order' => 0,
+                'order' => 15,
                 'title' => '分类管理',
                 'icon' => 'fa-clone',
                 'uri' => 'classes',
                 'created_at' => '2018-05-09 07:57:07',
-                'updated_at' => '2018-05-09 07:57:07',
+                'updated_at' => '2018-10-07 05:52:23',
             ),
-            17 => 
+            16 => 
             array (
                 'id' => 19,
                 'parent_id' => 0,
-                'order' => 0,
+                'order' => 16,
                 'title' => '商城管理',
                 'icon' => 'fa-shopping-bag',
                 'uri' => NULL,
                 'created_at' => '2018-05-29 09:24:10',
-                'updated_at' => '2018-05-29 09:24:10',
+                'updated_at' => '2018-10-07 05:52:23',
             ),
-            18 => 
+            17 => 
             array (
                 'id' => 20,
                 'parent_id' => 19,
-                'order' => 0,
+                'order' => 31,
                 'title' => '商城商品分类管理',
                 'icon' => 'fa-bars',
                 'uri' => 'shop-category',
                 'created_at' => '2018-05-29 09:24:26',
-                'updated_at' => '2018-05-29 09:24:26',
+                'updated_at' => '2018-10-07 05:56:34',
             ),
-            19 => 
+            18 => 
             array (
                 'id' => 21,
                 'parent_id' => 19,
-                'order' => 0,
+                'order' => 30,
                 'title' => '品牌管理',
                 'icon' => 'fa-umbrella',
                 'uri' => 'shop-brand',
                 'created_at' => '2018-05-29 09:26:28',
-                'updated_at' => '2018-05-29 09:26:28',
+                'updated_at' => '2018-10-07 05:56:34',
             ),
-            20 => 
+            19 => 
             array (
                 'id' => 22,
                 'parent_id' => 19,
-                'order' => 0,
+                'order' => 29,
                 'title' => '商城商品管理',
                 'icon' => 'fa-google',
                 'uri' => 'shop-goods',
                 'created_at' => '2018-05-31 01:53:31',
-                'updated_at' => '2018-05-31 01:53:31',
+                'updated_at' => '2018-10-07 05:56:34',
             ),
-            21 => 
+            20 => 
             array (
                 'id' => 23,
                 'parent_id' => 19,
-                'order' => 0,
-                'title' => '商城主题&专题管理',
+                'order' => 28,
+                'title' => '商城话题&专题管理',
                 'icon' => 'fa-compass',
                 'uri' => 'shop-topics',
                 'created_at' => '2018-05-31 05:48:40',
-                'updated_at' => '2018-05-31 05:48:40',
+                'updated_at' => '2018-10-07 05:56:34',
             ),
-            22 => 
+            21 => 
             array (
                 'id' => 24,
-                'parent_id' => 19,
-                'order' => 0,
+                'parent_id' => 30,
+                'order' => 27,
                 'title' => '商品规格管理',
                 'icon' => 'fa-object-ungroup',
                 'uri' => 'shop-specification',
                 'created_at' => '2018-06-01 08:28:40',
-                'updated_at' => '2018-06-01 08:28:40',
+                'updated_at' => '2018-10-07 05:56:34',
             ),
-            23 => 
+            22 => 
             array (
                 'id' => 25,
                 'parent_id' => 19,
-                'order' => 0,
+                'order' => 23,
                 'title' => '属性管理',
                 'icon' => 'fa-paperclip',
                 'uri' => NULL,
                 'created_at' => '2018-06-03 02:53:35',
-                'updated_at' => '2018-06-03 02:53:35',
+                'updated_at' => '2018-10-07 05:56:34',
             ),
-            24 => 
+            23 => 
             array (
                 'id' => 26,
                 'parent_id' => 25,
-                'order' => 0,
+                'order' => 25,
                 'title' => '属性类别管理',
                 'icon' => 'fa-certificate',
                 'uri' => 'shop-attribute-category',
                 'created_at' => '2018-06-03 02:54:11',
-                'updated_at' => '2018-06-03 02:54:11',
+                'updated_at' => '2018-10-07 05:56:34',
             ),
-            25 => 
+            24 => 
             array (
                 'id' => 27,
                 'parent_id' => 25,
-                'order' => 0,
+                'order' => 24,
                 'title' => '属性条目管理',
                 'icon' => 'fa-sitemap',
                 'uri' => 'shop-attribute',
                 'created_at' => '2018-06-03 02:54:48',
-                'updated_at' => '2018-06-03 02:54:48',
+                'updated_at' => '2018-10-07 05:56:34',
             ),
-            26 => 
+            25 => 
             array (
                 'id' => 28,
                 'parent_id' => 19,
-                'order' => 0,
+                'order' => 22,
                 'title' => '商城订单管理',
                 'icon' => 'fa-rmb',
                 'uri' => 'shop-order',
                 'created_at' => '2018-07-10 07:22:58',
-                'updated_at' => '2018-07-10 07:22:58',
+                'updated_at' => '2018-10-07 05:56:34',
             ),
-            27 => 
+            26 => 
             array (
                 'id' => 29,
                 'parent_id' => 19,
-                'order' => 0,
+                'order' => 21,
                 'title' => '用户反馈管理',
                 'icon' => 'fa-gittip',
                 'uri' => 'shop-feedback',
                 'created_at' => '2018-07-16 08:56:20',
-                'updated_at' => '2018-07-16 08:56:20',
+                'updated_at' => '2018-10-07 05:56:34',
+            ),
+            27 => 
+            array (
+                'id' => 30,
+                'parent_id' => 19,
+                'order' => 26,
+                'title' => '规格管理',
+                'icon' => 'fa-barcode',
+                'uri' => NULL,
+                'created_at' => '2018-09-22 05:23:17',
+                'updated_at' => '2018-10-07 05:56:34',
+            ),
+            28 => 
+            array (
+                'id' => 31,
+                'parent_id' => 19,
+                'order' => 18,
+                'title' => '专栏管理',
+                'icon' => 'fa-bullhorn',
+                'uri' => NULL,
+                'created_at' => '2018-10-07 05:51:07',
+                'updated_at' => '2018-10-07 05:56:34',
+            ),
+            29 => 
+            array (
+                'id' => 32,
+                'parent_id' => 31,
+                'order' => 20,
+                'title' => '首页专栏管理',
+                'icon' => 'fa-genderless',
+                'uri' => '/module',
+                'created_at' => '2018-10-07 05:53:14',
+                'updated_at' => '2018-10-07 05:56:34',
+            ),
+            30 => 
+            array (
+                'id' => 33,
+                'parent_id' => 19,
+                'order' => 17,
+                'title' => '导航圈管理',
+                'icon' => 'fa-at',
+                'uri' => '/nav',
+                'created_at' => '2018-10-07 05:55:19',
+                'updated_at' => '2018-10-07 05:56:34',
             ),
         ));
         

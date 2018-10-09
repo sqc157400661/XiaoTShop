@@ -19,7 +19,6 @@ class AddFieldToProjectTypeTable extends Migration
             $table->text('description')->nullable()->comment('详情描述');
             $table->tinyInteger('salenum')->default(10)->comment('下单量');
         });
-
         //
     }
 

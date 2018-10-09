@@ -39,17 +39,17 @@
     "pages/authorize/index"
   ],
   "window": {
-    "backgroundTextStyle": "dark",
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "xiaoT科技商城",
     "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true
+    "navigationStyle": "custom"
   },
   "tabBar": {
-    "backgroundColor": "#fafafa",
-    "borderStyle": "white",
+    "color": "#838383",
     "selectedColor": "#b4282d",
-    "color": "#666",
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
     "list": [
       {
         "pagePath": "pages/index/index",

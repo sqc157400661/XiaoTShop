@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers\Shop;
 
 use App\Models\ShopSpecification;
+use App\Models\ShopCategory;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -74,6 +75,8 @@ class ShopSpecificationController extends Controller
         return Admin::grid(ShopSpecification::class, function (Grid $grid) {
             $grid->model()->orderBy('sort_order', 'asc');
             $grid->id('序号')->sortable();
+            $grid->category_id('商品分类')
+                ->select(ShopCategory::getAllClasses(true));
             $grid->name('规格');
 
             $grid->disableExport();// 禁用导出数据按钮
@@ -93,10 +96,21 @@ class ShopSpecificationController extends Controller
         return Admin::form(ShopSpecification::class, function (Form $form) {
 
             $form->display('id', '序号');
+            $form->select('category_id', '商品分类')
+                ->rules('required')
+                ->options(ShopCategory::selectOptions(true));
             $form->text('name', '规格名称')
                 ->rules('required');
+            $form->radio('search_index', '是否限购')
+                ->options(ShopSpecification::getSearchDispayMap())
+                ->default(ShopSpecification::STATE_ON_SEARCH);
             $form->number('sort_order','排序')
                 ->default(255);
+
+            $form->hasMany('spec_items', '添加规格条目', function (Form\NestedForm $form) {
+                $form->text('item', '规格项');
+            });
+
         });
     }
 

@@ -1,7 +1,9 @@
 const ApiRootUrl ='你的域名/api/';
 
+var version = '/v2';
+
 module.exports = {
-  IndexUrl: ApiRootUrl + 'index', //首页数据接口 --
+  IndexUrl: ApiRootUrl + 'index'+version, //首页数据接口 --
   ProjectTypeList: ApiRootUrl + 'project-type-json', //技能类型 ok
   ProjectGood: ApiRootUrl + 'project-goods', // 技能组成商品 ok
   GoodsTransform:ApiRootUrl + 'project-goods-transform', // 转换成商城商品

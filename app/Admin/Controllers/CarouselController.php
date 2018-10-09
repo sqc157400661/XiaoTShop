@@ -3,7 +3,6 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Carousel;
-
 use App\Models\Good;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

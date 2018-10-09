@@ -1,24 +1,30 @@
-### 协作开发者
-1、[@2lovecode](https://github.com/2lovecode)
-
-
-**如有意向共同开发，请发邮箱157400661@qq.com,请附上个人说明以及意向描述，谢谢~**
-
 ### 基于Laravel5.5 小T商城（微信小程序端）
 
-+ 后台基于Laravel5.5开发
-+ 前端资源来源于nideshop
-+ 功能和数据库参考ecshop
+##项目概述
++ 基于Laravel5.5开发
++ 产品名称：XiaoTShop
++ 项目代码：https://github.com/sqc157400661/XiaoTShop
+
+## 运行环境
+- Nginx 1.8+
+- PHP 7.2+
+- Mysql 5.7+
+- Redis 3.0+
+- Memcached 1.4+
 
 **注意：当前版本功能还在完善中，暂时请勿商用。**
 
-### 项目截图
+### 项目截图【v0.1.2 版本】
 
 ![首页](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/Xiaot_img%20111.jpg)
 
-### 发行先行版1.0  计划发行时间2018.10.07 [可能会有波动]   计划每月升级一个版本
+### v0.1.2版本
 
 ![首页](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/gh_667b391a9af7_344.jpg)
+
+### 新版本【本次是v0.2.1】
+
+发版审核中... 稍后给出二维码
 
 ### 功能列表
 + 首页
@@ -87,21 +93,67 @@
 2、执行composer update 安装相关依赖
 
 3、配置.env 为自己的环境参数
-
-```
- # .env 数据库和redis配置略 可参考官方文档配置
-
- # .env 配置文件中 添加小程序
-WECHAT_MINI_PROGRAM_APPID= 你的appid
-WECHAT_MINI_PROGRAM_SECRET= 你的appsecret
-
-# 小程序代码./applet/xiaoTShop/config/api.js
-const ApiRootUrl ='你的域名/api/';
-
-```
+    demo
+  ```
+  APP_NAME=Laravel
+  APP_ENV=local
+  APP_KEY=base64:X2HTFXYXez3RwZ5plFA220P8HrFtXtflp+8o6Lw1X5E=
+  APP_DEBUG=true
+  APP_LOG_LEVEL=debug
+  APP_URL=http://xxxx
+  
+  DB_CONNECTION=mysql
+  DB_HOST=127.0.0.1
+  DB_PORT=3306
+  DB_DATABASE=数据库名
+  DB_USERNAME=root
+  DB_PASSWORD=数据库密码
+  
+  BROADCAST_DRIVER=log
+  CACHE_DRIVER=file
+  SESSION_DRIVER=file
+  SESSION_LIFETIME=120
+  QUEUE_DRIVER=sync
+  
+  CACHE_DRIVER=redis // 缓存驱动redis
+  REDIS_HOST=127.0.0.1
+  REDIS_PASSWORD=redis授权密码
+  REDIS_PORT=6379
+  
+  MAIL_DRIVER=smtp
+  MAIL_HOST=smtp.mailtrap.io
+  MAIL_PORT=2525
+  MAIL_USERNAME=null
+  MAIL_PASSWORD=null
+  MAIL_ENCRYPTION=null
+  
+  PUSHER_APP_ID=
+  PUSHER_APP_KEY=
+  PUSHER_APP_SECRET=
+  PUSHER_APP_CLUSTER=mt1
+  
+  WECHAT_MINI_PROGRAM_APPID=小程序的appid
+  WECHAT_MINI_PROGRAM_SECRET=小程序的appsecret
+  ```
 
 4、执行`php artisan XiaoT:install`
 
+
+**注意-如何升级：**<br>
+如果你之前安装过，需要升级版本，那么进行下面操作步骤<br>
+1、拉下最新代码覆盖原代码<br>
+2、执行composer update 安装相关依赖<br>
+3、执行`php artisan XiaoT:update`
+
+## 扩展包描述
+
+| 扩展包 | 一句话描述 | 在本项目中的使用案例 |  
+| --- | --- | --- |   
+| [orangehill/iseed](https://github.com/orangehill/iseed) | 将数据表里的数据以 seed 的方式导出 | demo数据表导出 |
+| [awssat/laravel-visits](https://github.com/awssat/laravel-visits) | 统计任意模型的查看数 | 数据统计相关。 |
+|[encore/laravel-admin](https://github.com/z-song/laravel-admin)| 后台构建 | 用于后台主体的构建 |
+| [jacobcyl/ali-oss-storage](https://github.com/jacobcyl/Aliyun-oss-storage) | 阿里云Oss管理 | 项目中阿里云OSS管理工具 |
+| [overtrue/laravel-wechat](https://github.com/overtrue/laravel-wechat) | 微信 SDK for Laravel | 小程序授权、登录、微信支付等 |
 
 ### 作者希望
 + 喜欢别忘了 Star
@@ -113,8 +165,11 @@ const ApiRootUrl ='你的域名/api/';
 <img src="https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/alipay.png" width="16%" height="16%" style="float:left;margin:-left:20px;" />
 </center>
 
+### 发版历史 && 本月发版计划
++ 2018.7.5    发布第一版  版本 v0.0.1
++ 2018.7.20   发布测试版  版本 v0.1.2  【主要进行功能完善】
++ 2018.10.10  发布体验版  版本 v0.2.1  【首页等页面功能和风格升级】【当前版本】
++ 2018.10.16  发布体验版  版本 v0.2.2  【商品支持多规格】
++ 2018.10.21  发布体验版  版本 v0.2.2  【添加专栏功能】
++ 2018.10.30  发布体验版  版本 v0.2.3  【申请支付功能】
 
-
-### 还在开发的功能
-+ 1、优惠券系统
-+ 2、用户积分系统

@@ -45,5 +45,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SpecialTableSeeder::class);
         $this->call(ShopCategoryTableSeeder::class);
         $this->call(ShopBrandTableSeeder::class);
+        $this->call(SpecialItemTableSeeder::class);
+        $this->call(VersionTableSeeder::class);
+        $this->call(NavigationTableSeeder::class);
     }
 }

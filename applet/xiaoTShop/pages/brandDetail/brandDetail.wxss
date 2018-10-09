@@ -70,7 +70,7 @@ page{
 .cate-item .b .item{
   float: left;
   background: #fff;
-  width: 375rpx;
+  width: 372rpx;
   padding-bottom: 33.333rpx;
   border-bottom: 1rpx solid #f4f4f4;
   height: auto;

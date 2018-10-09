@@ -16,11 +16,14 @@ class Carousel extends Resource
     {
         return [
             "businessId"=>$this->goods_id,
-            "type"=> $this->booth_type,
+            "spec_item_id"=>$this->spec_item_id,
+            "type"=> $this->carousel_type,
             "title"=> $this->carousel_title,
             "picUrl"=> config('filesystems.disks.oss.url').'/'.$this->carousel_img,
             "info"=> $this->carousel_info,
             "state"=> $this->state,
+            "carousel_type"=> $this->carousel_type,
+            "carousel_type_data"=> $this->carousel_type_data,
         ];
     }
 }

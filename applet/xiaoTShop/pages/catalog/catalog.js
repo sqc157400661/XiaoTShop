@@ -9,7 +9,19 @@ Page({
     scrollLeft: 0,
     scrollTop: 0,
     goodsCount: 0,
-    scrollHeight: 0
+    scrollHeight: 0,
+    searchInput: false,
+    noCancel: true,
+    noGoods: false,
+    searchData: [],
+    keywrod: '',
+    currentSortType: 'default',
+    currentSortOrder: '',
+    page: 1,
+    size: 20,
+    currentSortType: 'id',
+    currentSortOrder: 'desc',
+    categoryID: 0
   },
   onLoad: function (options) {
     this.getCatalog();
@@ -77,5 +89,54 @@ Page({
     }
 
     this.getCurrentCategory(event.currentTarget.dataset.id);
+  },
+  searchFocus: function () {
+    this.setData({
+      noCancel: false,
+      searchInput: true
+    });
+  },
+  searchClose: function () {
+    this.setData({
+      noCancel: true,
+      searchInput: false
+    });
+  },
+
+  searchConfirm(event) {
+    this.getSearchResult(event.detail.value);
+  },
+
+  getSearchResult(keyword) {
+    this.setData({
+      keyword: keyword,
+      page: 1,
+      categoryID: 0,
+      searchData: []
+    });
+    this.searchGoods();
+  },
+
+  searchGoods: function () {
+    let that = this;
+    util.request(api.GoodsList, { keyword: that.data.keyword, page: that.data.page, size: that.data.size, sort: that.data.currentSortType, order: that.data.currentSortOrder, categoryId: that.data.categoryID }).then(function (res) {
+      if (res.code == 200) {
+        console.log(res.data.length);
+        var noGoodsTmp = false;
+        if (res.data.length == 0) {
+          noGoodsTmp = true;
+        }
+        that.setData({
+          searchData: res.data,
+          noGoods: noGoodsTmp
+        });
+      }
+    });
+  },
+  toDetailsTap: function (event) {
+    console.log(event);
+    wx.redirectTo({
+      url: '/pages/goods/goods?id=' + event.currentTarget.dataset.id,
+    });
   }
 })

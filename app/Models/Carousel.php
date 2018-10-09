@@ -23,6 +23,7 @@ class Carousel extends Model
 
     //
     protected $table = 'carousel';
+    protected $fillable = ['carousel_title', 'carousel_img', 'carousel_info', 'state', 'carousel_type', 'carousel_type_data'];
 
     /**
      * 根据展位类型获取轮播
@@ -34,7 +35,7 @@ class Carousel extends Model
     		return false;
     	}
     	return CarouselResource::collection(Carousel::where([
-            ['booth_type', '=', $type],
+            ['carousel_type', '=', $type],
             ['state', '=', static::STATE_NORMAL],
         ])->take(static::USE_NUM)->get());
     }
@@ -59,6 +60,15 @@ class Carousel extends Model
                 'value' => self::STATE_BANNED,
                 'text' => self::STATE_BANNED_STRING,
             ]
+        ];
+    }
+
+    public static function getItemDataTypes()
+    {
+        return [
+            'goods' => '商品iD',
+            'special' => '专题id',
+            'link' => '链接',
         ];
     }
 }

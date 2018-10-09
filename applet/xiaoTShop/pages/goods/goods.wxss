@@ -3,24 +3,21 @@
 }
 
 .goodsimgs {
-  width: 750rpx;
-  height: 750rpx;
+  width: 740rpx;
+  height: 740rpx;
 }
 
 .goodsimgs image {
-  width: 750rpx;
-  height: 750rpx;
+  width: 740rpx;
+  height: 740rpx;
 }
 
 .service-policy {
   width: 750rpx;
   height: 73rpx;
   background: #f4f4f4;
-  padding: 0 31.25rpx;
+  padding: 0 2.25rpx;
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .service-policy .item {
@@ -31,6 +28,7 @@
   align-items: center;
   font-size: 25rpx;
   color: #666;
+  margin-left:62rpx;
 }
 
 .goods-info {
@@ -463,7 +461,7 @@
 .related-goods .b .item {
   float: left;
   background: #fff;
-  width: 375rpx;
+  width: 305rpx;
   height: auto;
   overflow: hidden;
   text-align: center;

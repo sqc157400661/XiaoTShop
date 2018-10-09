@@ -77,7 +77,7 @@ page ,.container{
 
 .page view{
     height: 108rpx;
-    width: 50%;
+    width: 49%;
     float: left;
     font-size: 29rpx;
     color: #333;

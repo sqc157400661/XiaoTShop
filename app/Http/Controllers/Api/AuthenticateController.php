@@ -49,7 +49,11 @@ class AuthenticateController extends ApiController
         }
 
         if (!$request->openid && empty($wx_info['openid'])) {
-            return $this->failed('用户openid没有获取到', 401);
+            if (isset($wx_info) && !empty($wx_info['errmsg'])) {
+                return $this->failed($wx_info['errmsg'], 406);
+            } else {
+                return $this->failed('用户openid没有获取到', 401);
+            }
         }
         $openid = empty($wx_info['openid'])?$request->openid:$wx_info['openid'];
         $userInfo = User::where('openid', $openid)->first();

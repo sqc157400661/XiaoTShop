@@ -1,19 +1,48 @@
-/**app.wxss**/
 .container {
-  box-sizing: border-box;
-  background-color: #f4f4f4;
-  font-family: PingFangSC-Light,helvetica,'Heiti SC';
-} 
-
-view,image,text,navigator{
-  box-sizing: border-box;
-  padding:0;
-  margin:0;
-
+    height: 100%;
 }
 
-view,text{
-  font-family: PingFangSC-Light,helvetica,'Heiti SC';
-  font-size: 29rpx;
-  color: #333;
+.wxParse-img {
+    display: block!important;
+}
+
+.header-container {
+    width: 100%;
+    height: 130rpx;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+.header-container .header-name {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 170rpx;
+    font-size: 30rpx;
+    color: #333;
+}
+
+.iphone .header-container {
+    height: 180rpx;
+}
+
+.iphone .header-container .header-name {
+    line-height: 270rpx;
+}
+
+.header-container .goback {
+    width: 56rpx;
+    height: 56rpx;
+    margin-top: 50rpx;
+    position: absolute;
+    margin-left: 20rpx;
+    border: 1rpx solid #fff;
+    border-radius: 50%;
+    padding: 6rpx;
+}
+
+.iphone .header-container .goback {
+    margin-top: 90rpx;
 }

@@ -14,7 +14,9 @@ Route::group([
 
     //轮播图管理
     $router->resource('carousel', CarouselController::class);
-    //专题管理
+    // 导航管理
+    $router->resource('nav', NavigationController::class);
+    //专类管理
     $router->resource('special', SpecialController::class);
     //商品管理
     $router->resource('goods', GoodController::class);
@@ -47,6 +49,23 @@ Route::group([
 
     // 统计管理
     $router->resource('stat', StatController::class);
+
+    // 
+    $router->resource('module', ModuleController::class);
+    $router->get('module-list', 'ModuleController@module_list')->name('module-list');
+
+    Route::group(['namespace' => 'Module'], function (Router $router) {
+        $router->resource('module-adv', AdvController::class);
+        $router->resource('module-a', ModuleAController::class);
+        $router->resource('module-b', ModuleBController::class);
+        $router->resource('module-c', ModuleCController::class);
+        $router->resource('module-e', ModuleEController::class);
+        $router->resource('module-f', ModuleFController::class);
+        $router->post('special_item_add', 'ModuleIndexController@special_item_add')->name('special_item_add');
+        $router->post('special_item_del', 'ModuleIndexController@special_item_del')->name('special_item_del');
+        $router->post('special_item_handle', 'ModuleIndexController@special_item_handle')->name('special_item_handle');
+        $router->post('update_item_sort', 'ModuleIndexController@update_item_sort')->name('update_item_sort');
+    });
 
     Route::post('uploadFile', 'UploadController@uploadImg')->name('admin-up');
 

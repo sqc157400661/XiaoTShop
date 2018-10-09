@@ -32,3 +32,4 @@ Form::extend('addSpecification', AddSpecification::class);
 
 Admin::js('/vendor/echarts/echarts.js');
 Admin::js('/vendor/echarts/macarons.js');
+//Admin::css('/vendor/admin/css/skin_0.css');
