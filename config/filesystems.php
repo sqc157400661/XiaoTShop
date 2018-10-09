@@ -57,8 +57,8 @@ return [
 
         'oss' => [
             'driver'        => 'oss',
-            'access_id'     => 'LTAIPBwk3qMhHat5',
-            'access_key'    => 'HjAzFWe5ngFdU7n3hwb0Q3UGJoXBoj',
+            'access_id'     => 'xxx',
+            'access_key'    => 'xxxx',
             'bucket'        => 'xiaot-static',
             'endpoint'      => 'oss-cn-hangzhou.aliyuncs.com', // OSS 外网节点或自定义外部域名
             //'endpoint_internal' => '<internal endpoint [OSS内网节点] 如：oss-cn-shenzhen-internal.aliyuncs.com>', // v2.0.4 新增配置属性，如果为空，则默认使用 endpoint 配置(由于内网上传有点小问题未解决，请大家暂时不要使用内网节点上传，正在与阿里技术沟通中)
