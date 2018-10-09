@@ -24,7 +24,7 @@
 
 ### 新版本【本次是v0.2.1】
 
-发版审核中... 稍后给出二维码
+![首页](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/gh_ed3c26c094b2_344.jpg)
 
 ### 功能列表
 + 首页
