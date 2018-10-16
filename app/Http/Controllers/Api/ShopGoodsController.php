@@ -125,6 +125,7 @@ class ShopGoodsController extends ApiController
         return $this->success($outData);
     }
 
+
     // 商品详情页的关联商品（大家都在看）
     public function getGoodsRelated(Request $request){
         $goodsInfo = ShopGoodsLogic::getGoodsDetail(['id' => $request->id]);

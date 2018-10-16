@@ -1,149 +1,181 @@
-<view class="container">
-  <swiper class="goodsimgs" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
-    <swiper-item wx:for="{{gallery}}" wx:key="{{item.id}}">
-      <image src="{{item}}" background-size="cover"></image>
-    </swiper-item>
-  </swiper>
-  <view class="service-policy">
-    <view class="item">30天无忧退货</view>
-    <view class="item">48小时快速退款</view>
-    <view class="item">满88元免邮费</view>
-  </view>
-  <view class="goods-info">
-    <view class="c">
-      <text class="name">{{goods.goods_name}}</text>
-      <text class="desc">{{goods.goods_brief}}</text>
-      <text class="price">￥{{goods.retail_price}}</text>
-      <view class="brand" wx:if="{{brand.name}}">
-        <navigator url="../brandDetail/brandDetail?id={{brand.id}}">
-          <text>{{brand.name}}</text>
+<import src="../../lib/wxParse/wxParse.wxml" />
+<view class="container {{iphone}}">
+    <view class="header-container">
+        <navigator hoverClass="navigator-hover" openType="switchTab" url="/pages/index/index" wx:if="{{share}}">
+            <image class="goback" src="../../images/gohome.png"></image>
         </navigator>
-      </view>
-    </view>
-  </view>
-  <!-- <view class="section-nav section-attr" bindtap="switchAttrPop">
-    <view class="t">请选择购买数量</view>
-    <image class="i" src="../../static/images/address_right.png" background-size="cover"></image>
-  </view> -->
-  <!--<view class="section-nav section-act">
-      <view class="t">
-        <view class="label">1个促销:</view>
-        <view class="tag">万圣趴</view>
-        <view class="text">全场满499，额外送糖果</view>
-      </view>
-      <image class="i" src="../../static/images/address_right.png" background-size="cover"></image>
-    </view>-->
-  <view class="comments" wx:if="{{comment.count > 0}}">
-    <view class="h">
-      <navigator url="../comment/comment?valueId={{goods.id}}&typeId=0">
-        <text class="t">评价({{comment.count > 999 ? '999+' : comment.count}})</text>
-        <text class="i">查看全部</text>
-      </navigator>
-    </view>
-    <view class="b">
-      <view class="item" wx:for="{{comment.data}}">
-        <view class="info">
-          <view class="user">
-            <image src="{{item.avatar}}"></image>
-            <text>{{item.nickname}}</text>
-          </view>
-          <view class="time">{{item.add_time}}</view>
-        </view>
-        <view class="content">
-          {{item.content}}
-        </view>
-        <view class="imgs" wx:if="{{item.pic_list.length > 0}}">
-          <image class="img" wx:for="{{item.pic_list}}" wx:for-item="vitem" src="{{vitem}}"></image>
-        </view>
-        <!-- <view class="spec">白色 2件</view> -->
-      </view>
-    </view>
-  </view>
-  <view class="goods-attr">
-    <view class="t">商品参数</view>
-    <view class="l">
-      <view class="item" wx:for="{{attribute}}" wx:key="{{item.name}}">
-        <text class="left">{{item.name}}</text>
-        <text class="right">{{item.value}}</text>
-      </view>
-    </view>
-  </view>
-
-  <view class="detail">
-    <import src="../../lib/wxParse/wxParse.wxml" />
-    <template is="wxParse" data="{{wxParseData:goodsDetail.nodes}}" />
-  </view>
-
-
-  <view class="common-problem" wx:if="{{issueList.length > 0}}" >
-    <view class="h">
-      <view class="line"></view>
-      <text class="title">常见问题</text>
-    </view>
-    <view class="b">
-      <view class="item" wx:for="{{issueList}}" wx:key="{{item.id}}">
-        <view class="question-box">
-          <text class="spot"></text>
-          <text class="question">{{item.question}}</text>
-        </view>
-        <view class="answer">
-          {{item.answer}}
-        </view>
-      </view>
-    </view>
-  </view>
-
-  <view class="related-goods" wx:if="{{relatedGoods.length > 0}}">
-    <view class="h">
-      <view class="line"></view>
-      <text class="title">大家都在看</text>
-    </view>
-    <view class="b">
-      <view class="item" wx:for="{{relatedGoods}}" wx:key="{{item.id}}">
-        <navigator url="/pages/goods/goods?id={{item.id}}">
-          <image class="img" src="{{item.primary_pic_url}}" background-size="cover"></image>
-          <text class="name">{{item.goods_name}}</text>
-          <text class="price">￥{{item.retail_price}}</text>
+        <navigator delta="1" hoverClass="navigator-hover" openType="navigateBack" wx:if="{{!share}}">
+            <image class="goback" src="../../images/goback.png"></image>
         </navigator>
-      </view>
     </view>
-  </view>
-</view>
-<view class="attr-pop-box" hidden="{{!openAttr}}">
-  <view class="attr-pop">
-    <view class="close" bindtap="closeAttr">
-      <image class="icon" src="/static/images/icon_close.png"></image>
-    </view>
-    <view class="img-info">
-      <image class="img" src="{{gallery[0].img_url}}"></image>
-      <view class="info">
-        <view class="c">
-          <view class="p">价格：￥{{goods.retail_price}}</view>
+    <view class="swiper-container" wx:if="{{gallery}}">
+        <swiper autoplay="{{autoplay}}" bindchange="swiperchange" class="swiper_box" duration="{{duration}}" interval="{{interval}}">
+            <swiper-item wx:for="{{gallery}}" wx:key="{{item.id}}">
+                <image class="slide-image" lazyLoad="true" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+        <view class="dots">
+            <view class="dot{{index==swiperCurrent?' active':''}}" wx:for="{{gallery}}" wx:key="unique"></view>
         </view>
-      </view>
     </view>
-    <view class="spec-con">
-      <view class="number-item">
-        <view class="name">数量</view>
-        <view class="selnum">
-          <view class="cut" bindtap="cutNumber">-</view>
-          <input value="{{number}}" class="number" disabled="true" type="number" />
-          <view class="add" bindtap="addNumber">+</view>
+    <!-- 视频播放 -->
+    <!-- <view class="swiper-container" wx:if="{{goodsDetail.basicInfo.videoId}}">
+        <video autoplay="true" loop="true" src="{{videoMp4Src}}" style="width:100%"></video>
+    </view> -->
+    <view class="goods-info">
+        <view class="goods-left">
+            <view class="goods-title">{{goods.goods_name}}</view>
+            <view class="goods-characteristic">{{goods.goods_brief}}</view>
+  
+            <block>
+                <view class="goods-price">Ұ {{goods.retail_price}}</view>
+                <view class="goods-originalPrice">Ұ {{goods.counter_price}}</view>
+                <view class="piangjia">
+              已售 {{goods.sell_volume}}
         </view>
-      </view>
+            </block>
+        </view>
     </view>
-  </view>
+
+    <view bindtap="bindGuiGeTap" class="row-arrow" wx:if="{{goods.specification_info.length>0}}">
+            选择规格
+    <image src="../../images/arrow-right.png"></image>
+    </view>
+    <view bindtap="tabFun" class="tab-header">
+        <view class="{{tabArr.curHdIndex=='0'?'active':''}}" data-id="0" id="tab-hd01">商品介绍</view>
+        <view class="{{tabArr.curHdIndex=='1'?'active':''}}" data-id="1" id="tab-hd02">商品评价</view>
+    </view>
+    <view class="tab-container">
+        <view class="tab-item {{tabArr.curBdIndex=='0'?'active':''}}">
+            <view class="goods-text">
+                <template is="wxParse" data="{{wxParseData:goodsDetail.nodes}}"></template>
+            </view>
+        </view>
+        <view class="tab-item {{tabArr.curBdIndex=='1'?'active':''}}">
+            <view class="reputation-none" wx:if="{{!comment}}">
+                <image src="../../images/empty_comment.png"></image> 还没有人评价
+            </view>
+            <view class="goods-reputa-list" wx:for="{{comment.data}}" wx:key="id">
+                <view class="goods-reputa-avatar">
+                    <image class="goods-avatar" src="{{item.avatar}}"></image>
+                </view>
+                <view class="goods-reputa-mark">
+                    <view class="goods-reputa-user">
+                        {{item.nickname}}
+                        <text>{{item.star_str}} </text>
+                    </view>
+                    <view class="goods-mark">{{item.content}}</view>
+                    <view class="goods-mark-day">
+                        {{item.add_time}}
+                    <text>{{item.property}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="getShareBox" class="goods-button">
+        <image src="../../images/share.png"></image>
+    </view>
+ 
+    <view class="footer-box" >
+        <view class="box-list">
+            <image src="../../images/goods_service.png"></image>
+            <button openType="contact" sessionFrom="weapp"></button>
+        </view>
+        <view bindtap="goShopCar" class="box-list">
+            <image src="../../images/shopping_cart.png"></image>
+            <view class="shop-num">{{cartGoodsCount}}</view>
+        </view>
+        <view bindtap="addCannelCollect" class="box-list">
+            <image src="../../images/goods_collect.png" wx:if="{{userHasCollect==0}}"></image>
+            <image src="../../images/goods_collect_checked.png" wx:if="{{userHasCollect==1}}"></image>
+        </view>
+        <view class="box-title">
+            <view bindtap="tobuy" class="box-shop-cart npx">立即购买</view>
+        </view>
+        <view class="box-title buy-now">
+            <view bindtap="toAddShopCar" class="box-now-buy npx">加入购物车</view>
+        </view>
+    </view>
+    <view class="show-popup" hidden="{{hideShopPopup}}">
+        <view bindtap="closePopupTap" class="popup-mask"></view>
+        <view class="popup-contents">
+            <view class="pop-goods-info">
+                <view class="pop-img-box">
+                    <image class="goods-thumbnail" src="{{goods.primary_pic_url}}"></image>
+                </view>
+                <view class="pop-goods-des">
+                    <view class="pop-goods-title">{{goods.goods_name}}</view>
+                    <view class="pop-goods-price">¥ {{goods.retail_price}}</view>
+                </view>
+                <view bindtap="closePopupTap" class="pop-goods-close"></view>
+            </view>
+            <view class="size-label-box">
+                <block wx:for="{{goods.specification_info}}" wx:for-index="idx" wx:for-item="property" wx:key="id">
+                    <view class="label">{{property.sp_name}}</view>
+                    <view class="label-item-box">
+                        <view bindtap="labelItemTap" class="label-item {{item.active?'active':''}}" data-propertychildid="{{item.sp_item_id}}" data-propertychildindex="{{index}}" data-propertychildname="{{item.sp_item_name}}" data-propertyid="{{property.sp_id}}" data-propertyindex="{{idx}}" data-propertyname="{{property.sp_name}}" wx:for="{{property.items}}" wx:key="id">
+              {{item.sp_item_name}}
+            </view>
+                    </view>
+                </block>
+            </view>
+            <view class="buy-num-box">
+                <view class="num-label">购买数量</view>
+                <view class="num-box">
+                    <view bindtap="numJianTap" class="num-jian {{buyNumber==buyNumMin?'hui':''}}">-</view>
+                    <view class="num-input">
+                        <input disabled type="number" value="{{buyNumber}}"></input>
+                    </view>
+                    <view bindtap="numJiaTap" class="num-jia {{buyNumber==buyNumMax?'hui':''}}">+</view>
+                </view>
+            </view>
+            <view bindtap="addShopCar" class="popup-join-btn" wx:if="{{shopType=='addShopCar'}}">加入购物车</view>
+            <view bindtap="buyNow" class="popup-join-btn" wx:if="{{shopType=='tobuy'}}"> 立即购买</view>
+        </view>
+    </view>
 </view>
-<view class="bottom-btn">
-  <view class="l l-collect" bindtap="addCannelCollect">
-    <image class="icon" src="{{ collectBackImage }}"></image>
-  </view>
-  <view class="l l-cart">
-    <view class="box">
-      <text class="cart-count">{{cartGoodsCount}}</text>
-      <image bindtap="openCartPage" class="icon" src="/static/images/ic_menu_shoping_nor.png"></image>
+<view class="show-container" hidden="{{wxlogin}}">
+    <view class="show-box">
+        <view class="show-logo-box">
+            <image src="{{toplogo}}"></image>
+            <view class="show-mall-name">{{topname}}</view>
+        </view>
+        <view class="show-text-box">
+            <view class="show-text-name">需要您的授权才能正常使用哦！</view>
+            <view class="show-text-info">
+                <text>·</text>请允许我们获得您的公开资讯</view>
+            <view class="show-text-info">
+                <text>·</text>我们不会公布您的这些信息</view>
+            <view class="show-text-info">
+                <text>·</text>只是为了给您提供更好的服务</view>
+        </view>
+        <button bindgetuserinfo="userlogin" openType="getUserInfo">允许</button>
     </view>
-  </view>
-  <view class="c" bindtap="payNow">立即购买</view>
-  <view class="r" bindtap="addToCart">加入购物车</view>
+</view>
+<view class="show-share" hidden="{{sharebox}}">
+    <view bindtap="closeshare" class="show-close-share"></view>
+    <view class="show-share-box">
+        <view class="show-share-title">把商品分享给好友</view>
+        <view class="show-share-btn-box">
+            <view class="show-share-share">
+                <image src="../../images/kanjia/share_user.png"></image>
+                <text>分享给好友</text>
+                <button class="pop-box-btn" openType="share"></button>
+            </view>
+            <view bindtap="getcode" class="show-share-code">
+                <image src="../../images/kanjia/share_img.png"></image>
+                <text>生成二维码</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="show-share" hidden="{{sharecode}}">
+    <view bindtap="closeshare" class="show-close-share"></view>
+    <view class="show-code-box">
+        <view class="show-code-re">
+            <image src="{{codeimg}}"></image>
+            <view bindtap="savecode" class="show-code-btn">保存商品二维码</view>
+        </view>
+    </view>
 </view>

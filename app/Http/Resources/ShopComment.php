@@ -31,9 +31,18 @@ class ShopComment extends Resource
         if($this->user_id){
             $user = User::find($this->user_id);
         }
+        $shop_product = '';
+        if($this->product_id){
+            $shop_product =' 选择规格：'. $this->shop_product->goods_spec_item_names;
+        }
+        if($this->product_id){
+            $shop_product =' 选择规格：'. $this->shop_product->goods_spec_item_names;
+        }
         return [
             "id"=>$this->id,
             "value_id"=> $this->value_id,
+            "star"=> $this->star,
+            "star_str"=> $this->star >=4 ? '好评':'中评',
             'nickname' => $user['nickname'],
             'avatar' => $user['avatar'],
             "content"=> $this->content,
@@ -41,6 +50,7 @@ class ShopComment extends Resource
             "new_content"=> $this->new_content,
             "pic_list"=> $pics,
             "add_time"=>$this->created_at,
+            'property' => $shop_product
         ];
     }
 

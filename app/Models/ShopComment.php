@@ -20,6 +20,11 @@ class ShopComment extends Model
         return $this->hasOne(ShopGoods::class,'value_id');
     }
 
+    public function shop_product()
+    {
+        return $this->hasOne(ShopProduct::class,'product_id');
+    }
+
     public function get_comment_picture()
     {
         return $this->hasMany(ShopCommentPicture::class,'comment_id');

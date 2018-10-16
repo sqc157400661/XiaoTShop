@@ -23,12 +23,33 @@ class ShopGoods extends Resource
 
             }
         }
+        $specification_info = [];
+        if($this->products){
+            foreach($this->products as $product){
+                $specification_ids = explode('_',$product->goods_specification_ids);
+                $specification_names = explode('_',$product->goods_specification_names);
+                $spec_item_ids = explode('_',$product->goods_spec_item_ids);
+                $spec_item_names = explode('_',$product->goods_spec_item_names);
+                foreach($specification_ids as $k =>$s_ids){
+
+                    $specification_info[$s_ids]['sp_id'] = $s_ids;
+                    $specification_info[$s_ids]['sp_name'] = $specification_names[$k];
+                    if(!isset($specification_info[$s_ids]['items'])){
+                        $specification_info[$s_ids]['items'] = [];
+                    }
+                    $specification_info[$s_ids]['items'][$spec_item_ids[$k]] = [
+                        'sp_item_id' =>$spec_item_ids[$k],
+                        'sp_item_name' =>$spec_item_names[$k],
+                    ];
+                }
+            }
+            $specification_info = array_values($specification_info);
+        }
         return [
             "id"=>$this->id,
             "goods_name"=> $this->goods_name,
             "goods_number"=> $this->goods_number,
             "keywords"=> $this->keywords,
-            "goods_number"=> $this->goods_number,
             "goods_brief"=> $this->goods_brief,
             "goods_desc"=> $this->goods_desc,
             "counter_price"=> $this->counter_price,
@@ -46,6 +67,8 @@ class ShopGoods extends Resource
             "is_vip_exclusive"=> $this->is_vip_exclusive,
             "is_limited"=> $this->is_limited,
             "is_hot"=> $this->is_hot,
+            "products"=> $this->products,
+            'specification_info'=>$specification_info
         ];
     }
 

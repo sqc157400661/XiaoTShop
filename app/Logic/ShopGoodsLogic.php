@@ -27,11 +27,13 @@ class ShopGoodsLogic
 
     }
 
+    // 统计商品
     static public function getGoodsCount($where)
     {
         return ShopGoods::where($where)->count();
     }
 
+    // 获取商品分类
     static public function getGoodsCategory($where)
     {
         $currentCategory = ShopCategory::where($where)->first();
