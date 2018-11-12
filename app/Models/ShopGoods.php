@@ -53,6 +53,12 @@ class ShopGoods extends Model
         return $this->hasMany(ShopProduct::class, 'goods_id');
     }
 
+    public function checked_products()
+    {
+        return $this->hasOne(ShopProduct::class, 'goods_id');
+    }
+
+
     public function specifications()
     {
         return $this->hasMany(ShopGoodsSpecification::class, 'goods_id');
@@ -144,7 +150,15 @@ class ShopGoods extends Model
     }
 
     // 获取商品详情
-    public static function getGoodsDetail($where){
+    public static function getGoodsDetail($where,$product_id =0){
+        if($product_id){
+            return static::with(['checked_products' => function ($query) use($product_id) {
+                $query->where('id', '=', $product_id);
+            }])->where(array_merge([
+                ['is_delete', '=', static::STATE_NOT_DELETE],
+                ['is_on_sale', '=', static::STATE_ON_SALE],
+            ], $where))->first();
+        }
         return static::where(array_merge([
             ['is_delete', '=', static::STATE_NOT_DELETE],
             ['is_on_sale', '=', static::STATE_ON_SALE],

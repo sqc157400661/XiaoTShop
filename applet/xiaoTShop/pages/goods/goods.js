@@ -50,7 +50,8 @@ Page({
             curBdIndex: 0
         },
         goods: {},
-        products:{},
+        products:[],
+        checked_sp_item_ids:[],
         gallery: [],
         attribute: [],
         issueList: [],
@@ -189,15 +190,30 @@ Page({
     },
     addToCart: function() {
         var that = this;
-        if (this.data.openAttr === false) {
+        if (this.data.hideShopPopup == 1) {
             //打开规格选择窗口
             this.setData({
-                openAttr: !this.data.openAttr
-            });
+                shopType: 'addShopCar'
+            }),
+            this.bindGuiGeTap();
         } else {
+            var product_id = 0;
+            var product = this.getProductByCheckedSpecIds()
+            console.log(product);
+            console.log(product.length);
+            if(product !== true && product.length < 1){
+                wx.showToast({
+                    image: '/static/images/icon_error.png',
+                    title: '请选择商品规格！',
+                    mask: true
+                });
+                return false;
+            }else if(product.id){
+               product_id =  product.id
+            }
 
             //验证库存
-            if (this.data.goods.goods_number < this.data.number) {
+            if (this.data.goods.goods_number < this.data.buyNumber) {
                 //找不到对应的product信息，提示没有库存
                 wx.showToast({
                     image: '/static/images/icon_error.png',
@@ -210,7 +226,8 @@ Page({
             //添加到购物车
             util.request(api.CartAdd, {
                     goodsId: this.data.goods.id,
-                    number: this.data.number
+                    number: this.data.buyNumber,
+                    product_id:product_id
                 }, "POST")
                 .then(function(res) {
                     let _res = res;
@@ -236,15 +253,27 @@ Page({
     },
     payNow: function() {
         var that = this;
-        if (this.data.openAttr === false) {
+        if (this.data.hideShopPopup == 1) {
             //打开规格选择窗口
             this.setData({
-                openAttr: !this.data.openAttr
-            });
+                shopType: 'tobuy'
+            }),
+            this.bindGuiGeTap();
         } else {
-
+            var product_id = 0;
+            var product = this.getProductByCheckedSpecIds()
+            if(product !== true && product.length < 1){
+                wx.showToast({
+                    image: '/static/images/icon_error.png',
+                    title: '请选择商品规格！',
+                    mask: true
+                });
+                return false;
+            }else if(product.length > 1){
+               product_id =  product.id
+            }
             //验证库存
-            if (this.data.goods.goods_number < this.data.number) {
+            if (this.data.goods.goods_number < this.data.buyNumber) {
                 //找不到对应的product信息，提示没有库存
                 wx.showToast({
                     image: '/static/images/icon_error.png',
@@ -254,12 +283,11 @@ Page({
                 return false;
             }
             wx.navigateTo({
-                url: '../shopping/checkout/checkout?goodsId=' + this.data.goods.id + '&number=' + this.data.number
+                url: '../shopping/checkout/checkout?goodsId=' + this.data.goods.id + '&number=' + this.data.buyNumber + '&product_id=' + product_id
             })
         }
 
     },
-
 
     bindGuiGeTap: function() {
         this.setData({
@@ -289,63 +317,81 @@ Page({
         }
     },
     labelItemTap: function(x) {
-        for (var e = this, i = e.data.goodsDetail.properties[x.currentTarget.dataset.propertyindex].childsCurGoods, s = 0; s < i.length; s++) 
-            e.data.goodsDetail.properties[x.currentTarget.dataset.propertyindex].childsCurGoods[s].active = ![];
-        e.data.goodsDetail.properties[x.currentTarget.dataset.propertyindex].childsCurGoods[x.currentTarget.dataset.propertychildindex].active = !![];
-        for (var o = e.data.goodsDetail.properties.length, n = 0, d = "", r = "", s = 0; s < e.data.goodsDetail.properties.length; s++) if (t("0x73") === t("0x73")) {
-            i = e.data.goodsDetail.properties[s].childsCurGoods;
-            for (var c = 0; c < i.length; c++) if ("kvaLC" !== t("0x74")) {
-                if (i[c].active) if ("HCUWT" === t("0x75")) n++, d = d + e.data.goodsDetail.properties[s].id + ":" + i[c].id + ",", 
-                r = r + e.data.goodsDetail.properties[s].name + ":" + i[c].name + "  "; else {
-                    var u = this;
-                    wx.saveImageToPhotosAlbum({
-                        filePath: u.data.codeimg,
-                        success: function(x) {
-                            wx.showToast({
-                                title: '保存成功',
-                                icon: "success",
-                                duration: 2e3
-                            });
-                        }
-                    }), u.setData({
-                        sharecode: !![]
-                    });
-                }
-            } else e.setData({
-                iphone: "iphone"
-            });
-        } else 0 == res.data.code && e.setData({
-            pingtuan: res.data.data
-        });
-        var h = ![];
-        if (o == n && (t("0x78") !== t("0x79") ? h = !![] : this.setData({
-            sharebox: ![]
-        })), h) if (t("0x7a") === t("0x7a")) wx.request({
-            url: a.siteInfo[t("0x67")] + a.siteInfo.subDomain + "/shop/goods/price",
-            data: {
-                goodsId: e.data.goodsDetail.basicInfo.id,
-                propertyChildIds: d
-            },
-            success: function(x) {
-                "nAlwX" !== t("0x7b") ? e.setData({
-                    selectSizePrice: x.data.data.price,
-                    propertyChildIds: d,
-                    propertyChildNames: r,
-                    buyNumMax: x.data.data.stores,
-                    buyNumber: x.data.data.stores > 0 ? 1 : 0,
-                    selectptPrice: x.data.data.pingtuanPrice
-                }) : h = !![];
+        var checked_sp_item_ids = this.data.checked_sp_item_ids;
+        var sp_item_id = x.currentTarget.dataset.sp_item_id;
+        var sp_id = x.currentTarget.dataset.sp_id;
+      
+        if(typeof checked_sp_item_ids[sp_id] == 'undefined'){
+              checked_sp_item_ids[sp_id] = {};  
+        }
+        if(typeof checked_sp_item_ids[sp_id][sp_item_id] !='undefined' &&checked_sp_item_ids[sp_id][sp_item_id] == 'checked'){
+            checked_sp_item_ids[sp_id][sp_item_id] = 'nocheck';
+        }else{
+            for(var i in checked_sp_item_ids[sp_id]){
+                checked_sp_item_ids[sp_id][i] = 'nocheck';
             }
-        }); else {
-            var l = this;
-            l.goPingtuan(), l.goPingList(), wx.stopPullDownRefresh();
+            checked_sp_item_ids[sp_id][sp_item_id] = 'checked';
         }
         this.setData({
-            goodsDetail: e.data.goodsDetail,
-            canSubmit: h
+            checked_sp_item_ids: checked_sp_item_ids
         });
+        var product = this.getProductByCheckedSpecIds();
     },
-
+    getProductByCheckedSpecIds(){
+        var goods = this.data.goods;
+        var products = this.data.products;
+        if(products.length<1){
+            return true;
+        }
+        var checked_sp_item_ids = this.data.checked_sp_item_ids;
+        var checked_sp_item_ids = this.data.checked_sp_item_ids;
+        var checkedIds = [];
+        for(var i in checked_sp_item_ids){
+            if(checked_sp_item_ids[i]){
+                for(var j in checked_sp_item_ids[i]){
+                    if(checked_sp_item_ids[i][j] == 'checked'){
+                        checkedIds.push(j);
+                    }
+                }
+            }
+        }
+        checkedIds = this.quickSort(checkedIds);
+        var checkedIdsStr= checkedIds.join("_");
+        var checkedProduct = [];
+        for(var k in products){
+            if(products[k].goods_spec_item_ids == checkedIdsStr){
+                checkedProduct = products[k];
+                goods.retail_price = checkedProduct.retail_price;
+                goods.goods_number = checkedProduct.goods_number;
+                this.setData({
+                    goods: goods
+                });
+            }
+        }
+        return  checkedProduct;
+    },
+    quickSort(arr){
+        //如果数组长度小于等于1，则返回数组本身
+        if(arr.length<=1){
+            return arr;
+        }
+        //定义中间值的索引
+        var index = Math.floor(arr.length/2);
+        //取到中间值
+        var temp = arr.splice(index,1);
+        //定义左右部分数组
+        var left = [];
+        var right = [];
+        for(var i=0;i<arr.length;i++){
+            //如果元素比中间值小，那么放在左边，否则放右边
+            if(arr[i]<temp){
+                left.push(arr[i]);
+            }else{
+                right.push(arr[i]);
+            }
+        }
+        return this.quickSort(left).concat(temp,this.quickSort(right));
+    },
     getShareBox: function() {
         this.setData({
             sharebox: ![]

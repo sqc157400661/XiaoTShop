@@ -3,6 +3,10 @@ page{
     background: #f4f4f4;
 }
 
+.container {
+    padding-top:138rpx;
+}
+
 .address-box{
     width: 100%;
     height: 166.55rpx;

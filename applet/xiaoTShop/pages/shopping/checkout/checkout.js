@@ -17,6 +17,7 @@ Page({
     actualPrice: 0.00,     //实际需要支付的总价
     is_buyNow:0,
     goodsId:0,
+    productId:0,// 规格id
     buynumber: 0,
     addressId: 0,
     couponId: 0
@@ -28,7 +29,8 @@ Page({
       this.setData({
         'is_buyNow': 1,
         'goodsId': options.goodsId,
-        'buynumber': options.number,
+        'buynumber':options.number,
+         productId:options.product_id
       });
     }
     try {
@@ -73,7 +75,7 @@ Page({
   },
   buyNow: function () {
     let that = this;
-    util.request(api.PayNow, { addressId: that.data.addressId, couponId: that.data.couponId, goodsId: that.data.goodsId, buynumber: that.data.buynumber }, 'POST').then(function (res)     {
+    util.request(api.PayNow, { addressId: that.data.addressId, couponId: that.data.couponId, goodsId: that.data.goodsId, buynumber: that.data.buynumber, productId: that.data.productId }, 'POST').then(function (res)     {
       if (res.code === 200) {
         that.setData({
           checkedGoodsList: res.data.checkedGoodsList,

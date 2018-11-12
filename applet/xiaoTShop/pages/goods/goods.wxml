@@ -91,10 +91,10 @@
             <image src="../../images/goods_collect_checked.png" wx:if="{{userHasCollect==1}}"></image>
         </view>
         <view class="box-title">
-            <view bindtap="tobuy" class="box-shop-cart npx">立即购买</view>
+            <view bindtap="payNow" class="box-shop-cart npx">立即购买</view>
         </view>
         <view class="box-title buy-now">
-            <view bindtap="toAddShopCar" class="box-now-buy npx">加入购物车</view>
+            <view bindtap="addToCart" class="box-now-buy npx">加入购物车</view>
         </view>
     </view>
     <view class="show-popup" hidden="{{hideShopPopup}}">
@@ -114,8 +114,8 @@
                 <block wx:for="{{goods.specification_info}}" wx:for-index="idx" wx:for-item="property" wx:key="id">
                     <view class="label">{{property.sp_name}}</view>
                     <view class="label-item-box">
-                        <view bindtap="labelItemTap" class="label-item {{item.active?'active':''}}" data-propertychildid="{{item.sp_item_id}}" data-propertychildindex="{{index}}" data-propertychildname="{{item.sp_item_name}}" data-propertyid="{{property.sp_id}}" data-propertyindex="{{idx}}" data-propertyname="{{property.sp_name}}" wx:for="{{property.items}}" wx:key="id">
-              {{item.sp_item_name}}
+                        <view bindtap="labelItemTap" class="label-item {{checked_sp_item_ids[property.sp_id] && checked_sp_item_ids[property.sp_id][item.sp_item_id]=='checked'?'active':''}}" data-sp_item_id="{{item.sp_item_id}}"  data-sp_item_name="{{item.sp_item_name}}" data-sp_id="{{property.sp_id}}" data-propertyindex="{{idx}}" data-sp_name="{{property.sp_name}}" wx:for="{{property.items}}" wx:key="id">
+                        {{item.sp_item_name}}
             </view>
                     </view>
                 </block>
@@ -130,8 +130,8 @@
                     <view bindtap="numJiaTap" class="num-jia {{buyNumber==buyNumMax?'hui':''}}">+</view>
                 </view>
             </view>
-            <view bindtap="addShopCar" class="popup-join-btn" wx:if="{{shopType=='addShopCar'}}">加入购物车</view>
-            <view bindtap="buyNow" class="popup-join-btn" wx:if="{{shopType=='tobuy'}}"> 立即购买</view>
+            <view bindtap="addToCart" class="popup-join-btn" wx:if="{{shopType=='addShopCar'}}">加入购物车</view>
+            <view bindtap="payNow" class="popup-join-btn" wx:if="{{shopType=='tobuy'}}"> 立即购买</view>
         </view>
     </view>
 </view>

@@ -1,0 +1,42 @@
+<template name="cart-goods-list">
+    <view bindtap="editCart" class="top-edit-btn" hidden="{{isEditCart}}">编辑</view>
+    <view bindtap="editCart" class="top-edit-btn" hidden="{{!isEditCart}}">完成</view>
+    <view class="goodsList">
+        <view class="a-gooods" wx:for="{{cartGoods}}" wx:key="{{index}}">
+            <view bindtap="checkedItem" bindtouchend="touchE" bindtouchmove="touchM" bindtouchstart="touchS" class="a-goods-conts {{item.checked?'active':''}}" data-index="{{index}}" style="{{item.left}}" >
+                <view class="goods-info">
+                    <view class="img-box">
+                        <image class="img" src="{{item.list_pic_url}}"></image>
+                    </view>
+                    <view class="text-box">
+                        <view class="goods-title">{{item.goods_name}}</view>
+                        <view class="goods-label">{{item.label}}</view>
+                        <view class="goods-price">¥ {{item.retail_price}}</view>
+                        <view class="buy-num">
+                            <view catchtap="cutNumber" class="jian-btn {{item.number==1?'disabled':''}}" data-index="{{index}}">-</view>
+                            <input disabled type="number" value="{{item.number}}"></input>
+                            <view catchtap="addNumber" class="jia-btn {{item.number==10?'disabled':''}}" data-index="{{index}}">+</view>
+                        </view>
+                    </view>
+                </view>
+                <view catchtap="delItem" class="delete-btn" data-index="{{index}}" data-item_id="{{item.id}}">
+          删除
+        </view>
+            </view>
+        </view>
+    </view>
+    <view class="jiesuan-box">
+        <view class="left-price">
+            <view bindtap="checkedAll" class="all-selected  {{checkedAllStatus?'active':''}}">全选</view>
+            <view class="total" hidden="{{noSelect}}">合计：Ұ {{totalPrice}}</view>
+        </view>
+        <view bindtap="checkoutOrder" class="to-pay-btn {{noSelect?'no-select':''}}" hidden="{{isEditCart}}">下单</view>
+        <view bindtap="deleteCart" class="to-pay-btn {{noSelect?'no-select':''}}" hidden="{{!isEditCart}}">删除</view>
+    </view>
+</template>
+<template name="no-goods">
+    <view class="title-box">
+        <image class="box-none" src="../../images/none/cart_empty.png"></image>
+    去添加点什么吧
+  </view>
+</template>

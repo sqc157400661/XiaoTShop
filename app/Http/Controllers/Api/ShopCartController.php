@@ -36,10 +36,12 @@ class ShopCartController extends ApiController
         $validator = Validator::make($request->all(),
             [
                 'goodsId' => 'required',
+                'product_id' => 'required',
                 'number' => 'required|numeric',
             ],
             [
                 'goodsId.required' => '商品id参数缺失',
+                'product_id.required' => '请选择规格',
                 'number.required' => '购买数量参数缺失',
                 'number.numeric' => '购买数量需要是数字',
             ]
@@ -47,7 +49,7 @@ class ShopCartController extends ApiController
         if ($validator->fails()) {
             return $this->failed($validator->errors(), 403);
         }
-        $goodsInfo = ShopGoods::getGoodsDetail(['id'=>$request->goodsId]);
+        $goodsInfo = ShopGoods::getGoodsDetail(['id'=>$request->goodsId],$request->product_id);
         $re = CartLogic::addCart($goodsInfo,$request->number);
         if($re){
             $goodsCount = ShopCart::getGoodsCount(['uid' => $user_id]);
@@ -79,7 +81,10 @@ class ShopCartController extends ApiController
         $info->number = $request->number;
         $re = $info->save();
         if($re){
-            return $this->message('更新成功');
+            $outData['cartTotal']['checkedGoodsCount'] = ShopCart::getGoodsCount(['checked' =>ShopCart::STATE_CHECKED]);
+            $outData['cartTotal']['checkedGoodsAmount'] = ShopCart::getGoodsAmountCount(['checked' =>ShopCart::STATE_CHECKED]);
+            return $this->success($outData);
+            //return $this->message('更新成功');
         }
         return $this->failed('更新失败','201');
     }
@@ -96,9 +101,11 @@ class ShopCartController extends ApiController
         $validator = Validator::make($request->all(),
             [
                 'goodsIds' => 'required',
+                'cartId' => 'numeric',
             ],
             [
                 'goodsIds.required' => '商品id参数缺失',
+                'cartId.numeric' => '购物车参数不合法',
             ]
         );
         if ($validator->fails()) {
@@ -106,8 +113,12 @@ class ShopCartController extends ApiController
         }
         $where = [
             'uid' =>$user_id,
-            'goods_id' => explode(',',$request->goodsIds)
         ];
+        if($request->cartId){
+            $where['id'] = $request->cartId;
+        }else{
+            $where['goods_id'] = $request->goodsIds;
+        }
         ShopCart::where($where)->delete();
         $cartData = CartLogic::getCartList(['uid' =>$user_id]);
         return $this->success($cartData);
@@ -125,10 +136,12 @@ class ShopCartController extends ApiController
         $validator = Validator::make($request->all(),
             [
                 'goodsIds' => 'required',
+                'productIds' => 'required',
                 'isChecked' => 'required|numeric',
             ],
             [
                 'goodsIds.required' => '商品id参数缺失',
+                'productIds.required' => '规格参数缺失',
                 'isChecked.required' => '参数缺失',
                 'isChecked.numeric' => '非法参数',
             ]
@@ -139,7 +152,7 @@ class ShopCartController extends ApiController
         $where = [
             'uid'=>$user_id,
         ];
-        ShopCart::where($where)->whereIn('goods_id',explode(',',$request->goodsIds))->update(['checked' => $request->isChecked]);
+        ShopCart::where($where)->whereIn('goods_id',explode(',',$request->goodsIds))->whereIn('product_id',explode(',',$request->productIds))->update(['checked' => $request->isChecked]);
         $cartData = CartLogic::getCartList(['uid' =>$user_id]);
         return $this->success($cartData);
     }

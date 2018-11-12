@@ -28,6 +28,11 @@ class ShopCart extends Model
         ];
     }
 
+    public function checked_products()
+    {
+        return $this->hasOne(ShopProduct::class, 'id','product_id');
+    }
+
     public static function getGoodsCount($where){
         return static::where($where)->sum('number');
     }

@@ -53,6 +53,7 @@ class ShopOrderController extends ApiController
         $validator = Validator::make($request->all(),
             [
                 'addressId' => 'required',
+                'productId' => 'required',
                 'goodsId' => 'required',
                 'buynumber' => 'required',
             ]
@@ -60,7 +61,7 @@ class ShopOrderController extends ApiController
         if ($validator->fails()) {
             return $this->failed($validator->errors(), 403);
         }
-        $outData = CartLogic::getBuyGoodsById($request->goodsId,$request->buynumber);
+        $outData = CartLogic::getBuyGoodsById($request->goodsId,$request->buynumber,1,$request->productId);
         $outData['checkedAddress'] = AddressLogic::getOneAddr($request->addressId, $this->user_id); // 选择地址
         $outData['checkedCoupon'] = []; // 选择的优惠券
         $outData['couponList'] = []; //  优惠券列表

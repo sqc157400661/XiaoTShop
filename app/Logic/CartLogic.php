@@ -11,6 +11,7 @@ use App\Http\Requests;
 use App\Http\Resources\ShopCart as ShopCartResource;
 use App\Http\Resources\ShopGoods as ShopGoodsResource;
 use App\Models\ShopCart;
+use App\Models\ShopProduct;
 use App\Models\ShopGoods;
 
 class CartLogic
@@ -29,7 +30,11 @@ class CartLogic
         }
 
         $newCart = new ShopCart();
-        $info = $newCart->where(['goods_id' => $goodsInfo->id])->first();
+        $where = ['goods_id' => $goodsInfo->id];
+        if($goodsInfo->checked_products){
+            $where['product_id'] =$goodsInfo->checked_products->id;
+        }
+        $info = $newCart->where($where)->first();
         if (!empty($info->goods_id)) {
             $info->number = $info->number + $number;
             // 库存超额判断
@@ -38,12 +43,19 @@ class CartLogic
             }
             return $info->save();
         }
+        // 如果选择了规格
+        if($goodsInfo->checked_products){
+            $newCart->goods_sn = $goodsInfo->checked_products->goods_sn;
+            $newCart->retail_price = $goodsInfo->checked_products->retail_price;
+            $newCart->product_id = $goodsInfo->checked_products->id;
+        }else{
+            $newCart->goods_sn = $goodsInfo->goods_sn;
+            $newCart->retail_price = $goodsInfo->retail_price;
+        }
         $newCart->uid = $user_id;
         $newCart->goods_id = $goodsInfo->id;
-        $newCart->goods_sn = $goodsInfo->goods_sn;
         $newCart->goods_name = $goodsInfo->goods_name;
         $newCart->market_price = $goodsInfo->counter_price;
-        $newCart->retail_price = $goodsInfo->retail_price;
         $newCart->number = $number;
         $newCart->list_pic_url = $goodsInfo->primary_pic_url;
         return $newCart->save();
@@ -76,15 +88,24 @@ class CartLogic
         ];
     }
 
-    public static function getBuyGoodsById($goodsId,$number = 1,$format = 1)
+    public static function getBuyGoodsById($goodsId,$number = 1,$format = 1,$productId = '')
     {
+        if($productId){
+            $products = ShopProduct::where(['id' => $productId])->get()->keyBy ('goods_id');
+        }
         $goodsInfos = ShopGoods::getGoodsList(['id'=>$goodsId]);
         foreach ($goodsInfos as $item_info){
+            $product_goods_spec_item_names ='';
+            $product_retail_price = 0;
+            if($productId){
+                $product_goods_spec_item_names = $products[$item_info->id]['goods_spec_item_names'];
+                $product_retail_price = $products[$item_info->id]['retail_price'];
+            }
             $checkedGoodsList[] = [
                 "goods_id"=> $item_info->id,
-                "goods_name"=> $item_info->goods_name,
+                "goods_name"=> $item_info->goods_name.' ' .$product_goods_spec_item_names,
                 "market_price"=> $item_info->counter_price,
-                "retail_price"=> $item_info->retail_price,
+                "retail_price"=> $product_retail_price ? $product_retail_price:$item_info->retail_price,
                 "number"=> $number,
                 'freight_price' => $item_info->freight_price,
                 "primary_pic_url"=>  $format ? config('filesystems.disks.oss.url').'/'.$item_info->primary_pic_url:$item_info->primary_pic_url,
