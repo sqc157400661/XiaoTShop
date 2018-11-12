@@ -9,16 +9,18 @@ function spec_info_data(goods_specification_vars,goods_specification_arr){
         var re_item_names ='';
         var goods_specification_names ='';
         var goods_specification_ids = '';
+        var re_item_ids_str='';
         re_item_ids = quickSort(re_item_ids);
         for(var j in re_item_ids){
+            re_item_ids_str += goods_specification_arr[re_item_ids[j]].itemId + '_';
             re_item_names += goods_specification_arr[re_item_ids[j]].itemName + '_';
             goods_specification_names += goods_specification_arr[re_item_ids[j]].specName + '_';
             goods_specification_ids += goods_specification_arr[re_item_ids[j]].specId + '_';
         }
+        re_item_ids_str = removeLastStr(re_item_ids_str);
         re_item_names = removeLastStr(re_item_names);
         goods_specification_names = removeLastStr(goods_specification_names);
         goods_specification_ids = removeLastStr(goods_specification_ids);
-        re_item_ids_str = re_item_ids.join("_");
         // 判断是否已有
         var oldDom = $('#'+re_item_ids_str)
         if(oldDom.length>0){
