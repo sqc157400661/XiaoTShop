@@ -345,7 +345,7 @@ Page({
         if (res.code == 200) {
           if (res.data.id) {
             wx.navigateTo({
-              url: '../shopping/checkout/checkout?goodsId=' + res.data.id + '&number=1'
+              url: '../to-pay-order/index?goodsId=' + res.data.id + '&number=1'
             })
           }
         }

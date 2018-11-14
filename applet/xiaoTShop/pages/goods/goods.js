@@ -283,7 +283,7 @@ Page({
                 return false;
             }
             wx.navigateTo({
-                url: '../shopping/checkout/checkout?goodsId=' + this.data.goods.id + '&number=' + this.data.buyNumber + '&product_id=' + product_id
+                url: '../to-pay-order/index?goodsId=' + this.data.goods.id + '&number=' + this.data.buyNumber + '&product_id=' + product_id
             })
         }
 

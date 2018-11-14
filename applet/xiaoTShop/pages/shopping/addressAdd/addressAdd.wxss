@@ -1,7 +1,17 @@
 page{
-    height: 100%;
     background: #f4f4f4;
 }
+
+.header-container {
+    background-color: #fff;
+}
+
+.container {
+    background-color: #f5f5f9;
+    justify-content: initial;
+    margin-top: 130rpx;
+}
+
 .add-address .add-form{
     background: #fff;
     width: 100%;

@@ -261,7 +261,7 @@ Page({
 
 
         wx.navigateTo({
-            url: '../shopping/checkout/checkout'
+            url: '../to-pay-order/index'
         })
     },
     deleteCart: function() {

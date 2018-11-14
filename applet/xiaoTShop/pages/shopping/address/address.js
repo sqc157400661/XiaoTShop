@@ -44,7 +44,7 @@ Page({
 
     //选择该收货地址
     wx.redirectTo({
-      url: '/pages/shopping/checkout/checkout'
+      url: '/pages/to-pay-order/index'
     })
   },
   onHide: function () {

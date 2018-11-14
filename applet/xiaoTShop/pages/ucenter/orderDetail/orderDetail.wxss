@@ -1,11 +1,9 @@
 page{
-    height: 100%;
     width: 100%;
-    background: #f4f4f4;
 }
 .container {
     height: 100%;
-    padding-top:138rpx;
+    margin-top: 130rpx;
 }
 
 .order-info{

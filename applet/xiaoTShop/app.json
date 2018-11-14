@@ -19,6 +19,7 @@
     "pages/auth/login/login",
     "pages/auth/register/register",
     "pages/auth/reset/reset",
+    "pages/to-pay-order/index",
     "pages/pay/pay",
     "pages/payResult/payResult",
     "pages/ucenter/index/index",
