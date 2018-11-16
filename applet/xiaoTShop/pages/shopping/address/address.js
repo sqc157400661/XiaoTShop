@@ -28,14 +28,12 @@ Page({
     });
   },
   addressAddOrUpdate (event) {
-    console.log(event)
     wx.navigateTo({
       url: '/pages/shopping/addressAdd/addressAdd?id=' + event.currentTarget.dataset.addressId
     })
   },
   selectAddress(event){
-    console.log(event.currentTarget.dataset.addressId);
-
+   
     try {
       wx.setStorageSync('addressId', event.currentTarget.dataset.addressId);
     } catch (e) {
@@ -43,9 +41,10 @@ Page({
     }
 
     //选择该收货地址
-    wx.redirectTo({
-      url: '/pages/to-pay-order/index'
-    })
+    wx.navigateBack();
+    // wx.redirectTo({
+    //   url: '/pages/to-pay-order/index'+ this.data.is_buyNow_info
+    // })
   },
   onHide: function () {
     // 页面隐藏

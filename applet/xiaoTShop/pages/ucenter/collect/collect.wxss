@@ -1,11 +1,10 @@
 page{
     background: #f4f4f4;
-    min-height: 100%;
 }
 
 .container{
     background: #f4f4f4;
-    min-height: 100%;
+    margin-top: 130rpx;
 }
 
 .collect-list{

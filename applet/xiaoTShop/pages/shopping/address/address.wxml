@@ -1,7 +1,7 @@
 <view class="container ">
     <view class="header-container">
         <navigator delta="1" hoverClass="navigator-hover" openType="navigateBack">
-            <image class="goback" src="../../images/goback.png"></image>
+            <image class="goback" src="../../../images/goback.png"></image>
         </navigator>
         <view class="header-name">我的地址</view>
     </view>
@@ -23,7 +23,7 @@
         <view class="text">还没有添加地址呢</view>
     </view>
     <view bindtap="addressAddOrUpdate" class="bottom-box" data-address-id="0">
-        <image src="../../images/address_add.png"></image>
+        <image src="../../../images/address_add.png"></image>
     新增地址
   </view>
 </view>
