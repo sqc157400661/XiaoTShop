@@ -135,6 +135,10 @@
   
   WECHAT_MINI_PROGRAM_APPID=小程序的appid
   WECHAT_MINI_PROGRAM_SECRET=小程序的appsecret
+  WECHAT_PAYMENT_APPID=支付的appid
+  WECHAT_PAYMENT_MCH_ID=商户号
+  WECHAT_PAYMENT_KEY=秘钥
+
   ```
 
 4、执行`php artisan XiaoT:install`

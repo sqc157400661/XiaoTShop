@@ -19,6 +19,7 @@ page{
   padding: 0;
   height: 100%;
   overflow: hidden;
+  margin-top: 132rpx;
   justify-content: space-between;
   box-sizing: border-box;
 } 

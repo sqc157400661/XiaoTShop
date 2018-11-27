@@ -113,11 +113,11 @@ return [
          'default' => [
 //             'sandbox'            => env('WECHAT_PAYMENT_SANDBOX', false),
              'app_id'             => env('WECHAT_PAYMENT_APPID', 'wx2bd067e97c4e9a1f'),
-             'mch_id'             => env('WECHAT_PAYMENT_MCH_ID', '1499833252'),
-             'key'                => env('WECHAT_PAYMENT_KEY', '4g3xjTp4gLH6YbH8h7ZyyGpcpNF7dCiP'),
+             'mch_id'             => env('WECHAT_PAYMENT_MCH_ID', ''),
+             'key'                => env('WECHAT_PAYMENT_KEY', ''),
 //             'cert_path'          => env('WECHAT_PAYMENT_CERT_PATH', 'path/to/cert/apiclient_cert.pem'),    // XXX: 绝对路径！！！！
 //             'key_path'           => env('WECHAT_PAYMENT_KEY_PATH', 'path/to/cert/apiclient_key.pem'),      // XXX: 绝对路径！！！！
-             'notify_url'         => 'https://xiaocheng.xuezhangbang.me/api/order-notify',                           // 默认支付结果通知地址
+             'notify_url'         => env('APP_URL').'/api/order-notify',                           // 默认支付结果通知地址
          ],
          // ...
      ],

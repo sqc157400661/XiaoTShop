@@ -42,9 +42,9 @@ class ShopCategoryController extends Controller
                     $form->number('sort_order', '排序')->default(255);
                     $form->text('keywords','分类关键词')->rules('required')->help('必填');
                     $form->textarea('front_desc','分类描述');
-                    $form->image('icon_url','分类图标')->help('必填 推荐 62*62')->rules('required');
-                    $form->image('banner_url','推广图片')->help('必填 推荐 600*400');
-                    $form->image('img_url','展示图片')->help('推荐 400*400')->rules('required');
+                    $form->image('icon_url','分类图标')->help('必填 推荐 62*62')->rules('required')->uniqueName();
+                    $form->image('banner_url','推广图片')->help('必填 推荐 600*400')->uniqueName();
+                    $form->image('img_url','展示图片')->help('推荐 400*400')->rules('required')->uniqueName();
                     $form->display('created_at', '创建时间');
                     $form->display('updated_at', '更新时间');
                     $form->saved(function (Form $form) {
@@ -131,9 +131,9 @@ class ShopCategoryController extends Controller
             $form->number('sort_order', '排序')->default(255);
             $form->text('keywords','分类关键词')->help('必填')->rules('required');
             $form->textarea('front_desc','分类描述')->help('必填')->rules('required');
-            $form->image('icon_url','分类图标')->help('必填 推荐 62*62')->rules('required');
-            $form->image('banner_url','推广图片')->help('必填 推荐 600*400')->rules('required');
-            $form->image('img_url','展示图片')->help('推荐 400*400');
+            $form->image('icon_url','分类图标')->help('必填 推荐 62*62')->rules('required')->uniqueName();
+            $form->image('banner_url','推广图片')->help('必填 推荐 600*400')->rules('required')->uniqueName();
+            $form->image('img_url','展示图片')->help('推荐 400*400')->uniqueName();
             $form->display('created_at', '创建时间');
             $form->display('updated_at', '更新时间');
             $form->saved(function (Form $form) {

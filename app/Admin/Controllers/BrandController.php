@@ -115,7 +115,8 @@ class BrandController extends Controller
             $form->textarea('simple_desc', '品牌描述');
 
             $form->image('pic_url', '品牌图片')
-                ->rules('required');
+                ->rules('required')
+                ->uniqueName();
 
             $form->number('sort_order','展示排序')
                 ->default(255);
@@ -130,7 +131,7 @@ class BrandController extends Controller
 
             $form->image('new_pic_url', '新增展示图片')
                 ->rules('required')
-                ->uniqueName() ;
+                ->uniqueName();
 
             $form->number('new_sort_order','新增逻辑下的排序')
                 ->default(255);

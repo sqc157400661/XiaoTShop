@@ -1,12 +1,18 @@
 <view class="container">
+    <view class="header-container">
+        <navigator delta="1" hoverClass="navigator-hover" openType="navigateBack">
+            <image class="goback" src="../../../images/goback.png"></image>
+        </navigator>
+        <view class="header-name">订单详情</view>
+    </view>
     <view class="order-info">
         <view class="item-a">下单时间：{{orderInfo.add_time}}</view>
         <view class="item-b">订单编号：{{orderInfo.order_sn}}</view>
         <view class="item-c">
             <view class="l">实付：<text class="cost">￥{{orderInfo.actual_price}}</text></view>
             <view class="r">
-                <view class="btn" bindtap="cancelOrder">取消订单</view>
-                <view class="btn active" bindtap="payOrder">去付款</view>
+                <view class="btn" bindtap="cancelOrder" hidden="{{orderInfo.order_status==10?fslse:true}}" data-id="{{orderInfo.id}}" >取消订单</view>
+                <view class="btn active" bindtap="payOrder" wx:if="{{orderInfo.handleOption.pay ==1}}">去付款</view>
             </view>
         </view>
     </view>

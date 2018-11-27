@@ -162,21 +162,9 @@ Page({
                         url: '/pages/payResult/payResult?status=1&orderId=' + orderId
                     });
                 }).catch(res => {
-                    wx.showModal({
-                        title: '功能暂时关闭',
-                        showCancel: false,
-                        content: '该功能暂时关闭中，待商城完善后开放',
-                        confirmText: '确定',
-                        success: function(res) {
-                            if (res.confirm) {
-                                console.log('用户点击确定')
-                                wx.redirectTo({
-                                    url: '/pages/payResult/payResult?status=0&orderId=' + orderId
-                                });
-                            }
-                        }
+                    wx.redirectTo({
+                        url: '/pages/payResult/payResult?status=0&orderId=' + orderId
                     });
-
                 });
             } else {
                 util.showErrorToast('下单失败');

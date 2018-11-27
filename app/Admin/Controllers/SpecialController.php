@@ -115,7 +115,7 @@ class SpecialController extends Controller
             $form->display('id', '序号');
 
             $form->image('icon', '图标')
-                ->rules('required');
+                ->rules('required')->uniqueName();
             $form->select('class_id', '分类')
                 ->rules("required")
                 ->options(Classes::getAllClasses(true))

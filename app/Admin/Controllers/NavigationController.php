@@ -111,7 +111,7 @@ class NavigationController extends Controller
             $form->display('id', '序号');
 
             $form->image('icon', '图标')
-                ->rules('required');
+                ->rules('required')->uniqueName();
             $form->select('link_type', '链接类型')
                 ->rules("required")
                 ->options(Navigation::getLinkTypes())

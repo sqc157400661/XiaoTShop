@@ -1,4 +1,10 @@
 <view class="container">
+  <view class="header-container">
+      <navigator delta="1" hoverClass="navigator-hover" openType="navigateBack">
+          <image class="goback" src="../../../images/goback.png"></image>
+      </navigator>
+      <view class="header-name">订单详情</view>
+  </view>
   <view class="footprint">
     <view class="day-item" wx:for="{{footprintList}}" wx:key="{{index}}">
       <view class="day-hd">{{item.add_time}}</view>

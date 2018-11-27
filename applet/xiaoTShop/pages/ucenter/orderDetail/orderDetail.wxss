@@ -5,6 +5,9 @@ page{
     height: 100%;
     margin-top: 130rpx;
 }
+.header-container {
+    background-color: #fff;
+}
 
 .order-info{
     padding-top: 25rpx;

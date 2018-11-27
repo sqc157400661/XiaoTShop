@@ -109,7 +109,7 @@ class AdvController extends Controller
             $form->hasMany('carousels', '添加轮播', function (Form\NestedForm $form) {
                 $form->text('carousel_title', '标题')
                     ->rules('required|max:100');
-                $form->image('carousel_img', '图片');
+                $form->image('carousel_img', '图片')->uniqueName();
                 $form->select('carousel_type', '操作类型')->options(SpecialItem::getItemDataTypes())->rules('required')->help('操作类型');
                 $form->text('carousel_type_data', '操作数据')->rules('required')->help('对应于操作类型');
                 $form->text('carousel_info', '显示内容')

@@ -1,30 +1,47 @@
 <view class="container">
-    <view class="no-order" hidden="{{orderList.length > 0 ? true : false}}">
-            <image src="/static/images/no-order.png" class="no-order-img"></image>
-            <view class="text">暂无订单</view>
-        </view>
-    <view class="orders">
-        <navigator url="../orderDetail/orderDetail?id={{item.id}}" class="order" wx:for="{{orderList}}" wx:key="{{item.id}}">
-            <view class="h">
-                <view class="l">订单编号：{{item.order_sn}}</view>
-                <view class="r">{{item.order_status_text}}</view>
-            </view>
-            <view class="goods" wx:for="{{item.goodsList}}" wx:key="{{gitem.id}}" wx:for-item="gitem">
-                <view class="img">
-                    <image src="{{gitem.list_pic_url}}"></image>
-                </view>
-                <view class="info">
-                    <text class="name">{{gitem.goods_name}}</text>
-                    <text class="number">共{{gitem.number}}件商品</text>
-                </view>
-                <view class="status"></view>
-            </view>
-            <view class="b">
-                <view class="l">实付：￥{{item.actual_price}}</view>
-                <view class="r">
-                    <button class="btn" data-order-index="{{index}}"   data-order_id="{{item.id}}" data-actual_price="{{item.actual_price}}" catchtap="payOrder" wx:if="{{item.handleOption.pay}}">去付款</button>
-                </view>
-            </view>
+    <view class="header-container">
+        <navigator hoverClass="navigator-hover" openType="switchTab" url="/pages/index/index" wx:if="{{share}}">
+            <image class="goback" src="../../../images/gohome.png"></image>
         </navigator>
+        <navigator delta="1" hoverClass="navigator-hover" openType="navigateBack" wx:if="{{!share}}">
+            <image class="goback" src="../../../images/goback.png"></image>
+        </navigator>
+        <view class="header-name">订单列表</view>
+    </view>
+    <view class="status-box">
+        <view bindtap="statusTap" class="status-label {{index==statusTab?'active':''}}" data-index="{{index}}" wx:for="{{statusType}}" wx:key="{{index}}">
+      {{item}}
+      <view class="{{tabClass[index]}}"></view>
+        </view>
+    </view>
+    <view class="no-order" hidden="{{orderList.length > 0?true:false}}">
+        <image class="no-order-img" src="/images/empty_order.png"></image>
+        <view class="text">还没有订单呢</view>
+    </view>
+    <view class="order-list" hidden="{{orderList.length > 0?false:true}}">
+        <view class="a-order" wx:for="{{orderList}}" wx:key="{{item.id}}">
+            <view bindtap="orderDetail" class="order-date" data-id="{{item.id}}">
+                <view class="date-box">下单时间：{{item.add_time}}</view>
+                <view class="status {{item.status== 0 || item.status== 10 ?'':'red'}}">{{item.order_status_text}}</view>
+            </view>
+            <view bindtap="orderDetail" class="goods-info" data-id="{{item.id}}">
+                <view class="goods-des">
+                    <view>订单号:{{item.order_sn}} </view>
+                    <view wx:if="{{item.postscript&&item.postscript!=''}}">备注： {{item.postscript}}</view>
+                </view>
+            </view>
+            <view bindtap="orderDetail" data-id="{{item.id}}">
+                <scroll-view class="goods-img-container" scrollX="true">
+                    <view class="img-box" wx:for="{{item.goodsList}}" wx:key="{{index}}">
+                        <image class="goods-img" src="{{item.list_pic_url}}"></image>
+                    </view>
+                </scroll-view>
+            </view>
+            <view class="price-box">
+                <view class="total-price">合计：¥ {{item.actual_price}}</view>
+                <view bindtap="cancelOrder" class="btn cancel-btn" data-id="{{item.id}}" hidden="{{item.order_status==10?fslse:true}}">取消订单</view>
+                <view catchtap="payOrder" class="btn topay-btn" data-order-index="{{index}}"   data-order_id="{{item.id}}"  data-actual_price="{{item.actual_price}}"   wx:if="{{item.handleOption.pay ==1}}" >立即支付</view>
+            </view>
+        </view>
     </view>
 </view>

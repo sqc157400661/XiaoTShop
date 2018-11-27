@@ -104,24 +104,24 @@ class ModuleDController extends Controller
             $form->number('sort', '排序')->default(255);
             // 轮播内容
             $form->embeds('item_data', '附加信息', function ($form) {
-                $form->image('adv_img_1','1-推广图片')->help('必填 推荐 600*400');//->rules('required')
+                $form->image('adv_img_1','1-推广图片')->help('必填 推荐 600*400')->uniqueName();//->rules('required')
                 $form->text('adv_title_1','1-标题')->rules('required')->help('必填');
                 $form->select('adv_type_1','1-操作类型')->options(SpecialItem::getItemDataTypes())->rules('required')->help('操作类型');
                 $form->text('adv_data_1','1-操作数据')->rules('required')->help('对应于操作类型');
                 $form->divide();
 
-                $form->image('adv_img_2','2-推广图片')->help('推荐 600*400');
+                $form->image('adv_img_2','2-推广图片')->help('推荐 600*400')->uniqueName();
                 $form->text('adv_title_2','2-标题');
                 $form->select('adv_type_2','2-操作类型')->options(SpecialItem::getItemDataTypes())->help('操作类型');
                 $form->text('adv_data_2','2-操作数据')->help('对应于操作类型');
                 $form->divide();
 
-                $form->image('adv_img_3','3-推广图片')->help('推荐 600*400');
+                $form->image('adv_img_3','3-推广图片')->help('推荐 600*400')->uniqueName();
                 $form->text('adv_title_3','3-标题');
                 $form->select('adv_type_3','3-操作类型')->options(SpecialItem::getItemDataTypes())->help('操作类型');
                 $form->text('adv_data_3','3-操作数据')->help('对应于操作类型');
                 $form->divide();
-                $form->image('adv_img_4','4-推广图片')->help('推荐 600*400');
+                $form->image('adv_img_4','4-推广图片')->help('推荐 600*400')->uniqueName();
                 $form->text('adv_title_4','4-标题');
                 $form->select('adv_type_4','4-操作类型')->options(SpecialItem::getItemDataTypes())->help('操作类型');
                 $form->text('adv_data_4','4-操作数据')->help('对应于操作类型');

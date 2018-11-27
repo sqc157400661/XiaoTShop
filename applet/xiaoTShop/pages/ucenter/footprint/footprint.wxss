@@ -1,10 +1,13 @@
 page{
-    background: #f4f4f4;
+    background: #ffffff;
 }
 
 .container{
     background: #f4f4f4;
     margin-top: 130rpx;
+}
+.header-container {
+    background-color: #fff;
 }
 
 .footprint{

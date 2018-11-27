@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\ShopCart;
 use App\Logic\AddressLogic;
 use App\Logic\OrderLogic;
+use App\Models\ShopOrder;
 
 class MyOrderController extends ApiController
 {
@@ -22,7 +23,15 @@ class MyOrderController extends ApiController
         $user_id = \Auth::user()->id;
         $orderLogic = new OrderLogic();
         $where['uid'] = $user_id;
-        $orderList = $orderLogic->getOrderList($where);
+        if($request->input('statusTab')){
+            $where['order_status'] = $request->input('statusTab');
+        }
+        if($request->input('v2')){
+            $orderList['list'] = $orderLogic->getOrderList($where);
+            $orderList['statusType'] = $orderLogic->getStatusDisplayMap();
+        }else{
+            $orderList = $orderLogic->getOrderList($where);
+        }
         return $this->success($orderList);
     }
 
@@ -74,7 +83,13 @@ class MyOrderController extends ApiController
         if ($validator->fails()) {
             return $this->failed($validator->errors(), 403);
         }
-
+        $where['uid'] = $user_id;
+        $where['id'] = $request->orderId;
+        $orderLogic = new OrderLogic();
+        $re = $orderLogic->orderCancel($where);
+        if($re){
+            return $this->message('操作成功');
+        }
     }
 
     // 物流详情

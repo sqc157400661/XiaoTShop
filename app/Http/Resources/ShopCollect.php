@@ -21,6 +21,7 @@ class ShopCollect extends Resource
             "retail_price"=> $this->shop_goods['retail_price'],
             "list_pic_url"=> config('filesystems.disks.oss.url').'/'.$this->shop_goods['primary_pic_url'],
             "goods_brief"=> $this->shop_goods['goods_brief'],
+            "add_time"=> $this->add_time,
         ];
     }
 

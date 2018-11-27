@@ -1,12 +1,20 @@
-<view class="container">
-  <view class="collect-list">
-    <view class="item" bindtap="openGoods"  bindtouchstart="touchStart" bindtouchend="touchEnd" wx:for="{{collectList}}" wx:key="{{item.id}}" data-index="{{index}}">
-      <image class="img" src="{{item.list_pic_url}}"></image>
-      <view class="info">
-        <view class="name">{{item.name}}</view>
-        <view class="subtitle">{{item.goods_brief}}</view>
-        <view class="price">￥{{item.retail_price}}</view>
-      </view>
+<view class="goods-container">
+    <view class="header-container">
+        <navigator delta="1" hoverClass="navigator-hover" openType="navigateBack">
+            <image class="goback" src="../../../images/goback.png"></image>
+        </navigator>
+        <view class="header-name">我的收藏</view>
     </view>
-  </view>
+    <view bindtap="openGoods"  bindtouchstart="touchStart" bindtouchend="touchEnd" class="goods-box"  wx:for="{{collectList}}" wx:key="{{item.id}}" data-index="{{index}}">
+        <view class="img-box">
+            <image class="image" lazyLoad="true" mode="aspectFill" src="{{item.list_pic_url}}"></image>
+        </view>
+        <view class="goods-title">{{item.name}}</view>
+        <view class="good-money">收藏时间：{{item.add_time}}</view>
+        <view class="title-opacity">查看详细</view>
+    </view>
+    <view class="no-more-goods" hidden="{{collectList.length>0}}">
+        <image class="no-order-img" src="/images/empty_collection.png"></image>
+        <view class="text">还没有任何收藏呢</view>
+    </view>
 </view>
