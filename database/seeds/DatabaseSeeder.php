@@ -48,5 +48,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SpecialItemTableSeeder::class);
         $this->call(VersionTableSeeder::class);
         $this->call(NavigationTableSeeder::class);
+        $this->call(AdminMenuOneTableSeeder::class);
     }
 }

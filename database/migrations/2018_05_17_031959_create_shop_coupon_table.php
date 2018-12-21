@@ -16,8 +16,8 @@ class CreateShopCouponTable extends Migration {
 		{
 			$table->increments('id')->unsigned()->comment('优惠券id');
 			$table->string('name', 60)->default('')->comment('优惠券名称');
-			$table->decimal('type_money', 10)->default(0.00)->comment('减免金额');
-			$table->tinyInteger('send_type')->default(0)->comment('优惠券发放类型');
+			$table->decimal('type_money', 10)->default(0.00)->comment('减免金额或折扣');
+			$table->tinyInteger('send_type')->default(0)->comment('优惠券发放类型 1用户直领 2系统发放 3兑换 4其他');
 			$table->decimal('min_amount', 10)->unsigned()->default(0.00)->comment('优惠使用最小金额');
 			$table->decimal('max_amount', 10)->unsigned()->default(0.00)->comment('优惠使用最大金额');
 			$table->timestamp('send_start_date')->default('1970-01-01 08:00:01')->comment('优惠券发放开始时间');

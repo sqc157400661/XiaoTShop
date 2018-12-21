@@ -26,7 +26,6 @@ Route::namespace('Api')->group(function () {
     Route::any('/project_json/models', 'ProjectJsonController@getProjectModelsByFunctypeId');
 
 
-
     // 需要用户信息的
     Route::middleware('auth:api')->group(function () {
         // 新版本的接口
@@ -93,6 +92,13 @@ Route::namespace('Api')->group(function () {
         Route::get('/order-detail','MyOrderController@orderDetail');// 订单详情
         Route::get('/order-cancel','MyOrderController@orderCancel');// 取消订单
         Route::get('/order-express','MyOrderController@orderExpress');// 物流详情
+
+        // 领券中心
+        Route::get('/coupon-center','ShopCouponController@getCouponList');
+        // 领券中心
+        Route::get('/coupon-mine','ShopCouponController@getMyCouponList');
+        // 领券
+        Route::post('/coupon-get','ShopCouponController@getCoupon');
 
         // 评论相关的
         Route::get('/comment-list','ShopCommentController@getCommentList');// 评论列表

@@ -35,9 +35,20 @@ class VersionTableSeeder extends Seeder
                 'seed' => 'CarouselTableSeeder,SpecialTableSeeder,SpecialItemTableSeeder,AdminMenuTableSeeder,NavigationTableSeeder',
                 'handle_data' => '',
                 'desc' => '发布体验版【首页等页面功能和风格升级】',
-                'status' => 0,
+                'status' => 1,
                 'created_at' => '2018-10-09 11:27:42',
                 'updated_at' => '2018-10-09 11:27:45',
+            ),
+            2 => 
+            array (
+                'id' => 3,
+                'version' => 'v0.2.1',
+                'seed' => 'AdminMenuOneTableSeeder',
+                'handle_data' => '',
+                'desc' => '添加优惠券功能',
+                'status' => 0,
+                'created_at' => '2018-12-21 11:27:42',
+                'updated_at' => '2018-12-21 11:27:45',
             ),
         ));
         
