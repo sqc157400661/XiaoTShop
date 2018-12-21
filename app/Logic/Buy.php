@@ -10,6 +10,7 @@ use App\Models\ShopGoods;
 use App\Models\ShopOrder;
 use Illuminate\Support\Facades\DB;
 use EasyWeChat\Factory;
+use App\Logic\ShopCouponLogic;
 use Carbon\Carbon;
 use function EasyWeChat\Kernel\Support\generate_sign;
 
@@ -122,6 +123,7 @@ class Buy
                 $order_goods_insert[] = [
                     'order_id' => $order_model->id,
                     'goods_id' => $va['goods_id'],
+                    'product_id'=> $va['product_id'],
                     'goods_name' => $va['goods_name'],
                     'retail_price' => $va['retail_price'],
                     'market_price' => $va['market_price'],
@@ -137,6 +139,11 @@ class Buy
         $order_goods_model = DB::table('shop_order_goods')->insert($order_goods_insert);
         // 清除购物车商品
         $cartRe = CartLogic::clearCart($this->_user_id);
+        if($this->_order_data['checkedCouponId']){
+            // 使用优惠券
+            ShopCouponLogic::useCoupon($this->_user_id,$this->_order_data['checkedCouponId']);
+        }
+
         if ($order_goods_model) {
             DB::commit();
             return $order_model->toArray();

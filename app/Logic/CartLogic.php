@@ -103,6 +103,7 @@ class CartLogic
             }
             $checkedGoodsList[] = [
                 "goods_id"=> $item_info->id,
+                "product_id"=> $productId,
                 "goods_name"=> $item_info->goods_name.' ' .$product_goods_spec_item_names,
                 "market_price"=> $item_info->counter_price,
                 "retail_price"=> $product_retail_price ? $product_retail_price:$item_info->retail_price,

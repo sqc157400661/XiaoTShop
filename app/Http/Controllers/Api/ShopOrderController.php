@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Logic\CartLogic;
 use App\Models\ShopCart;
 use App\Logic\AddressLogic;
+use App\Logic\ShopCouponLogic;
 use App\Logic\Buy;
+use App\Http\Resources\ShopMyCoupon;
 
 class ShopOrderController extends ApiController
 {
@@ -34,10 +36,11 @@ class ShopOrderController extends ApiController
             return $this->failed($validator->errors(), 403);
         }
         $outData = CartLogic::getCheckedGoodsList($this->user_id);
+        $couponInfo = ShopCouponLogic::checkedCoupon($this->user_id,$request->couponId,$outData['goodsTotalPrice']);
         $outData['checkedAddress'] = AddressLogic::getOneAddr($request->addressId, $this->user_id); // 选择地址
-        $outData['checkedCoupon'] = []; // 选择的优惠券
-        $outData['couponList'] = []; //  优惠券列表
-        $outData['couponPrice'] = 0.00; // 选中的优惠金额
+        $outData['checkedCoupon'] = $couponInfo['checkedCoupon']; // 选择的优惠券
+        $outData['couponList'] =ShopMyCoupon::collection(ShopCouponLogic::getAvailableCouponListByGoodsPrice($outData['goodsTotalPrice'],$this->user_id)); //  优惠券列表
+        $outData['couponPrice'] = $couponInfo['couponPrice']; // 选中的优惠金额
         $outData['actualPrice'] = PriceCalculate($outData['orderTotalPrice'], '-', $outData['couponPrice']); // 真实付款金额
         return $this->success($outData);
     }
@@ -62,10 +65,11 @@ class ShopOrderController extends ApiController
             return $this->failed($validator->errors(), 403);
         }
         $outData = CartLogic::getBuyGoodsById($request->goodsId,$request->buynumber,1,$request->productId);
+        $couponInfo = ShopCouponLogic::checkedCoupon($this->user_id,$request->couponId,$outData['goodsTotalPrice']);
         $outData['checkedAddress'] = AddressLogic::getOneAddr($request->addressId, $this->user_id); // 选择地址
-        $outData['checkedCoupon'] = []; // 选择的优惠券
-        $outData['couponList'] = []; //  优惠券列表
-        $outData['couponPrice'] = 0.00; // 选中的优惠金额
+        $outData['checkedCoupon'] = $couponInfo['checkedCoupon']; // 选择的优惠券
+        $outData['couponList'] = ShopMyCoupon::collection(ShopCouponLogic::getAvailableCouponListByGoodsPrice($outData['goodsTotalPrice'],$this->user_id)); //  优惠券列表
+        $outData['couponPrice'] = $couponInfo['couponPrice']; // 选中的优惠金额
         $outData['actualPrice'] = PriceCalculate($outData['orderTotalPrice'], '-', $outData['couponPrice']); // 真实付款金额
         return $this->success($outData);
     }
@@ -92,7 +96,7 @@ class ShopOrderController extends ApiController
             return $this->failed($validator->errors(), 403);
         }
         if($request->goodsId){
-            $orderData = CartLogic::getBuyGoodsById($request->goodsId,$request->buynumber,0);
+            $orderData = CartLogic::getBuyGoodsById($request->goodsId,$request->buynumber,1,$request->productId);
         }else{
             $orderData = CartLogic::getCheckedGoodsList($this->user_id);
         }
@@ -100,10 +104,11 @@ class ShopOrderController extends ApiController
         if (empty($checkedAddress)) {
             return $this->failed('未查到用户收货地址，请检查您的收货地址', 401);
         }
+        $couponInfo = ShopCouponLogic::checkedCoupon($this->user_id,$request->couponId,$orderData['goodsTotalPrice']);
         $orderData['checkedCouponId'] = $request->couponId??0; // 选择的优惠券
-        $orderData['checkedCoupon'] = []; // 选择的优惠券
-        $orderData['couponList'] = []; //  优惠券列表
-        $orderData['couponPrice'] = 0.00; // 选中的优惠金额
+        $orderData['checkedCoupon'] = $couponInfo['checkedCoupon']; // 选择的优惠券
+        $orderData['couponList'] = ShopCouponLogic::getAvailableCouponListByGoodsPrice($orderData['goodsTotalPrice'],$this->user_id); //  优惠券列表
+        $orderData['couponPrice'] = $couponInfo['couponPrice']; // 选中的优惠金额
         $orderData['actualPrice'] = PriceCalculate($orderData['orderTotalPrice'], '-', $orderData['couponPrice']); // 真实付款金额
         $buyModel = new Buy();
         $buyRe = $buyModel->buyStep($request, $orderData, $checkedAddress, $this->user_id);

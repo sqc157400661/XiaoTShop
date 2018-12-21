@@ -81,6 +81,9 @@ Route::group([
         // 属性管理
         $router->resource('shop-attribute', ShopAttributeController::class);
 
+        // 优惠券管理
+        $router->resource('shop-coupon', ShopCouponController::class);
+
         // 商品管理
         $router->resource('shop-goods', ShopGoodsController::class);
         // 主题&专题管理
