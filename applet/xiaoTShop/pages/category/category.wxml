@@ -1,4 +1,10 @@
 <view class="container">
+    <view class="header-container">
+        <navigator delta="1" hoverClass="navigator-hover" openType="navigateBack" wx:if="{{!share}}">
+            <image class="goback" src="../../images/goback.png"></image>
+        </navigator>
+        <view class="header-name">分类</view>
+    </view>
     <view class="cate-nav">
         <scroll-view scroll-x="true" class="cate-nav-body" style="width: 750rpx;" scroll-left="{{scrollLeft}}">
             <view  wx:for="{{navList}}" class="item {{ id == item.id ? 'active' : ''}}" data-id="{{item.id}}" data-index="{{index}}" bindtap="switchCate">

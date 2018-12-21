@@ -143,6 +143,7 @@ page{
   text-align: center;
   color: #333;
   font-size: 28rpx;
+  margin-right:50rpx;
 }
 
 .region-select .done.disabled{
@@ -160,7 +161,7 @@ page{
 .region-select .region-list{
   height: auto;
   overflow: scroll;
-  max-height:492rpx;
+  max-height:450rpx;
 }
 
 .region-select .region-list .item{

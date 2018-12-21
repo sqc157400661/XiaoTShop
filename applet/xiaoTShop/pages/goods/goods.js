@@ -4,21 +4,6 @@ var util = require('../../utils/util.js');
 var api = require('../../config/api.js');
 
 
-
-
-var x = [ "OiKWA", "request", "urls", "goodsDetail", "basicInfo", "inviter_id_", "share", "tHcrw", "qflhA", "showModal", "购买数量不能为0！", "iphone", "YIFrk", "DcYRT", "buyNumber", "/banner/list", "beBQV", "OwTDm", "gTBMD", "picUrl", "getStorageSync", "mallName", "uid", "getStorage", "shopCarInfo", "yrjzi", "/shop/goods/detail", "KJrTp", "canSubmit", "请选择商品规格！", "properties", "SVWXV", "name", "selectSize", "minPrice", "pingtuanPrice", "vOnhQ", "videoId", "stores", "html", "content", "goPingtuan", "goPingList", "reputation", "/shop/goods/pingtuan/set", "kqzdy", "MWSPp", "YHKfz", "currentTarget", "dataset", "propertyindex", "childsCurGoods", "active", "YindB", "MYsGc", "Elyng", "bLytM", "unGcr", "buliduBuyNowInfo", "navigateTo", "pingtuan", "bindGuiGeTap", "addShopCar", "tobuy", "/shop/goods/pingtuan/open", "token", "wRnRC", "WDgch", "fPaFh", "siteInfo", "url", "subDomain", "lAhSQ", "请先选择规格尺寸哦~", "buyNumMin", "ncVOy", "buyNumMax", "/pages/pingtuan/index?id=", "&uid=", "&gid=", "保存成功", "success", "KifEI", "AKpbJ", "HCUWT", "saveImageToPhotosAlbum", "codeimg", "ykPJB", "uOGAc", "UVdPM", "ThJFs", "price", "eRhZo", "iJbaT", "JPVnb", "收藏成功", "../../images/active.png", "EDghJ", "uXAGD", "msg", "bulidShopCarInfo", "closePopupTap", "加入购物车成功", "xnYRi", "vphWw", "FbhWq", "goodsId", "pingtuanId", "pic", "propertyChildIds", "label", "propertyChildNames", "selectptPrice", "left", "number", "logistics", "weight", "shopList", "HMIZL", "gSzDN", "buyNowInfo", "/pages/to-pay-order/index?orderType=buyNow", "showLoading", "商品准备中...", "dRRWN", "getVideoSrc", "iJHaS", "xYwuh", "YQcLH", "selectSizePrice", "logisticsType", "bAYir", "bulidupingTuanInfo", "PingTuanInfo", "/pages/to-pay-order/index?orderType=buyPT", "准备拼团中...", "logisticsId", "FkhxI", "SRMqU", "jqsZQ", "ptuanCt", "BuoBD", "tZeKf", "FCCpH", "zSxSG", "splice", "NziVZ", "HTQUm", "gVbmx", "/pages/index/index", "tqJfD", "VjhgN", "/pages/goods-details/index?id=", "&inviter_id=", "&share=1", "/shop/goods/reputation", "dJafL", "wCwdC", "../../images/error.png", "HAeCZ", "BTdzK", "HHldj", "VfMxj", "oRCxU", "/shop/goods/fav/delete", "取消收藏", "NRNyu", "gyYfz", "JQaWP", "nHits", "QIoGw", "UFJwh", "/media/video/detail", "zhgSO", "ZkJcO", "switchTab", "curHdIndex", "curBdIndex", "stopPullDownRefresh", "QyGGm", "温馨提示", "需要您的授权，才能正常使用哦～", "kApUJ", "CpZbt", "wxParse", "article", "/user/wxapp/register/complex", "zqNzr", "DjsZT", "reLaunch", "muDeR", "UESSH", "生成中...", "/qrcode/wxa/unlimit", "pages/goods-details/index", "uoQHj", "ZJzhN", "xoCei", "/shop/goods/price", "downloadFile", "Dnfyd", "hdXQc", "BFAXI", "../../wxParse/wxParse.js", "选择规格：", "detail", "current", "otmUe", "length", "WScDJ", "login", "showToast", "授权成功", "globalData", "usinfo", "split", "AbXyN", "push", "ETbRr", "data", "code", "setData", "fdMp4", "JowPp", "wTRNh", "shopNum", "lnZAP", "lHhKU", "setStorage", "hideLoading", "tempFilePath", "PNOnv", "ZRdHw", "scene", "Cxmsp", "inviter_id" ];
-
-!function(x, t) {
-    !function(t) {
-        for (;--t; ) x.push(x.shift());
-    }(++t);
-}(x, 203);
-
-var t = function(t, e) {
-    return x[t -= 0];
-};
-
-
 Page({
     data: {
         id: 0,
@@ -198,9 +183,7 @@ Page({
             this.bindGuiGeTap();
         } else {
             var product_id = 0;
-            var product = this.getProductByCheckedSpecIds()
-            console.log(product);
-            console.log(product.length);
+            var product = this.getProductByCheckedSpecIds();
             if(product !== true && product.length < 1){
                 wx.showToast({
                     image: '/static/images/icon_error.png',
@@ -269,7 +252,7 @@ Page({
                     mask: true
                 });
                 return false;
-            }else if(product.length > 1){
+            }else if(product.id){
                product_id =  product.id
             }
             //验证库存

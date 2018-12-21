@@ -95,7 +95,7 @@ function request(url, data = {}, method = "GET") {
                         reject(err);
                     })
                 } else {
-                    reject(res.message);
+                    reject(res);
                 }
 
             },

@@ -14,6 +14,7 @@
     "pages/ucenter/orderDetail/orderDetail",
     "pages/ucenter/express/express",
     "pages/ucenter/feedback/feedback",
+    "pages/couponcenter/index",
     "pages/ucenter/coupon/coupon",
     "pages/ucenter/collect/collect",
     "pages/auth/login/login",

@@ -1,47 +1,33 @@
 <view class="container">
-  <view class="coupon-form">
-    <view class="input-box">
-      <input class="coupon-sn" placeholder="请输入优惠码" />
-      <image class="clear-icon" src="http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/clear-fb-dd9d604f86.png"></image>
+    <view class="header-container">
+        <navigator delta="1" hoverClass="navigator-hover" openType="navigateBack">
+            <image class="goback" src="../../../images/goback.png"></image>
+        </navigator>
+        <view class="header-name">我的礼券</view>
     </view>
-    <button class="add-btn disabled">兑换</button>
+    <view class="coupons-list">
+        <view bindtap="gitCoupon" class="coupons-item" data-id="{{item.id}}" wx:for="{{coupons}}" wx:key="id">
+            <view class="money-left">{{item.type_money}}
+        <text>{{item.type_label}}</text>
+            </view>
+            <view class="money-right">
+                <view class="money-name">{{item.name}}</view>
+                <view class="money-hold">满{{item.min_amount}}元使用</view>
+            </view>
+            <view bindtap="gohome" class="money-home">去使用</view>
+            <view class="money-line"></view>
+            <view class="money-fooder">
+        {{item.end_time}}前有效
+        <view class='zhang'>x {{item.coupon_number}}张</view>
+      </view>
+        </view>
+    </view>
+    <view class="no-more-goods" hidden="{{loadingMoreHidden?true:false}}">
+        <image class="no-order-img" src="/images/coupon_empty.png"></image>
+        <view class="text">还没有领取礼券呢</view>
+    </view>
+    <view bindtap="goBuy" class="bottom-box">
+        <image src="../../../images/coupon_button.png"></image>
+    去领券 >>
   </view>
-  <view class="help">使用说明</view>
-  <view class="coupon-list">
-    <view class="item">
-      <view class="tag">新人专享</view>
-      <view class="content">
-        <view class="left">
-          <view class="name">限时免单券</view>
-          <view class="time">2017.06.08-2017.06.11</view>
-        </view>
-        <view class="right">
-          <button class="go">去使用</button>
-        </view>
-      </view>
-      <view class="condition">
-        <text class="txt">简约陶瓷马克杯专享；小米用户福利；限时购、三石福利价、礼品卡及详情页标注不可用券特殊商品除外</text>
-        <image src="http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/couponArrow-71315b4145.png" class="icon"></image>
-      </view>
-    </view>
-
-     <view class="item">
-      <view class="tag">新人专享</view>
-      <view class="content">
-        <view class="left">
-          <view class="name">限时免单券</view>
-          <view class="time">2017.06.08-2017.06.11</view>
-        </view>
-        <view class="right">
-          <button class="go">去使用</button>
-        </view>
-      </view>
-      <view class="condition">
-        <text class="txt">简约陶瓷马克杯专享；小米用户福利；限时购、三石福利价、礼品卡及详情页标注不可用券特殊商品除外</text>
-        <image src="http://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/icon/couponArrow-71315b4145.png" class="icon"></image>
-      </view>
-    </view>
-  </view>
-
-
 </view>

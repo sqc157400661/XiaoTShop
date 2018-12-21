@@ -9,6 +9,7 @@ Page({
         checkedGoodsList: [],
         checkedAddress: {},
         checkedCoupon: [],
+        couponId:0,
         couponList: [],
         goodsTotalPrice: 0.00, //商品总价
         freightPrice: 0.00, //快递费
@@ -30,7 +31,7 @@ Page({
                 'is_buyNow': 1,
                 'goodsId': options.goodsId,
                 'buynumber': options.number,
-                productId: options.product_id,
+                'productId': options.product_id,
                 //is_buyNow_info:'?goodsId='+options.goodsId+'&number='+options.number+'&product_id='+options.product_id
             });
         }
@@ -102,6 +103,31 @@ Page({
             wx.hideLoading();
         });
     },
+    bindChangeCoupon: function(x) {
+        let that = this;
+        var e = x.detail.value[0] - 1;
+        if(-1 == e){
+            that.setData({
+                couponId:0,
+                couponPrice: 0.00,
+            });
+        }else{
+            var coupon = that.data.couponList[e];
+            if(!coupon){
+                return false;
+            }
+            var couponId = coupon.coupon_id;
+            that.setData({
+                couponId: couponId,
+            });
+        }
+        if(that.data.goodsId){
+            that.buyNow();
+        }else{
+            that.getCheckoutInfo();
+        }
+        
+    },
     selectAddress() {
         wx.navigateTo({
             url: '/pages/shopping/address/address' ,
@@ -153,6 +179,7 @@ Page({
             addressId: this.data.addressId,
             couponId: this.data.couponId,
             goodsId: that.data.goodsId,
+            productId: that.data.productId,
             buynumber: that.data.buynumber
         }, 'POST').then(res => {
             if (res.code === 200) {
