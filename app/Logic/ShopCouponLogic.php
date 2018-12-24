@@ -1,6 +1,6 @@
 <?php
 /**
- * sqc @小T科技 2018.03.06
+ * sqc @小T科技 2018.12.24
  *
  *
  */
@@ -179,7 +179,12 @@ class ShopCouponLogic
                 break;
 
             default:
-                $couponPrice = PriceCalculate($goodsTotalPrice, '*', $coupon['type_money']);
+                $tmp = 100 - $coupon['type_money'];
+                if($tmp < 0 ){
+                    $tmp = 0;
+                }
+                $tmp1 = PriceCalculate($goodsTotalPrice, '*', $tmp);
+                $couponPrice = PriceCalculate($tmp1, '/', 100,1);
                 break;
         }
         return $couponPrice;

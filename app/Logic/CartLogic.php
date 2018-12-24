@@ -30,7 +30,10 @@ class CartLogic
         }
 
         $newCart = new ShopCart();
-        $where = ['goods_id' => $goodsInfo->id];
+        $where = [
+            'goods_id' => $goodsInfo->id,
+            'uid' => $user_id
+        ];
         if($goodsInfo->checked_products){
             $where['product_id'] =$goodsInfo->checked_products->id;
         }
