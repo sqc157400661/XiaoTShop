@@ -35,23 +35,7 @@ Page({
                 //is_buyNow_info:'?goodsId='+options.goodsId+'&number='+options.number+'&product_id='+options.product_id
             });
         }
-        try {
-            var addressId = wx.getStorageSync('addressId');
-            if (addressId) {
-                this.setData({
-                    'addressId': addressId
-                });
-            }
-
-            var couponId = wx.getStorageSync('couponId');
-            if (couponId) {
-                this.setData({
-                    'couponId': couponId
-                });
-            }
-        } catch (e) {
-            // Do something when catch error
-        }
+        
 
 
     },
@@ -144,6 +128,24 @@ Page({
     },
     onShow: function() {
         let that = this;
+        try {
+            var addressId = wx.getStorageSync('addressId');
+            if (addressId) {
+                this.setData({
+                    'addressId': addressId
+                });
+            }
+
+            var couponId = wx.getStorageSync('couponId');
+            if (couponId) {
+                this.setData({
+                    'couponId': couponId
+                });
+            }
+        } catch (e) {
+            // Do something when catch error
+        }
+        
         // 页面显示
         wx.showLoading({
             title: '加载中...',
@@ -153,6 +155,8 @@ Page({
         } else {
             that.getCheckoutInfo();
         }
+
+
 
 
     },

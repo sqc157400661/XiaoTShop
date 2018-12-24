@@ -8,7 +8,7 @@
     <form bindsubmit="createOrder" reportSubmit="false">
         <view class="address-box">
             <view class="add-address" hidden="{{checkedAddress.id > 0}}">
-                <view bindtap="addAddress" class="title">新增收货地址</view>
+                <view bindtap="selectAddress" class="title">新增收货地址</view>
             </view>
             <view bindtap="selectAddress" class="show-address" hidden="{{checkedAddress.id <= 0}}">
                 <view class="name-tel">{{checkedAddress.name}}  {{checkedAddress.mobile}}</view>

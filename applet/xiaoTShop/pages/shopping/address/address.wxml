@@ -7,7 +7,7 @@
     </view>
     <view class="address-list" wx:if="{{ addressList.length > 0 }}">
         <view class="a-address" wx:for="{{addressList}}" wx:key="{{item.id}}" >
-            <view bindtap="selectAddress" class="left-text {{item.is_default?'active':''}}" data-address-id="{{item.id}}">
+            <view bindtap="selectAddress" class="left-text {{addressId == item.id?'active':''}}" data-address-id="{{item.id}}">
                 <view class="name-tel">
           {{item.name}} {{item.mobile}}
         </view>
