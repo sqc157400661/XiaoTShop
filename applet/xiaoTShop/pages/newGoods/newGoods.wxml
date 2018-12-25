@@ -13,13 +13,13 @@
   <view class="sort">
     <view class="sort-box">
       <view class="item {{currentSortType == 'default' ? 'active' : ''}}"  bindtap="openSortFilter" id="defaultSort">
-        <text class="txt">缁煎悎</text>
+        <text class="txt">综合</text>
       </view>
       <view class="item by-price {{currentSortType == 'price' ? 'active' : ''}} {{currentSortOrder == 'asc'  ? 'asc' : 'desc'}}" bindtap="openSortFilter" id="priceSort">
-        <text class="txt">浠锋牸</text>
+        <text class="txt">价格</text>
       </view>
       <view class="item {{currentSortType == 'category' ? 'active' : ''}}" bindtap="openSortFilter" id="categoryFilter">
-        <text class="txt">鍒嗙被</text>
+        <text class="txt">分类</text>
       </view>
     </view>
     <view class="sort-box-category" wx-if="{{categoryFilter}}">
@@ -32,7 +32,7 @@
         <navigator class="item {{iindex % 2 == 0 ? 'item-b' : '' }}" url="../goods/goods?id={{iitem.id}}">
           <image class="img" src="{{iitem.primary_pic_url}}" background-size="cover"></image>
           <text class="name">{{iitem.goods_name}}</text>
-          <text class="price">锟{iitem.retail_price}}</text>
+          <text class="price">￥{{iitem.retail_price}}</text>
         </navigator>
       </block>
     </view>

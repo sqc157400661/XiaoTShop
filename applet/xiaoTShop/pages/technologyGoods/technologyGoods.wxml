@@ -1,35 +1,48 @@
-<view class="container">
-  <swiper class="goodsimgs" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
-    <swiper-item wx:for="{{gallery}}" wx:key="{{item.id}}">
-      <image src="{{item}}" background-size="cover"></image>
-    </swiper-item>
-  </swiper>
-  <view class="service-policy">
-    <view class="item">7天技术支持</view>
-    <view class="item">功能定制</view>
-    <view class="item">分享即得优惠</view>
-  </view>
-  <view class="goods-info">
-    <view class="c">
-      <text class="name">{{goods.goods_name}}</text>
-      <text class="desc">{{goods.goods_desc}}</text>
-      <text class="price">￥{{_checkedProductPrice/100}}</text>
-      <view class="brand" wx:if="{{brand.name}}">
-        <navigator url="../brandDetail/brandDetail?id={{brand.brandId}}">
-          <text>{{brand.name}}</text>
+<import src="../../lib/wxParse/wxParse.wxml" />
+<view class="container {{iphone}}">
+    <view class="header-container">
+        <navigator hoverClass="navigator-hover" openType="switchTab" url="/pages/index/index" wx:if="{{share}}">
+            <image class="goback" src="../../images/gohome.png"></image>
         </navigator>
-      </view>
+        <navigator delta="1" hoverClass="navigator-hover" openType="navigateBack" wx:if="{{!share}}">
+            <image class="goback" src="../../images/goback.png"></image>
+        </navigator>
     </view>
-  </view>
-  <view class="section-nav section-act" wx:for="{{specificationList}}" wx:key="{{item.id}}" bindtap="switchAttrPop" data-models="{{item.models}}" >
-    <view class="t">
-      <view>{{item.functype_name}} </view>
-      <view class="text1" wx:if="{{item.checkdotsNum}}"> 已选{{item.checkdotsNum}}功能</view>
+    <view class="swiper-container" wx:if="{{gallery}}">
+        <swiper autoplay="{{autoplay}}" bindchange="swiperchange" class="swiper_box" duration="{{duration}}" interval="{{interval}}">
+            <swiper-item wx:for="{{gallery}}" wx:key="{{item.id}}">
+                <image class="slide-image" lazyLoad="true" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+        <view class="dots">
+            <view class="dot{{index==swiperCurrent?' active':''}}" wx:for="{{gallery}}" wx:key="unique"></view>
+        </view>
     </view>
-    <image class="i" src="../../static/images/address_right.png" background-size="cover"></image>
-  </view>
+    <!-- 视频播放 -->
+    <!-- <view class="swiper-container" wx:if="{{goodsDetail.basicInfo.videoId}}">
+        <video autoplay="true" loop="true" src="{{videoMp4Src}}" style="width:100%"></video>
+    </view> -->
+    <view class="goods-info">
+        <view class="goods-left">
+            <view class="goods-title">{{goods.goods_name}}</view>
+            <view class="goods-characteristic">{{goods.goods_brief}}</view>
+  
+            <block>
+                <view class="goods-price">Ұ {{_checkedProductPrice/100}}</view>
+                <view class="goods-originalPrice">Ұ {{_checkedProductPrice/100}}</view>
+                <view class="piangjia">
+                已选{{item.checkdotsNum}}功能
+                </view>
+            </block>
+        </view>
+    </view>
 
-  <view class="section-nav section-act">
+    <view bindtap="switchAttrPop" class="row-arrow notscorll"  wx:for="{{specificationList}}" wx:key="{{item.id}}" bindtap="switchAttrPop" data-models="{{item.models}}" >
+        <view class="infotext">{{item.functype_name}} </view>
+        <view class="text1" wx:if="{{item.checkdotsNum}}"> 已选{{item.checkdotsNum}}功能</view>
+        <image src="../../images/arrow-right.png"></image>
+    </view>
+    <view class="row-arrow">
       <view class="t">
         <view class="label">1个促销:</view>
         <view class="tag">会员价</view>
@@ -37,80 +50,94 @@
       </view>
       <image class="i" src="../../static/images/address_right.png" background-size="cover"></image>
     </view>
-
-  <view class="goods-attr" wx:if="{{_checkedProductDots.length>0}}">
-    <view class="t">商品参数</view>
-    <view class="l">
-      <view class="item" wx:for="{{_checkedProductDots}}" wx:key="{{item.id}}" wx:if="{{item}}">
-        <text class="left">{{item.funcdot_name}}</text>
-        <text class="right">{{item.funcdot_desc}}</text>
-      </view>
-    </view>
-  </view>
-
-  <view class="detail">
-    <view class="_checkedProductList">
-      <view class="level1" wx:for="{{specificationList}}" wx:key="{{item.id}}" >
-        <image class="icon1" src="/static/images/checked1.png"></image>
-        <view>
-          {{item.functype_name}}
-        </view>
-
-        <view class="level2" wx:for="{{item.models}}" wx:for-item="vitem" wx:key="{{vitem.id}}">
-          <image class="icon2" src="/static/images/checked1.png"></image>
-          <view>
-            {{vitem.model_name}}
+    <!-- <view bindtap="tabFun" class="tab-header">
+        <view class="{{tabArr.curHdIndex=='0'?'active':''}}" data-id="0" id="tab-hd01">商品介绍</view>
+        <view class="{{tabArr.curHdIndex=='1'?'active':''}}" data-id="1" id="tab-hd02">商品评价</view>
+    </view> -->
+    <view class="goods-attr" wx:if="{{_checkedProductDots.length>0}}">
+        <view class="t">商品参数</view>
+        <view class="l">
+          <view class="item" wx:for="{{_checkedProductDots}}" wx:key="{{item.id}}" wx:if="{{item}}">
+            <text class="left">{{item.funcdot_name}}</text>
+            <text class="right">{{item.funcdot_desc}}</text>
           </view>
-          <view class="level3" wx:for="{{vitem.dots}}" wx:for-item="vvitem" wx:key="{{vvitem.id}}" wx:if="{{vvitem.checked}}">
-          <image class="icon2" src="/static/images/checked.png"></image>
-          <view>
-            {{vvitem.funcdot_name}}
+        </view>
+      </view>
+
+    <view class="tab-container">
+        <view class="detail">
+            <view class="_checkedProductList">
+              <view class="level1" wx:for="{{specificationList}}" wx:key="{{item.id}}" >
+                <image class="icon1" src="/static/images/checked1.png"></image>
+                <view>
+                  {{item.functype_name}}
+                </view>
+
+                <view class="level2" wx:for="{{item.models}}" wx:for-item="vitem" wx:key="{{vitem.id}}">
+                  <image class="icon2" src="/static/images/checked1.png"></image>
+                  <view>
+                    {{vitem.model_name}}
+                  </view>
+                  <view class="level3" wx:for="{{vitem.dots}}" wx:for-item="vvitem" wx:key="{{vvitem.id}}" wx:if="{{vvitem.checked}}">
+                  <image class="icon2" src="/static/images/checked.png"></image>
+                  <view>
+                    {{vvitem.funcdot_name}}
+                  </view>
+                  </view> 
+                </view>  
+              </view>
+            </view>
           </view>
-          </view> 
-        </view>  
-      </view>
     </view>
-  </view>
 
-
-</view>
-<view class="attr-pop-box" hidden="{{!openAttr}}">
-  <view class="attr-pop">
-    <view class="close" bindtap="closeAttr">
-      <image class="icon" src="/static/images/icon_close.png"></image>
+    <view bindtap="getShareBox" class="goods-button">
+        <image src="../../images/share.png"></image>
     </view>
-    <view class="img-info">
-      <image class="img" src="{{gallery[0].img_url}}"></image>
-      <view class="info">
-        <view class="c">
-          <view class="p">价格：￥{{_checkedProductPrice/100}}</view>
-          <view class="a" wx:if="{{_checkedProductNum>0}}">已选择：{{_checkedProductNum}}</view>
+ 
+    <view class="footer-box" >
+        <view class="box-list">
+            <image src="../../images/goods_service.png"></image>
+            <button openType="contact" sessionFrom="weapp"></button>
         </view>
-      </view>
-    </view>
-    <view class="spec-con">
-      <view class="spec-item" wx:for="{{models}}" wx:key="{{item.id}}">
-        <view class="name">{{item.model_name}}</view>
-        <view class="values">
-          <view  class="value {{vitem.checked ? 'selected' : ''}}" bindtap="clickSkuValue" wx:for="{{item.dots}}" wx:for-item="vitem" wx:key="{{vitem.id}}" data-functype-id="{{vitem.functype_id}}" data-model-id="{{vitem.model_id}}"  data-dot-id="{{vitem.id}}" >{{vitem.funcdot_name}}</view>
-    
+        <view bindtap="openCartPage" class="box-list">
+            <image src="../../images/shopping_cart.png"></image>
+            <view class="shop-num">{{cartGoodsCount}}</view>
         </view>
-      </view>
+        <view bindtap="addCannelCollect" class="box-list">
+            <image src="../../images/goods_collect.png" wx:if="{{userHasCollect==0}}"></image>
+            <image src="../../images/goods_collect_checked.png" wx:if="{{userHasCollect==1}}"></image>
+        </view>
+        <view class="box-title">
+            <view bindtap="payNow" class="box-shop-cart npx">立即购买</view>
+        </view>
+        <view class="box-title buy-now">
+            <view bindtap="addToCart" class="box-now-buy npx">加入购物车</view>
+        </view>
     </view>
-  </view>
+    <view class="show-popup" hidden="{{!openAttr}}">
+        <view bindtap="closeAttr" class="popup-mask"></view>
+        <view class="popup-contents">
+            <view class="pop-goods-info">
+                <view class="pop-img-box">
+                    <image class="goods-thumbnail" src="{{gallery[0].img_url}}"></image>
+                </view>
+                <view class="pop-goods-des">
+                    <view class="pop-goods-title" >已选择：{{_checkedProductNum}}</view>
+                    <view class="pop-goods-price">¥ {{_checkedProductPrice/100}}</view>
+                </view>
+                <view bindtap="closeAttr" class="pop-goods-close"></view>
+            </view>
+            <view class="size-label-box">
+                <block wx:for="{{models}}" wx:key="{{item.id}}">
+                    <view class="label">{{item.model_name}}</view>
+                    <view class="label-item-box">
+                        <view bindtap="clickSkuValue" class="label-item  {{vitem.checked ? 'active' : ''}}"  wx:for="{{item.dots}}" wx:for-item="vitem" wx:key="{{vitem.id}}"  data-functype-id="{{vitem.functype_id}}" data-model-id="{{vitem.model_id}}"  data-dot-id="{{vitem.id}}" >
+                       {{vitem.funcdot_name}}
+                    </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
 </view>
 
-
-<view class="bottom-btn">
-  <view class="l l-collect" bindtap="addCannelCollect">
-    <image class="icon" src="{{ collectBackImage }}"></image>
-  </view>
-  <view class="l l-cart">
-    <view class="box">
-      <text class="cart-count">{{cartGoodsCount}}</text>
-      <image bindtap="openCartPage" class="icon" src="/static/images/ic_menu_shoping_nor.png"></image>
-    </view>
-  </view>
-  <view class="c" bindtap="payNow">立即购买</view>
-  <view class="r" bindtap="addToCart">加入购物车</view>
-</view>
