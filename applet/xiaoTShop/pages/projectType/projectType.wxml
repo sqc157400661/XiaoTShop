@@ -1,4 +1,10 @@
 <view class="container">
+    <view class="header-container">
+        <navigator hoverClass="navigator-hover" openType="switchTab" url="/pages/index/index">
+            <image class="goback" src="../../images/gohome.png"></image>
+        </navigator>
+        
+    </view>
     <scroll-view scroll-y="true" scroll-top="{{scrollTop}}" style="height:{{scrollHeight}};">
     <view class="cate-item">
         <view class="h">

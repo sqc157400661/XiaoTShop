@@ -1,4 +1,4 @@
-// pages/newGoods/newGoods.js
+// pages/consociate/consociate.js
 Page({
 
   /**

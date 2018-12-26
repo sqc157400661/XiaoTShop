@@ -1,0 +1,13 @@
+/* pages/consociate/consociate.wxss */
+page{
+    background: #ffffff;
+}
+
+.container{
+    background: #f4f4f4;
+    margin-top: 130rpx;
+    padding:30rpx;
+}
+.header-container {
+    background-color: #fff;
+}

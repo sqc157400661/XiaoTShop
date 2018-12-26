@@ -39,9 +39,9 @@
       </navigator>
     </view>
     <view class="item">
-      <navigator url="url" class="a">
+      <navigator url="/pages/consociate/consociate" class="a">
         <text class="icon kefu"></text>
-        <text class="txt">会员福利</text>
+        <text class="txt">商业&技术合作</text>
       </navigator>
     </view>
     <view class="item">

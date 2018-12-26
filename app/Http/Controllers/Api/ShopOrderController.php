@@ -110,6 +110,7 @@ class ShopOrderController extends ApiController
         $orderData['couponList'] = ShopCouponLogic::getAvailableCouponListByGoodsPrice($orderData['goodsTotalPrice'],$this->user_id); //  优惠券列表
         $orderData['couponPrice'] = $couponInfo['couponPrice']; // 选中的优惠金额
         $orderData['actualPrice'] = PriceCalculate($orderData['orderTotalPrice'], '-', $orderData['couponPrice']); // 真实付款金额
+        $orderData['postscript'] = $request->postscript??'暂无留言';
         $buyModel = new Buy();
         $buyRe = $buyModel->buyStep($request, $orderData, $checkedAddress, $this->user_id);
         if (empty($buyRe['error'])) {

@@ -3,6 +3,7 @@ page{
 }
 
 .container{
+  width:94%;
     background: #f4f4f4;
     margin-top: 130rpx;
     padding-top: 30rpx;

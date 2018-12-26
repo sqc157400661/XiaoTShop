@@ -38,6 +38,7 @@
     "pages/shopping/addressAdd/addressAdd",
     "pages/goods/goods",
     "pages/topicDetail/topicDetail",
+    "pages/consociate/consociate",
     "pages/authorize/index"
   ],
   "window": {

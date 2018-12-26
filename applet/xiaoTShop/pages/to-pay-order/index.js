@@ -21,7 +21,14 @@ Page({
         productId: 0, // 规格id
         buynumber: 0,
         addressId: 0,
+        postscript:'暂无留言',
         couponId: 0
+    },
+    getPostscript: function (e) {
+        var val = e.detail.value;
+        this.setData({
+            postscript: val
+        });
     },
     onLoad: function(options) {
 
@@ -35,8 +42,6 @@ Page({
                 //is_buyNow_info:'?goodsId='+options.goodsId+'&number='+options.number+'&product_id='+options.product_id
             });
         }
-        
-
 
     },
     getCheckoutInfo: function() {
@@ -184,6 +189,7 @@ Page({
             couponId: this.data.couponId,
             goodsId: that.data.goodsId,
             productId: that.data.productId,
+            postscript: that.data.postscript,
             buynumber: that.data.buynumber
         }, 'POST').then(res => {
             if (res.code === 200) {

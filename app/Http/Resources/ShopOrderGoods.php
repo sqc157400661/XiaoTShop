@@ -18,7 +18,7 @@ class ShopOrderGoods extends Resource
         return [
             "goods_name"=> $this->goods_name,
             "number"=> $this->number,
-            "list_pic_url"=> config('filesystems.disks.oss.url').'/'.$this->list_pic_url,
+            "list_pic_url"=> (strpos($this->list_pic_url,'http')===false) ?config('filesystems.disks.oss.url').'/'.$this->list_pic_url:$this->list_pic_url,
             "actual_price"=> $this->actual_price,
         ];
     }

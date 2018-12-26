@@ -1,0 +1,18 @@
+<view class="container">
+	<view class="header-container">
+      <navigator delta="1" hoverClass="navigator-hover" openType="navigateBack">
+          <image class="goback" src="../../images/goback.png"></image>
+      </navigator>
+      <view class="header-name">合作</view>
+  	</view>
+
+  <view class="fb-mobile">
+    <view class="label">
+    	如果你有商业（技术外包）资源或对我们有兴趣，想进行合作，可以加我微信号
+    </view>
+    <view class="mobile-box">
+     	微信号：sqc157400661
+    </view>
+  </view>
+
+</view>

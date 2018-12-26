@@ -109,7 +109,7 @@ class Buy
         $order_insert['mobile'] = $this->_address_data['mobile'];// 收件人手机号
 
         //用户留言
-        $order_insert['postscript'] = empty($this->_post_data->remark) ? '用户无留言' : $this->_post_data->remark;
+        $order_insert['postscript'] = empty($this->_order_data['postscript']) ? '用户无留言' : $this->_order_data['postscript'];
 
         $order_goods_insert = array(); // 订单附表的数据
 

@@ -33,6 +33,6 @@ class ShopCollect extends Model
     }
 
     public static function getList($where){
-        return static::where(array_merge(['is_attention'=>static::STATE_ATTENTION],$where))->get();
+        return static::where(array_merge(['is_attention'=>static::STATE_ATTENTION],$where))->orderBy('id','desc')->get();
     }
 }

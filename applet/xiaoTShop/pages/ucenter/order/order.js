@@ -43,16 +43,25 @@ Page({
         });
         that.getOrderList();
     },
-    cancelOrder: function(x) {
+    cancelOrder: function(opt) {
         let that = this;
-        var orderId = x.currentTarget.dataset.id;
-        util.request(api.OrderCancel, {
-            orderId:orderId
-        }).then(function(res) {
-            if (res.code == 200) {
-                that.getOrderList();
+        wx.showModal({
+            title: "确定要取消该订单吗？",
+            content: "",
+            success: function (x) {
+                if(x.confirm){
+                    var orderId = opt.currentTarget.dataset.id;
+                    util.request(api.OrderCancel, {
+                        orderId:orderId
+                    }).then(function(res) {
+                        if (res.code == 200) {
+                            that.getOrderList();
+                        }
+                    });
+                }
             }
         });
+        
     },
     orderDetail: function(x) {
         var e = x.currentTarget.dataset.id;

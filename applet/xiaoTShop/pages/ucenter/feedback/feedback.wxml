@@ -1,5 +1,10 @@
 <view class="container">
-
+<view class="header-container">
+      <navigator delta="1" hoverClass="navigator-hover" openType="navigateBack">
+          <image class="goback" src="../../../images/goback.png"></image>
+      </navigator>
+      <view class="header-name">建议</view>
+  </view>
   <picker bindchange="bindPickerChange" value="{{index}}" range="{{FeedbackData}}">
     <view class="picker">
       <view class="fb-type">
