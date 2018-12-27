@@ -23,7 +23,7 @@
 
 ![首页](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/gh_667b391a9af7_344.jpg)
 
-### 新版本【本次是v0.2.1】
+### 新版本【本次是v0.6.7】
 
 ![首页](https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/XiaoT/show/gh_ed3c26c094b2_344.jpg)
 
@@ -36,50 +36,13 @@
 + 品牌功能
 + 完整的购物流程，商品的加入、编辑、删除、批量选择，收货地址的选择，下单支付
 + 会员中心（订单、收藏、足迹、收货地址、意见反馈）
++ 营销优惠系统
++ 支付功能
 ....
 
 ### 小程序前端项目结构
 ```
-├─config
-├─lib
-│  └─wxParse　　　
-├─pages
-│  ├─auth
-│  │  ├─login
-│  │  ├─register
-│  │  └─reset
-│  ├─brand
-│  ├─brandDetail
-│  ├─cart
-│  ├─catalog
-│  ├─category
-│  ├─comment
-│  ├─goods
-│  ├─hotGoods
-│  ├─index
-│  ├─logs
-│  ├─newGoods
-│  ├─pay
-│  ├─search
-│  ├─shopping
-│  │  ├─address
-│  │  ├─addressAdd
-│  │  └─checkout
-│  ├─topic
-│  ├─topicDetail
-│  └─ucenter
-│      ├─address
-│      ├─addressAdd
-│      ├─collect
-│      ├─coupon
-│      ├─feedback
-│      ├─footprint
-│      ├─index
-│      ├─order
-│      └─orderDetail
-├─static
-│  └─images
-└─utils
+跟目录下的 applet文件夹下
 ```
 
 ### 后端说明
@@ -142,6 +105,11 @@
   ```
 
 4、执行`php artisan XiaoT:install`
+
+5、注意本项目默认使用的阿里云oss系统
+```
+config下的filesystems.php文件下修改自己的参数
+```
 
 
 **注意-如何升级：**<br>
