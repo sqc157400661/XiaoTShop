@@ -58,13 +58,13 @@ class PaymentController extends ApiController
         $response = $app->handlePaidNotify(function($message, $fail){
             $this->pay_log('notify  ' . var_export($message, true));
             // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单
-            $order = Order::where(['order_sn' => $message['out_trade_no']])->first();
+            $order = ShopOrder::where(['order_sn' => $message['out_trade_no']])->first();
             if (!$order) { // 如果订单不存在
                 return true; // 告诉微信，我已经处理完了，订单没找到，别再通知我了
             }
             // 如果订单存在
             // 检查订单是否已经更新过支付状态
-            if ($order->status >= 22) {
+            if ($order->order_status >= ShopOrder::STATUS_ALREADY_PAID) {
                 return true; // 已经支付成功了就不再更新了
             }
 
@@ -74,26 +74,20 @@ class PaymentController extends ApiController
                 // 用户是否支付成功
                 if($message['result_code'] === 'SUCCESS'){
                     // 判断支付金额
-                    $order->pay_date = Carbon::now(); // 更新支付时间为当前时间
+                    $order->pay_time = time(); // 更新支付时间为当前时间
                     $order->trade_no = $message['transaction_id'];// 微信交易号存放到数据库【退款等会用到】
                     if ($message['total_fee'] == ($order->actual_price * 100)) {
                         // 不是已经支付状态则修改为已经支付状态
-                        $order->status = '22';
-                        $order->lock_state = 0;
+                        $order->order_status = ShopOrder::STATUS_ALREADY_PAID;
                     } else {
-                        // 测试的
-                        // $order->status = '22';
-                        // $order->lock_state=0;
                         //生产的
-                        $order->status = '10';
-                        $order->lock_state = 4;
+                        $order->order_status = ShopOrder::STATUS_WAIT_PAY;
                         //add_my_log('order', '支付金额与订单金额不符：' . $order->actual_price . '（元）=>' . $notify->total_fee . '(分)', 3, json_encode($order->toArray()), '微信支付回调');
                     }
 
                 }elseif($message['result_code'] === 'FAIL'){
                     // 用户支付失败
-                    $order->status = '10';
-                    $order->lock_state = 2;
+                    $order->order_status = ShopOrder::STATUS_WAIT_PAY;
                 }
             } else { // 用户支付通讯失败
                 return $fail('通信失败，请稍后再通知我');
