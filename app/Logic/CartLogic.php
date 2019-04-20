@@ -34,8 +34,8 @@ class CartLogic
             'goods_id' => $goodsInfo->id,
             'uid' => $user_id
         ];
-        if($goodsInfo->checked_products){
-            $where['product_id'] =$goodsInfo->checked_products->id;
+        if ($goodsInfo->checked_products) {
+            $where['product_id'] = $goodsInfo->checked_products->id;
         }
         $info = $newCart->where($where)->first();
         if (!empty($info->goods_id)) {
@@ -47,11 +47,11 @@ class CartLogic
             return $info->save();
         }
         // 如果选择了规格
-        if($goodsInfo->checked_products){
+        if ($goodsInfo->checked_products) {
             $newCart->goods_sn = $goodsInfo->checked_products->goods_sn;
             $newCart->retail_price = $goodsInfo->checked_products->retail_price;
             $newCart->product_id = $goodsInfo->checked_products->id;
-        }else{
+        } else {
             $newCart->goods_sn = $goodsInfo->goods_sn;
             $newCart->retail_price = $goodsInfo->retail_price;
         }
@@ -79,61 +79,62 @@ class CartLogic
         $cartList = ShopCart::getCheckedGoodsList($uid);
         $checkedGoodsList = ShopCartResource::collection($cartList);
         $goodsTotalPrice = 0.00;
-        foreach($checkedGoodsList as $goodsVal){
-            $goodsTotalPrice = PriceCalculate($goodsTotalPrice,'+',PriceCalculate($goodsVal['retail_price'],'*',$goodsVal['number']));
+        foreach ($checkedGoodsList as $goodsVal) {
+            $goodsTotalPrice = PriceCalculate($goodsTotalPrice, '+', PriceCalculate($goodsVal['retail_price'], '*', $goodsVal['number']));
         }
         $freightPrice = array_sum(array_pluck($checkedGoodsList, 'freight_price'));
         return [
             'checkedGoodsList' => $checkedGoodsList,// 商品列表
             'goodsTotalPrice' => $goodsTotalPrice,// 商品总价格
             'freightPrice' => $freightPrice,// 商品运费总和
-            'orderTotalPrice' => PriceCalculate($goodsTotalPrice,'+',$freightPrice)
+            'orderTotalPrice' => PriceCalculate($goodsTotalPrice, '+', $freightPrice)
         ];
     }
 
-    public static function getBuyGoodsById($goodsId,$number = 1,$format = 1,$productId = '')
+    public static function getBuyGoodsById($goodsId, $number = 1, $format = 1, $productId = '')
     {
-        if($productId){
-            $products = ShopProduct::where(['id' => $productId])->get()->keyBy ('goods_id');
+        if ($productId) {
+            $products = ShopProduct::where(['id' => $productId])->get()->keyBy('goods_id');
         }
-        $goodsInfos = ShopGoods::getGoodsList(['id'=>$goodsId]);
-        foreach ($goodsInfos as $item_info){
-            $product_goods_spec_item_names ='';
+        $goodsInfos = ShopGoods::getGoodsList(['id' => $goodsId]);
+        foreach ($goodsInfos as $item_info) {
+            $product_goods_spec_item_names = '';
             $product_retail_price = 0;
-            if($productId){
+            if ($productId) {
                 $product_goods_spec_item_names = $products[$item_info->id]['goods_spec_item_names'];
                 $product_retail_price = $products[$item_info->id]['retail_price'];
             }
             $checkedGoodsList[] = [
-                "goods_id"=> $item_info->id,
-                "product_id"=> $productId,
-                "goods_name"=> $item_info->goods_name.' ' .$product_goods_spec_item_names,
-                "market_price"=> $item_info->counter_price,
-                "retail_price"=> $product_retail_price ? $product_retail_price:$item_info->retail_price,
-                "number"=> $number,
+                "goods_id" => $item_info->id,
+                "product_id" => $productId,
+                "goods_name" => $item_info->goods_name . ' ' . $product_goods_spec_item_names,
+                "market_price" => $item_info->counter_price,
+                "retail_price" => $product_retail_price ? $product_retail_price : $item_info->retail_price,
+                "number" => $number,
                 'freight_price' => $item_info->freight_price,
-                "primary_pic_url"=>  $format ? config('filesystems.disks.oss.url').'/'.$item_info->primary_pic_url:$item_info->primary_pic_url,
-                "list_pic_url"=>  $format ? config('filesystems.disks.oss.url').'/'.$item_info->primary_pic_url:$item_info->primary_pic_url,
+                "primary_pic_url" => $format ? config('filesystems.disks.oss.url') . '/' . $item_info->primary_pic_url : $item_info->primary_pic_url,
+                "list_pic_url" => $format ? config('filesystems.disks.oss.url') . '/' . $item_info->primary_pic_url : $item_info->primary_pic_url,
             ];
         }
         $goodsTotalPrice = 0.00;
-        foreach($checkedGoodsList as $goodsVal){
-            $goodsTotalPrice = PriceCalculate($goodsTotalPrice,'+',PriceCalculate($goodsVal['retail_price'],'*',$number));
+        foreach ($checkedGoodsList as $goodsVal) {
+            $goodsTotalPrice = PriceCalculate($goodsTotalPrice, '+', PriceCalculate($goodsVal['retail_price'], '*', $number));
         }
         $freightPrice = array_sum(array_pluck($checkedGoodsList, 'freight_price'));
         return [
             'checkedGoodsList' => $checkedGoodsList,// 商品列表
             'goodsTotalPrice' => $goodsTotalPrice,// 商品总价格
             'freightPrice' => $freightPrice,// 商品运费总和
-            'orderTotalPrice' => PriceCalculate($goodsTotalPrice,'+',$freightPrice)
+            'orderTotalPrice' => PriceCalculate($goodsTotalPrice, '+', $freightPrice)
         ];
     }
 
     // 清空购物车
-    public static function clearCart($uid){
+    public static function clearCart($uid)
+    {
         return ShopCart::where([
             'uid' => $uid,
-            'checked'=> ShopCart::STATE_CHECKED
+            'checked' => ShopCart::STATE_CHECKED
         ])->delete();
     }
 

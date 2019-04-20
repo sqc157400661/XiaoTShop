@@ -15,6 +15,7 @@ Page({
         selectSize: '选择规格：',
         selectSizePrice: 0,
         cartGoodsCount: 0,
+        bargain:{},
         buyNumber: 1,
         buyNumMin: 1,
         buyNumMax: 0,
@@ -44,90 +45,26 @@ Page({
         brand: {},
         userHasCollect: 0,
     },
-
-    kanjiashow: function() {
-        this.setData({
-            kanjiashare: ![]
+    swiperchange: function(x) {
+        let that = this;
+        that.setData({
+            swiperCurrent: x.detail.current,
         });
     },
-    closevictory: function() {
-        this.setData({
-            victorykanjia: !![]
+    gohome: function() {
+        wx.switchTab({
+            url: "/pages/index/index"
         });
     },
-    getshare: function() {
-        this.setData({
-            kanjiashare: ![]
-        });
-    },
-    closeShare: function() {
-        this.setData({
-            kanjiashare: !![]
-        });
-    },
-    closeHelp: function() {
-        this.setData({
-            helpkanjiashare: !![]
-        });
-    },
-    showposter: function() {
-        this.setData({
-            kanjiashare: !![],
-            postershow: ![]
-        });
-    },
-    closecode: function() {
-        this.setData({
-            postershow: !![]
-        });
-    },
-    saveposter: function() {
-        var x = this;
-        console.log(x.data.codeimg),
-        wx.saveImageToPhotosAlbum({
-            filePath: x.data.codeimg,
-            success: function(e) {
-                if ("THCry" !== "WalDl") wx.showToast({
-                    title: "保存成功",
-                    icon: "success",
-                    duration: 2e3
-                });
-                else {
-                    var t = ptime,
-                    i = Math.floor(t / 3600 / 24),
-                    n = i.toString();
-                    1 == n.length && (n = "0" + n);
-                    var o = Math.floor((t - 3600 * i * 24) / 3600),
-                    s = o.toString();
-                    1 == s.length && (s = "0" + s);
-                    var r = Math.floor((t - 3600 * i * 24 - 3600 * o) / 60),
-                    c = r.toString();
-                    1 == c.length && (c = "0" + c);
-                    var u = (t - 3600 * i * 24 - 3600 * o - 60 * r).toString();
-                    1 == u.length && (u = "0" + u),
-                    x.setData({
-                        countDownDay: n,
-                        countDownHour: s,
-                        countDownMinute: c,
-                        countDownSecond: u
-                    }),
-                    ptime--,
-                    ptime < 0 && (clearInterval(interval), x.setData({
-                        countDownDay: "00",
-                        countDownHour: "00",
-                        countDownMinute: "00",
-                        countDownSecond: "00"
-                    }));
-                }
-            }
-        }),
-        x.setData({
-            postershow: !![]
+    tabFun: function(x) {
+        var e = x.target.dataset.id, i = {};
+        i['curHdIndex'] = e, i['curBdIndex'] = e, this.setData({
+            tabArr: i
         });
     },
     getGoodsInfo: function() {
         let that = this;
-        util.request(api.GoodsDetail, {
+        util.request(api.BargainGoodsDetail, {
             id: that.data.id
         }).then(function(res) {
             if (res.code == 200) {
@@ -140,30 +77,14 @@ Page({
                     issueList: res.data.issue,
                     comment: res.data.comment,
                     brand: res.data.brand,
+                    bargain:res.data.bargain,
                     userHasCollect: res.data.userHasCollect
                 });
                 WxParse.wxParse('goodsDetail', 'html', res.data.info.goods_desc, that);
-
-                // that.getGoodsRelated(); 相关商品
             }
         });
 
     },
-
-    getGoodsRelated: function() {
-        let that = this;
-        util.request(api.GoodsRelated, {
-            id: that.data.id
-        }).then(function(res) {
-            if (res.code == 200) {
-                that.setData({
-                    relatedGoods: res.data,
-                });
-            }
-        });
-
-    },
-
     onLoad: function(options) {
         // 页面初始化 options为页面跳转所带来的参数
         this.setData({
@@ -203,102 +124,10 @@ Page({
         // 页面关闭
 
     },
-    addCannelCollect: function() {
-        let that = this;
-        //添加或是取消收藏
-        util.request(api.CollectAddOrDelete, {
-                typeId: 0,
-                valueId: this.data.id
-            }, "POST")
-            .then(function(res) {
-                let _res = res;
-                if (_res.code == 200) {
-                    if (_res.data.type == 'add') {
-                        that.setData({
-                            userHasCollect: 1
-                        });
-                    } else {
-                        that.setData({
-                            userHasCollect: 0
-                        });
-                    }
-
-                } else {
-                    wx.showToast({
-                        image: '/static/images/icon_error.png',
-                        title: _res.message,
-                        mask: true
-                    });
-                }
-            });
+    readyKanjia:function(){
+        
     },
-    goShopCar: function() {
-        wx.switchTab({
-            url: '/pages/cart/cart',
-        });
-    },
-    addToCart: function() {
-        var that = this;
-        if (this.data.hideShopPopup == 1) {
-            //打开规格选择窗口
-            this.setData({
-                shopType: 'addShopCar'
-            }),
-            this.bindGuiGeTap();
-        } else {
-            var product_id = 0;
-            var product = this.getProductByCheckedSpecIds();
-            if(product !== true && product.length < 1){
-                wx.showToast({
-                    image: '/static/images/icon_error.png',
-                    title: '请选择商品规格！',
-                    mask: true
-                });
-                return false;
-            }else if(product.id){
-               product_id =  product.id
-            }
-
-            //验证库存
-            if (this.data.goods.goods_number < this.data.buyNumber) {
-                //找不到对应的product信息，提示没有库存
-                wx.showToast({
-                    image: '/static/images/icon_error.png',
-                    title: '库存不足',
-                    mask: true
-                });
-                return false;
-            }
-
-            //添加到购物车
-            util.request(api.CartAdd, {
-                    goodsId: this.data.goods.id,
-                    number: this.data.buyNumber,
-                    product_id:product_id
-                }, "POST")
-                .then(function(res) {
-                    let _res = res;
-                    if (_res.code == 200) {
-                        wx.showToast({
-                            title: '添加成功'
-                        });
-                        that.setData({
-                            openAttr: !that.data.openAttr,
-                            cartGoodsCount: _res.data.goodsCount
-                        });
-                    } else {
-                        wx.showToast({
-                            image: '/static/images/icon_error.png',
-                            title: _res.message,
-                            mask: true
-                        });
-                    }
-
-                });
-        }
-
-    },
-    payNow: function() {
+    goKanjia: function() {
         var that = this;
         if (this.data.hideShopPopup == 1) {
             //打开规格选择窗口
@@ -319,6 +148,16 @@ Page({
             }else if(product.id){
                product_id =  product.id
             }
+            
+            //验证限购
+            if (this.data.goods.limit_num < this.data.buyNumber) {
+                wx.showToast({
+                    image: '/static/images/icon_error.png',
+                    title: '数量超限',
+                    mask: true
+                });
+                return false;
+            }
             //验证库存
             if (this.data.goods.goods_number < this.data.buyNumber) {
                 //找不到对应的product信息，提示没有库存
@@ -330,7 +169,7 @@ Page({
                 return false;
             }
             wx.navigateTo({
-                url: '../to-pay-order/index?goodsId=' + this.data.goods.id + '&number=' + this.data.buyNumber + '&product_id=' + product_id
+                url: '/pages/kanjia/index?goodsId=' + that.data.goods.id + '&number=' + that.data.buyNumber + '&product_id=' + product_id+ '&bargainId=' + that.data.id
             })
         }
 

@@ -20,6 +20,7 @@ Page({
         goodsId: 0,
         productId: 0, // 规格id
         buynumber: 0,
+        bargainId:0,
         addressId: 0,
         postscript:'暂无留言',
         couponId: 0
@@ -39,6 +40,7 @@ Page({
                 'goodsId': options.goodsId,
                 'buynumber': options.number,
                 'productId': options.product_id,
+                'bargainId': options.bargainId ? options.bargainId:0,
                 //is_buyNow_info:'?goodsId='+options.goodsId+'&number='+options.number+'&product_id='+options.product_id
             });
         }
@@ -74,7 +76,8 @@ Page({
             couponId: that.data.couponId,
             goodsId: that.data.goodsId,
             buynumber: that.data.buynumber,
-            productId: that.data.productId
+            productId: that.data.productId,
+            bargainId: that.data.bargainId
         }, 'POST').then(function(res) {
             if (res.code === 200) {
                 that.setData({

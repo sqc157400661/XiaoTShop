@@ -24,6 +24,9 @@ class ShopGoods extends Model
     const STATE_VIP = 1;// 会员专属
     const STATE_NOT_VIP = 0;// 非会员专属
 
+    const TYPE_NOMAL = 1;// 正常商品
+    const TYPE_OTHNER = 2;// 生成的商品
+
     const STATE_ON_SALE_STRING = '上架中';
     const STATE_NOT_SALE_STRING = '已下架';
 
@@ -57,6 +60,10 @@ class ShopGoods extends Model
     {
         return $this->hasOne(ShopProduct::class, 'goods_id');
     }
+    public function bargain()
+    {
+        return $this->hasOne(ActivityBargain::class, 'goods_id');
+    }
 
 
     public function specifications()
@@ -86,6 +93,7 @@ class ShopGoods extends Model
             self::STATE_DELETE => self::STATE_DELETE_STRING,
         ];
     }
+
     // 是否限购
     public static function getLimitDispayMap()
     {
@@ -94,6 +102,7 @@ class ShopGoods extends Model
             self::STATE_SALE_NOT_LIMIT => self::STATE_SALE_NOT_LIMIT_STRING,
         ];
     }
+
     // 是否推荐
     public static function getRecommendDispayMap()
     {
@@ -137,22 +146,25 @@ class ShopGoods extends Model
             $this->attributes['list_pic_url'] = json_encode($pictures);
         }
     }
+
     // 获取商品列表
-    public static function getGoodsList($where= [],$pagesize='' ,$order='sort_order asc'){
-        $model =  static::where(array_merge([
+    public static function getGoodsList($where = [], $pagesize = '', $order = 'sort_order asc')
+    {
+        $model = static::where(array_merge([
 //            ['is_delete', '=', static::STATE_NOT_DELETE],
 //            ['is_on_sale', '=', static::STATE_ON_SALE],
-        ], $where))->orderByRaw($order);
-        if($pagesize){
+    ], $where))->orderByRaw($order);
+        if ($pagesize) {
             return $model->paginate($pagesize);
         }
         return $model->get();
     }
 
     // 获取商品详情
-    public static function getGoodsDetail($where,$product_id =0){
-        if($product_id){
-            return static::with(['checked_products' => function ($query) use($product_id) {
+    public static function getGoodsDetail($where, $product_id = 0)
+    {
+        if ($product_id) {
+            return static::with(['checked_products' => function ($query) use ($product_id) {
                 $query->where('id', '=', $product_id);
             }])->where(array_merge([
                 ['is_delete', '=', static::STATE_NOT_DELETE],

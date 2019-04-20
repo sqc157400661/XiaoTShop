@@ -222,7 +222,7 @@ class ShopCouponLogic
                 throw new \Exception('该优惠券您已经使用或失效');
             }
             if($now < $user_coupon['start_time'] || $now > $user_coupon['end_time']){
-                throw new \Exception('先在你还不能使用该优惠');
+                throw new \Exception('目前你还不能使用该优惠');
             }
         }
     }

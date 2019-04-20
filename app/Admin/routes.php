@@ -23,6 +23,8 @@ Route::group([
     //商品分类管理
     $router->resource('classes', ClassController::class);
 
+
+
     // 前台用户管理
     $router->resource('User', UsersController::class);
 
@@ -83,6 +85,9 @@ Route::group([
 
         // 优惠券管理
         $router->resource('shop-coupon', ShopCouponController::class);
+
+        // 砍价管理
+        $router->resource('bargain', BargainController::class);
 
         // 商品管理
         $router->resource('shop-goods', ShopGoodsController::class);

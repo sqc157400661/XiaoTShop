@@ -15,7 +15,8 @@ class PaymentController extends ApiController
 {
 
 
-    public function toPay(Request $request){
+    public function toPay(Request $request)
+    {
         // 验证规则
         $validator = Validator::make($request->all(),
             [
@@ -35,13 +36,13 @@ class PaymentController extends ApiController
         }
         // 查询订单
         $order_info = ShopOrder::find($request->orderId)->toArray();
-        if(empty($order_info)){
+        if (empty($order_info)) {
             return $this->failed('订单不存在', 401);
         }
         // 开始生成预支付订单
         $buy = new Buy();
-        $buy_info = $buy->pay_step1($order_info,\Auth::user()->openid);
-        if($buy_info){
+        $buy_info = $buy->pay_step1($order_info, \Auth::user()->openid);
+        if ($buy_info) {
             return $this->success($buy_info);
         }
         return $this->failed('支付失败', 401);
@@ -55,7 +56,7 @@ class PaymentController extends ApiController
     {
         $this->pay_log(var_export(file_get_contents('php://input'), true));
         $app = Factory::payment(config('wechat.payment.default'));
-        $response = $app->handlePaidNotify(function($message, $fail){
+        $response = $app->handlePaidNotify(function ($message, $fail) {
             $this->pay_log('notify  ' . var_export($message, true));
             // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单
             $order = ShopOrder::where(['order_sn' => $message['out_trade_no']])->first();
@@ -72,7 +73,7 @@ class PaymentController extends ApiController
 
             if ($message['return_code'] === 'SUCCESS') { // return_code 表示通信状态，不代表支付状态
                 // 用户是否支付成功
-                if($message['result_code'] === 'SUCCESS'){
+                if ($message['result_code'] === 'SUCCESS') {
                     // 判断支付金额
                     $order->pay_time = time(); // 更新支付时间为当前时间
                     $order->trade_no = $message['transaction_id'];// 微信交易号存放到数据库【退款等会用到】
@@ -85,7 +86,7 @@ class PaymentController extends ApiController
                         //add_my_log('order', '支付金额与订单金额不符：' . $order->actual_price . '（元）=>' . $notify->total_fee . '(分)', 3, json_encode($order->toArray()), '微信支付回调');
                     }
 
-                }elseif($message['result_code'] === 'FAIL'){
+                } elseif ($message['result_code'] === 'FAIL') {
                     // 用户支付失败
                     $order->order_status = ShopOrder::STATUS_WAIT_PAY;
                 }
@@ -97,7 +98,6 @@ class PaymentController extends ApiController
         });
         return $response;
     }
-
 
 
     /**

@@ -1,0 +1,166 @@
+<import src="../../lib/wxParse/wxParse.wxml" />
+<view class="container {{iphone}}">
+    <view class="header-container">
+        <navigator hoverClass="navigator-hover" openType="switchTab" url="/pages/index/index" wx:if="{{share}}">
+            <image class="goback" src="../../images/gohome.png"></image>
+        </navigator>
+        <navigator delta="1" hoverClass="navigator-hover" openType="navigateBack" wx:if="{{!share}}">
+            <image class="goback" src="../../images/goback.png"></image>
+        </navigator>
+    </view>
+    <view class="swiper-container" wx:if="{{gallery}}">
+        <swiper autoplay="{{autoplay}}" bindchange="swiperchange" class="swiper_box" duration="{{duration}}" interval="{{interval}}">
+            <swiper-item wx:for="{{gallery}}" wx:key="{{item.id}}">
+                <image class="slide-image" lazyLoad="true" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+        <view class="dots">
+            <view class="dot{{index==swiperCurrent?' active':''}}" wx:for="{{gallery}}" wx:key="unique"></view>
+        </view>
+    </view>
+    <!-- 视频播放 -->
+    <!-- <view class="swiper-container" wx:if="{{goodsDetail.basicInfo.videoId}}">
+        <video autoplay="true" loop="true" src="{{videoMp4Src}}" style="width:100%"></video>
+    </view> -->
+    <view class="goods-info">
+        <view class="goods-left">
+            <view class="goods-title">{{goods.goods_name}}</view>
+            <view class="goods-characteristic">{{goods.goods_brief}}</view>
+  
+            <block>
+                <view class="goods-price">
+                <text>底价</text>Ұ{{bargain.min_price}}</view>
+                <view class="goods-originalPrice">
+                <text>原价</text>Ұ{{bargain.retail_price}}</view>
+                <view class="piangjia">
+              已售 {{goods.sell_volume}}
+        </view>
+            </block>
+        </view>
+    </view>
+
+    <view bindtap="bindGuiGeTap" class="row-arrow" wx:if="{{goods.specification_info.length>0}}">
+            选择规格
+    <image src="../../images/arrow-right.png"></image>
+    </view>
+    <view bindtap="tabFun" class="tab-header">
+        <view class="{{tabArr.curHdIndex=='0'?'active':''}}" data-id="0" id="tab-hd01">商品介绍</view>
+        <view class="{{tabArr.curHdIndex=='1'?'active':''}}" data-id="1" id="tab-hd02">商品评价</view>
+    </view>
+    <view class="tab-container">
+        <view class="tab-item {{tabArr.curBdIndex=='0'?'active':''}}">
+            <view class="goods-text">
+                <template is="wxParse" data="{{wxParseData:goodsDetail.nodes}}"></template>
+            </view>
+        </view>
+        <view class="tab-item {{tabArr.curBdIndex=='1'?'active':''}}">
+            <view class="reputation-none" wx:if="{{!comment}}">
+                <image src="../../images/empty_comment.png"></image> 还没有人评价
+            </view>
+            <view class="goods-reputa-list" wx:for="{{comment.data}}" wx:key="id">
+                <view class="goods-reputa-avatar">
+                    <image class="goods-avatar" src="{{item.avatar}}"></image>
+                </view>
+                <view class="goods-reputa-mark">
+                    <view class="goods-reputa-user">
+                        {{item.nickname}}
+                        <text>{{item.star_str}} </text>
+                    </view>
+                    <view class="goods-mark">{{item.content}}</view>
+                    <view class="goods-mark-day">
+                        {{item.add_time}}
+                    <text>{{item.property}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="getShareBox" class="goods-button">
+        <image src="../../images/share.png"></image>
+    </view>
+ 
+    <view bindtap="goKanjia" class="footer-box">
+        立即发起砍价，最低可砍到 {{bargain.min_price}} 元
+    </view>
+   
+    <view class="show-popup" hidden="{{hideShopPopup}}">
+        <view bindtap="closePopupTap" class="popup-mask"></view>
+        <view class="popup-contents">
+            <view class="pop-goods-info">
+                <view class="pop-img-box">
+                    <image class="goods-thumbnail" src="{{goods.primary_pic_url}}"></image>
+                </view>
+                <view class="pop-goods-des">
+                    <view class="pop-goods-title">{{goods.goods_name}}</view>
+                    <view class="pop-goods-price">¥ {{goods.retail_price}}</view>
+                </view>
+                <view bindtap="closePopupTap" class="pop-goods-close"></view>
+            </view>
+            <view class="size-label-box">
+                <block wx:for="{{goods.specification_info}}" wx:for-index="idx" wx:for-item="property" wx:key="id">
+                    <view class="label">{{property.sp_name}}</view>
+                    <view class="label-item-box">
+                        <view bindtap="labelItemTap" class="label-item {{checked_sp_item_ids[property.sp_id] && checked_sp_item_ids[property.sp_id][item.sp_item_id]=='checked'?'active':''}}" data-sp_item_id="{{item.sp_item_id}}"  data-sp_item_name="{{item.sp_item_name}}" data-sp_id="{{property.sp_id}}" data-propertyindex="{{idx}}" data-sp_name="{{property.sp_name}}" wx:for="{{property.items}}" wx:key="id">
+                        {{item.sp_item_name}}
+            </view>
+                    </view>
+                </block>
+            </view>
+            <view class="buy-num-box">
+                <view class="num-label">购买数量</view>
+                <view class="num-box">
+                    <view bindtap="numJianTap" class="num-jian {{buyNumber==buyNumMin?'hui':''}}">-</view>
+                    <view class="num-input">
+                        <input disabled type="number" value="{{buyNumber}}"></input>
+                    </view>
+                    <view bindtap="numJiaTap" class="num-jia {{buyNumber==buyNumMax?'hui':''}}">+</view>
+                </view>
+            </view>
+            <view bindtap="goKanjia" class="popup-join-btn"> 立即发起砍价，最低可砍到 {{bargain.min_price}} 元</view>
+        </view>
+    </view>
+</view>
+<view class="show-container" hidden="{{wxlogin}}">
+    <view class="show-box">
+        <view class="show-logo-box">
+            <image src="{{toplogo}}"></image>
+            <view class="show-mall-name">{{topname}}</view>
+        </view>
+        <view class="show-text-box">
+            <view class="show-text-name">需要您的授权才能正常使用哦！</view>
+            <view class="show-text-info">
+                <text>·</text>请允许我们获得您的公开资讯</view>
+            <view class="show-text-info">
+                <text>·</text>我们不会公布您的这些信息</view>
+            <view class="show-text-info">
+                <text>·</text>只是为了给您提供更好的服务</view>
+        </view>
+        <button bindgetuserinfo="userlogin" openType="getUserInfo">允许</button>
+    </view>
+</view>
+<view class="show-share" hidden="{{sharebox}}">
+    <view bindtap="closeshare" class="show-close-share"></view>
+    <view class="show-share-box">
+        <view class="show-share-title">把商品分享给好友</view>
+        <view class="show-share-btn-box">
+            <view class="show-share-share">
+                <image src="../../images/kanjia/share_user.png"></image>
+                <text>分享给好友</text>
+                <button class="pop-box-btn" openType="share"></button>
+            </view>
+            <view bindtap="getcode" class="show-share-code">
+                <image src="../../images/kanjia/share_img.png"></image>
+                <text>生成二维码</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="show-share" hidden="{{sharecode}}">
+    <view bindtap="closeshare" class="show-close-share"></view>
+    <view class="show-code-box">
+        <view class="show-code-re">
+            <image src="{{codeimg}}"></image>
+            <view bindtap="savecode" class="show-code-btn">保存商品二维码</view>
+        </view>
+    </view>
+</view>

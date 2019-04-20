@@ -17,6 +17,7 @@ use Encore\Admin\Controllers\ModelForm;
 use Encore\Admin\Widgets\Box;
 use Encore\Admin\Widgets\Tab;
 use Encore\Admin\Widgets\Table;
+use App\Admin\Extensions\Tools\ShopGoodsHandle;
 
 class ShopGoodsController extends Controller
 {
@@ -79,6 +80,7 @@ class ShopGoodsController extends Controller
     protected function grid()
     {
         return Admin::grid(ShopGoods::class, function (Grid $grid) {
+            $grid->model()->where('goods_type', ShopGoods::TYPE_NOMAL);
             $grid->model()->orderBy('sort_order', 'asc');
             $grid->id('序号')->sortable();
             $grid->primary_pic_url('商品主图')->image('', 75, 75);
@@ -93,14 +95,14 @@ class ShopGoodsController extends Controller
 
             $getListImg = $this;
             // 这里是多个信息一起显示
-            $grid->column('其他信息')->expand(function () use($getListImg) {
+            $grid->column('其他信息')->expand(function () use ($getListImg) {
                 $imgUrl = '<img src="%s" style="max-width:160px;max-height:160px" class="img img-thumbnail">';
                 $row_arr1 = [
                     [
-                        '商品主图：' . sprintf($imgUrl,config('filesystems.disks.oss.url').'/'.$this->primary_pic_url),
+                        '商品主图：' . sprintf($imgUrl, config('filesystems.disks.oss.url') . '/' . $this->primary_pic_url),
                     ],
                     [
-                        '商品列表图：' .$getListImg->getListImg($this->list_pic_url,$imgUrl) ,
+                        '商品列表图：' . $getListImg->getListImg($this->list_pic_url, $imgUrl),
                     ],
                     [
                         '商品关键词：' . $this->keywords,
@@ -120,29 +122,17 @@ class ShopGoodsController extends Controller
                 $tab = new Tab();
                 $tab->add('商品基础信息', $table);
 
-                $box = new Box('商品描述',$this->goods_desc);
+                $box = new Box('商品描述', $this->goods_desc);
                 $tab->add('商品描述', $box);
 
                 return $tab;
             }, '其他信息');
 
 
-
-//            $grid->goods_price('单价');
-//            $grid->goods_marketprice('市场价');
-//            $grid->goods_onsaleprice('折扣价');
-//            $grid->goods_salenum('销售量');
-//            $grid->goods_click('点击量');
-//            $grid->goods_carousel('轮播图片')->image('', 50, 50);
-//            $grid->goods_description_pictures('描述图片')->image('', 50, 50);
-//
-////            $grid->goods_storage('库存');
-//            $grid->goods_state('状态')
-//                ->select(Good::getStateDispayMap());
-//            $grid->sort('排序');
-//            $grid->created_at('创建时间');
-//            $grid->updated_at('更新时间');
-
+            $grid->actions(function ($actions) {
+                // 添加操作
+                $actions->append(new ShopGoodsHandle($actions->row));
+            });
             $grid->filter(function ($filter) {
                 $filter->like('goods_name', '商品名');
                 $filter->in('class_id', '分类')
@@ -191,7 +181,7 @@ class ShopGoodsController extends Controller
             $form->textarea('keywords', '商品关键词');
             $form->textarea('goods_brief', '商品摘要');
             $form->editor('goods_desc', '商品描述');
-            $form->addSpecification('products', '添加规格',function(){
+            $form->addSpecification('products', '添加规格', function () {
                 return ShopSpecification::all();
             });
             $form->textarea('promotion_desc', '促销描述');
@@ -226,11 +216,11 @@ class ShopGoodsController extends Controller
                 ->default(ShopGoods::STATE_NOT_VIP);
             $form->currency('vip_exclusive_price', '会员专享价')
                 ->symbol('￥');
-            $form->number('sort_order','排序')
+            $form->number('sort_order', '排序')
                 ->default(255);
 
             $form->hasMany('goods_attribute', '添加属性', function (Form\NestedForm $form) {
-                $form->select('attribute_id', '选择属性')->options(ShopAttribute::pluck('name','id'));
+                $form->select('attribute_id', '选择属性')->options(ShopAttribute::pluck('name', 'id'));
                 $form->text('value', '属性值');
             });
 
@@ -253,13 +243,14 @@ class ShopGoodsController extends Controller
         });
     }
 
-    public function getListImg($list_pic_url,$modelUrl){
-        if(empty($list_pic_url) || empty($modelUrl)){
+    public function getListImg($list_pic_url, $modelUrl)
+    {
+        if (empty($list_pic_url) || empty($modelUrl)) {
             return '';
         }
-        $url ='';
-        foreach($list_pic_url as $v){
-            $url .= sprintf($modelUrl,config('filesystems.disks.oss.url').'/'.$v);
+        $url = '';
+        foreach ($list_pic_url as $v) {
+            $url .= sprintf($modelUrl, config('filesystems.disks.oss.url') . '/' . $v);
         }
         return $url;
     }

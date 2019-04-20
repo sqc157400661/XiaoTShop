@@ -1,0 +1,570 @@
+.top-header {
+    background-color: rgba(0,0,0,0.0);
+    border-bottom: 0;
+    position: absolute;
+}
+
+.top-header image {
+    width: 50rpx;
+    height: 50rpx;
+    top: 60rpx;
+    left: 22rpx;
+}
+
+.iphoneTop image {
+    top: 100rpx;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.kanjia-header {
+    width: 100%;
+    height: 770rpx;
+    background-image: linear-gradient(-130deg,#b4a078 0,#e7dac0 100%);
+    padding-top: 90rpx;
+}
+
+.kanjia-header-user {
+    width: 100%;
+    text-align: center;
+    padding-top: 30rpx;
+    color: #fff;
+    margin-bottom: 20rpx;
+}
+
+.kanjia-header-user image {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    box-shadow: 0 0 0.4rem 0 rgba(0,0,0,0.15);
+}
+
+.kanjia-header-user .user-name {
+    font-size: 30rpx;
+    padding-bottom: 10rpx;
+}
+
+.kanjia-header-user .user-info {
+    font-size: 26rpx;
+    font-weight: 300;
+}
+
+.kanjia-header-goods {
+    width: 88%;
+    height: 190rpx;
+    background-color: #f6edde;
+    margin: 0 auto;
+    border-radius: 6rpx;
+    box-shadow: 0 0 0.4rem 0 rgba(0,0,0,0.15);
+}
+
+.kanjia-header-goods .goods-image {
+    width: 170rpx;
+    height: 170rpx;
+    border-radius: 6rpx;
+    float: left;
+    padding-top: 10rpx;
+    padding-left: 10rpx;
+}
+
+.kanjia-header-goods .goods-info {
+    float: left;
+    width: 67%;
+    color: #b4a078;
+    padding-left: 20rpx;
+    padding-top: 20rpx;
+    font-size: 30rpx;
+}
+
+.goods-info .goods-title {
+    width: 100%;
+    height: 88rpx;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.goods-info .goods-min {
+    float: left;
+    font-size: 26rpx;
+    padding-top: 4rpx;
+    font-weight: 300;
+}
+
+.goods-info .goods-min text {
+    font-size: 32rpx;
+}
+
+.goods-info .good-max {
+    float: left;
+    color: #999;
+    font-size: 26rpx;
+    padding-top: 10rpx;
+    font-weight: 300;
+    padding-left: 80rpx;
+    text-decoration: line-through;
+}
+
+.kanjia-header-btn {
+    width: 100%;
+    text-align: center;
+}
+
+.kanjia-header-btn .btn-info {
+    color: #fff;
+    font-size: 24rpx;
+    font-weight: 300;
+    margin-top: 30rpx;
+}
+
+.kanjia-header-btn .btn-two {
+    margin-top: 30rpx;
+}
+
+.btn-info .min {
+    font-size: 32rpx;
+    padding-left: 4rpx;
+    padding-right: 4rpx;
+}
+
+.btn-info .max {
+    padding-left: 4rpx;
+    padding-right: 4rpx;
+}
+
+.btn-two .btn-me {
+    display: inline-block;
+    color: #b4a078;
+    font-size: 28rpx;
+    border: 1px solid #b4a078;
+    font-weight: 300;
+    border-radius: 6rpx;
+    margin-left: 10rpx;
+    width: 200rpx;
+    height: 74rpx;
+    line-height: 74rpx;
+}
+
+.btn-two .btn-he {
+    display: inline-block;
+    font-size: 28rpx;
+    font-weight: 300;
+    border-radius: 6rpx;
+    background-color: #b4a078;
+    color: #fff;
+    margin-right: 10rpx;
+    width: 300rpx;
+    height: 76rpx;
+    line-height: 76rpx;
+}
+
+.btn-two .btn-he-no {
+    background-color: #b0a48d;
+}
+
+.btn-two .btn-succse {
+    color: #fff;
+    font-size: 28rpx;
+    font-weight: 300;
+    width: 480rpx;
+    margin: 0 auto;
+    height: 76rpx;
+    background-color: #b4a078;
+    line-height: 76rpx;
+    border-radius: 6rpx;
+}
+
+.btn-succse-info {
+    font-size: 30rpx;
+    height: 160rpx;
+    line-height: 160rpx;
+    color: #fff;
+    font-weight: 300;
+}
+
+.kanjia-info-times {
+    text-align: center;
+    margin-top: 50rpx;
+    width: 100%;
+    font-size: 30rpx;
+    height: 60rpx;
+    color: #f5f5f5;
+    position: relative;
+}
+
+.kanjia-info-times .ac {
+    margin-right: 10rpx;
+}
+
+.kanjia-info-times .day,.kanjia-info-times .hou,.kanjia-info-times .min,.kanjia-info-times .con {
+    background-color: #b4a078;
+    padding: 4rpx 8rpx;
+    color: #fff;
+    font-size: 30rpx;
+    border-radius: 4rpx;
+    margin-right: 10rpx;
+}
+
+.kanjia-active {
+    width: 100%;
+    position: relative;
+}
+
+.kanjia-active text {
+    width: 0;
+    height: 0;
+    display: block;
+    border-left: 15px solid rgba(0,0,0,0);
+    border-right: 15px solid rgba(0,0,0,0);
+    border-top: 15px solid rgba(0,0,0,0);
+    border-bottom: 20px solid #fff;
+    position: absolute;
+    top: -50rpx;
+    left: 0;
+    margin: 0 auto;
+    bottom: 0;
+    right: 0;
+}
+
+.kanjia-help {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.kanjia-help-title {
+    width: 100%;
+    color: #b4a078;
+    font-size: 26rpx;
+    text-align: center;
+    height: 30px;
+    font-weight: 300;
+}
+
+.kanjia-help-list {
+    width: 95%;
+    height: 120rpx;
+    margin: 0 auto;
+    border-bottom: 1px dashed #f6edde;
+    margin-bottom: 20rpx;
+}
+
+.kanjia-help-list .avatar {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    float: left;
+}
+
+.help-list-info {
+    float: left;
+    width: 51%;
+    padding-left: 20rpx;
+    font-size: 28rpx;
+    padding-top: 10rpx;
+}
+
+.help-list-info .list-info-name {
+    font-size: 28rpx;
+    color: #333;
+    padding-bottom: 10rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.help-list-info .list-info-time {
+    color: #999;
+    font-size: 22rpx;
+}
+
+.help-info-money {
+    float: right;
+    width: 28%;
+    font-size: 22rpx;
+    padding-top: 20rpx;
+}
+
+.help-info-money image {
+    width: 40rpx;
+    height: 40rpx;
+    float: left;
+}
+
+.help-info-money .kjmoney {
+    margin-top: 4rpx;
+    float: left;
+    padding-left: 4rpx;
+    color: #b4a078;
+}
+
+.help-info-money .kjmoney text {
+    font-size: 24rpx;
+    font-weight: 600;
+    padding-left: 2rpx;
+    padding-right: 2rpx;
+}
+
+.show-pop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.show-pop-box {
+    width: 60%;
+    height: 500rpx;
+    color: #fff;
+    margin: 0 auto;
+    margin-top: 55%;
+    border-radius: 6rpx;
+    background-image: linear-gradient(-130deg,#b4a078 0,#e7dac0 100%);
+    box-shadow: 0 0 0.4rem 0 rgba(0,0,0,0.15);
+    position: relative;
+}
+
+.show-pop-box .pop-box-close {
+    width: 50rpx;
+    height: 50rpx;
+    position: absolute;
+    right: 8rpx;
+    top: 4rpx;
+}
+
+.show-pop-box .pop-box-info {
+    width: 100%;
+    text-align: center;
+    padding-top: 80rpx;
+    font-weight: 300;
+}
+
+.show-pop-box .pop-box-info .pop-box-title {
+    font-size: 40rpx;
+    padding-bottom: 10rpx;
+}
+
+.show-pop-box .pop-box-info .pop-box-kanjia {
+    font-size: 30rpx;
+    padding-bottom: 10rpx;
+}
+
+.show-pop-box .pop-box-info .pop-box-text {
+    font-size: 28rpx;
+}
+
+.show-pop-box .pop-box-share {
+    width: 100%;
+    text-align: center;
+    padding-top: 60rpx;
+    font-weight: 300;
+    color: #b4a078;
+    position: relative;
+}
+
+.show-pop-box .pop-box-share .pop-box-btn {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    position: absolute;
+    left: 80rpx;
+    opacity: 0;
+}
+
+.show-pop-box .pop-box-share .share-user {
+    display: inline-block;
+    font-size: 22rpx;
+    padding-right: 40rpx;
+}
+
+.show-pop-box .pop-box-share .share-img {
+    display: inline-block;
+    font-size: 22rpx;
+    padding-left: 40rpx;
+}
+
+.show-pop-box .pop-box-share .share-user image {
+    width: 40rpx;
+    height: 40rpx;
+    background-color: #b4a078;
+    padding: 20rpx;
+    border-radius: 50%;
+    display: block;
+    margin-left: 10rpx;
+    margin-bottom: 10rpx;
+}
+
+.show-pop-box .pop-box-share .share-img image {
+    width: 50rpx;
+    height: 50rpx;
+    background-color: #b4a078;
+    padding: 16rpx;
+    border-radius: 50%;
+    display: block;
+    margin-left: 20rpx;
+    margin-bottom: 10rpx;
+}
+
+.show-pop .banner-pop {
+    width: 66%;
+    margin: 0 auto;
+    margin-top: 50%;
+}
+
+.show-pop .banner-pop .qr-code {
+    width: 100%;
+    height: auto;
+    border-radius: 6rpx;
+}
+
+.show-pop .banner-pop .banner-btn {
+    width: 100%;
+    height: 80rpx;
+    background-color: #fff;
+    border-radius: 6rpx;
+    line-height: 80rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #333;
+}
+
+.show-share-box {
+    width: 60%;
+    height: 400rpx;
+    margin: 0 auto;
+    margin-top: 40%;
+    text-align: center;
+    border-radius: 6rpx;
+    background-image: linear-gradient(-130deg,#b4a078 0,#e7dac0 100%);
+    box-shadow: 0 0 0.4rem 0 rgba(0,0,0,0.15);
+    position: relative;
+}
+
+.show-share-box .share-box-close {
+    width: 50rpx;
+    height: 50rpx;
+    position: absolute;
+    right: 8rpx;
+    top: 4rpx;
+}
+
+.show-share-box .share-box-avatar {
+    width: 120rpx;
+    height: 120rpx;
+    position: absolute;
+    top: -30px;
+    left: 37%;
+    border-radius: 50%;
+    box-shadow: 0 0 0.4rem 0 rgba(0,0,0,0.15);
+}
+
+.show-share-box .share-box-name {
+    padding-top: 80rpx;
+    color: #fff;
+    font-size: 28rpx;
+}
+
+.show-share-box .share-box-text {
+    font-size: 32rpx;
+    padding-top: 50rpx;
+    color: #fff;
+    font-weight: 300;
+}
+
+.show-share-box .share-box-btn {
+    color: #fff;
+    width: 100px;
+    height: 70rpx;
+    margin: 0 auto;
+    background-color: #b4a078;
+    margin-top: 50rpx;
+    font-size: 28rpx;
+    line-height: 70rpx;
+    font-weight: 300;
+    border-radius: 50rpx;
+}
+
+.show-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 99999999999;
+}
+
+.show-container .show-box {
+    width: 70%;
+    margin: 0 auto;
+    height: 600rpx;
+    background-color: #fff;
+    margin-top: 40%;
+    border-radius: 10rpx;
+}
+
+.show-logo-box {
+    text-align: center;
+    width: 80%;
+    border-bottom: 1px solid #f5f5f5;
+    margin: 0 auto;
+    padding-top: 40rpx;
+}
+
+.show-logo-box image {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.show-mall-name {
+    font-size: 32rpx;
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+    color: #333;
+}
+
+.show-text-box {
+    margin-top: 20rpx;
+    margin-bottom: 40rpx;
+}
+
+.show-text-name {
+    font-size: 30rpx;
+    color: #333;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.show-text-info {
+    width: 80%;
+    margin: 0 auto;
+    font-size: 24rpx;
+    color: #999;
+    margin-top: 10rpx;
+}
+
+.show-text-info text {
+    margin-right: 10rpx;
+    font-size: 26rpx;
+}
+
+.show-box button::after {
+    border-radius: 4rpx;
+    border: 0;
+}
+
+.show-box button {
+    width: 80%;
+    height: 70rpx;
+    line-height: 70rpx;
+    font-size: 30rpx;
+    background-color: #04be01;
+    color: #fff;
+}

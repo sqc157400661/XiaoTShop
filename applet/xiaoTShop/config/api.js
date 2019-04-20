@@ -3,7 +3,7 @@ const ApiRootUrl ='你的域名/api/';
 var version = '/v2';
 
 module.exports = {
-    IndexUrl: ApiRootUrl + 'index' + version, //首页数据接口 --
+    IndexUrl: ApiRootUrl + 'index', //首页数据接口 --
     ProjectTypeList: ApiRootUrl + 'project-type-json', //技能类型 ok
     ProjectGood: ApiRootUrl + 'project-goods', // 技能组成商品 ok
     GoodsTransform: ApiRootUrl + 'project-goods-transform', // 转换成商城商品
@@ -69,6 +69,16 @@ module.exports = {
     MyCoupon: ApiRootUrl + 'coupon-mine', //我的优惠券
     CouponCenter: ApiRootUrl + 'coupon-center', //领券中心 卡券列表
     GetCoupon: ApiRootUrl + 'coupon-get', //领券
+
+    BargainList: ApiRootUrl + 'bargain-list', // 砍价列表
+    BargainGoodsDetail: ApiRootUrl + 'bargain-goods-detail', // 砍价商品详情
+    BargainDetail: ApiRootUrl + 'bargain-detail', // 砍价详情
+    BargainHelpDetail: ApiRootUrl + 'bargain-help-detail', // 助力详情
+    BargainHelp: ApiRootUrl + 'bargain-help', // 发起助力
+
+
+    Getwxacodeunlimit: ApiRootUrl + 'getwxacodeunlimit', // 小程序二维码
+
 
     /*--------------------------------------------------------------------------------------*/
 
